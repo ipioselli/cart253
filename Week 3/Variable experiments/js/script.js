@@ -1,12 +1,12 @@
 /**
-Title of Project
-Author Name
+Experimenting with Variables
+Ines Pioserlli
 
 This is a template. You must fill in the title,
 author, and this description to match your project!
 */
 function setup() {
-createCanvas(500, 500);
+createCanvas(windowWidth, windowHeight);
 }
 
 
