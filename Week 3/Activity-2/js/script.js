@@ -51,7 +51,7 @@ bg.r = map(circle1.size, 100, width, 0, 255);
 //circle1
 circle1.x = circle1.x +circle1.speed;
 circle1.x = constrain(circle1.x, 0, width/2);
-circle1.size = circle1.size +1;
+circle1.size = circle1.size + 1;
 circle1.size = constrain(circle1.size, 0, width );
 fill(circle1.fill, circle1.alpha);
 ellipse(circle1.x, circle1.y, circle1.size);

@@ -22,7 +22,7 @@ createCanvas(500, 500);
 }
 
 function draw() {
-  //backgroundShade = backgroundShade + 0.5;
+  backgroundShade = backgroundShade + 0.5;
   background(backgroundShade); //covers the background
   //circle.speed = random(-10, 10);
   circle.x = circle.x + circle.speed;
