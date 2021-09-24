@@ -18,7 +18,16 @@ let rectangle = {
   sizeAngle: 0
 
 }
+let rectangle = {
+  x: 0,
+  y: 500,
+  size: 50,
+  vx: 0,
+  vy: 0,
+  shade: 0,
+  sizeAngle: 0
 
+}
 function setup() {
   createCanvas(500,500);
   rectangle.vx = random(-5,-5);
@@ -33,7 +42,7 @@ function draw() {
 
   rectangle.x = rectangle.x + rectangle.vx;
   rectangle.y = rectangle.y + rectangle.vy;
-  rectangle.size =  sin(rectangle.sizeAngle); //osulate between -1 and 1
+  rectangle.size = map(sin(rectangle.sizeAngle), -1, 1, 10, 50) ; //osulate between -1 and 1
   rectangle.shade = rectangle.shade + 2;
 
   rectMode(CENTER);
