@@ -29,16 +29,21 @@ function draw() {
 
   circle.x = circle.x + circle.speed;
 
-  if (mouseX <width/2){
-    fill(255, 0, 0);
-  }
-  else if (mouseX < 2 * width/3){
-    fill(0, 255, 0)
-  }
-  else{
-    fill(0, 0, 255);
+  fill(255, 255, 255);
+
+  if (circle.x === width) {
+    circle.speed = -circle.speed; //make it turn the other way
   }
 
+  if(circle.x < 0){
+    circle.speed = -circle.speed;
+  }
+
+
+  if (circle.x < width/3 || circle.x > 2 * width/3) {
+      fill(255, 0, 0);
+
+  }
 
 
   ellipse(circle.x, circle.y, circle.size);
