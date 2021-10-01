@@ -1,11 +1,10 @@
 /**
-Class 04 : Conditionals
-Ines Pioselli
+Title of Project
+Author Name
 
 This is a template. You must fill in the title,
 author, and this description to match your project!
 */
-
 
 let backgroundShade = 0;
 let circle = {
@@ -25,29 +24,25 @@ function setup() {
 }
 
 
-/**
-Description of draw()
-*/
 function draw() {
   background(backgroundShade);
 
   circle.x = circle.x + circle.speed;
 
-  if (circle.x === width) {
-    circle.speed = -circle.speed; //make it turn the other way
+  if (mouseX <width/2){
+    fill(255, 0, 0);
+  }
+  else if (mouseX < 2 * width/3){
+    fill(0, 255, 0)
+  }
+  else{
+    fill(0, 0, 255);
   }
 
-  if(circle.x < 0){
-    circle.speed = -circle.speed;
-  }
 
-if (mouseY < height/2){
-  fill(255, 0, 0);
-}
 
-if(mouseY > height/2){
-  fill(0, 0, 255);
-}
   ellipse(circle.x, circle.y, circle.size);
+
+
 
 }
