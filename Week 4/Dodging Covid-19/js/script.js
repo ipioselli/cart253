@@ -32,8 +32,6 @@ function setup() {
 }
 
 
-
-
 function draw() {
   background(0);
 
@@ -48,6 +46,14 @@ function draw() {
   //user movement
   user.x = mouseX;
   user.y = mouseY;
+
+  //check for covid19
+  let d = dist(user.x, user.y, covid19.x, covid19.y);
+  if (d < covid19.size/2 + user.size/2) {
+    noLoop();
+
+  }
+
   //display covid 19
   fill(covid19.fill.r, covid19.fill.g, covid19.fill.b);
   ellipse(covid19.x, covid19.y, covid19.size);
