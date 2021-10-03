@@ -2,6 +2,7 @@
 //Dodging Covid-19
 //Ines Pioselli
 
+let ebichuImage;
 
 let covid19 = {
   x: 0,
@@ -24,6 +25,10 @@ let user = {
   fill: 255
 }
 
+function preload(){
+  ebichuImage = loadImage("assets/images/clown.png");
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -37,7 +42,7 @@ function draw() {
 
   //add sparkles
 
-  for (let i = 0; i <100; i++){
+  for (let i = 0; i <1000; i++){
     let x = random(0, width);
     let y = random(0, height);
     stroke(255);
@@ -71,5 +76,6 @@ function draw() {
   //display user
   fill(user.fill);
   ellipse(user.x, user.y, user.size);
+  image(ebichuImage, 0, 0);
 
 }
