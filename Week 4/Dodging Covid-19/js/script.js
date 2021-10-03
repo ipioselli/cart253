@@ -21,12 +21,13 @@ let covid19 = {
 let user = {
   x: 250,
   y: 250,
-  size: 100,
-  fill: 255
+  size: 200,
+  //fill: 255,
+  image: undefined
 }
 
 function preload(){
-  ebichuImage = loadImage("assets/images/clown.png");
+  user.image = loadImage("assets/images/ebichu.png");
 }
 
 function setup() {
@@ -74,8 +75,9 @@ function draw() {
   ellipse(covid19.x, covid19.y, covid19.size);
 
   //display user
-  fill(user.fill);
-  ellipse(user.x, user.y, user.size);
-  image(ebichuImage, 0, 0);
+  //fill(user.fill);
+  //ellipse(user.x, user.y, user.size);
+  imageMode(CENTER);
+  image(user.image, user.x, user.y, user.size, user.size);
 
 }
