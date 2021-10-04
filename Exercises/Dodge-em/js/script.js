@@ -54,7 +54,7 @@ function preload() {
 
   user.image = loadImage("assets/images/cryingebichu.png");
   problem1.image= loadImage("assets/images/knife.png");
-  myFont = loadFont('assets/DebugFreeTrial-MVdYB.otf');
+  myFont = loadFont('assets/Fonts/DebugFreeTrial-MVdYB.otf');
 
 
 }
@@ -144,7 +144,7 @@ if (d < problem1.size/2 + user.size/2) {
         text(s2, 500, 600);
   }
 
-
+//draws the images
   imageMode(CENTER);
   image(problem1.image, problem1.x, problem1.y, problem1.size, problem1.size);
   image(user.image, user.x, user.y, user.size, user.size);
