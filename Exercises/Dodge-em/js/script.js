@@ -39,8 +39,8 @@ let user = {
 }
 
 let circle1 ={
-  x: width/2,
-  y: height/2,
+  x: 0,
+  y: 255,
   size: 100,
   speed: 5
 
@@ -151,6 +151,6 @@ if (d < problem1.size/2 + user.size/2) {
   imageMode(CENTER);
   image(problem1.image, problem1.x, problem1.y, problem1.size, problem1.size);
   image(user.image, user.x, user.y, user.size, user.size);
-  ellipse(circle1.x, circle1.y, circle1.size);
+//  ellipse(circle1.x, circle1.y, circle1.size);
 
 }
