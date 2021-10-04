@@ -77,7 +77,7 @@ function draw() {
   //display user
   //fill(user.fill);
   //ellipse(user.x, user.y, user.size);
-  imageMode(CENTER);
-  image(user.image, user.x, user.y, user.size, user.size);
+    imageMode(CENTER);
+    image(user.image, user.x, user.y, user.size, user.size);
 
 }

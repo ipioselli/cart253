@@ -8,6 +8,8 @@ let bg ={
   b: 105
 
 }
+let s = 'RIP';
+let s2= 'Better luck next time';
 
 let problem1 = {
   x: 250,
@@ -26,7 +28,13 @@ let problem1 = {
 let user = {
   x: 250,
   y:250,
-  size: 200,
+  size: 300,
+  vx:0,
+  vy:0,
+  ax: 0,
+  ay:0,
+  acceleration: 0.25,
+  maxSpeed: 5,
   image:undefined
 }
 
@@ -45,6 +53,9 @@ function setup() {
 
     problem1.y = random(0, height);
     problem1.vx = problem1.speed;
+    textFont("Helvetica", 16);
+    textSize(100);
+
 }
 
 //draw function
@@ -56,7 +67,7 @@ function draw() {
   for (let i = 0; i <1000; i++){
     let x = random(0, width);
     let y = random(0, height);
-    stroke(255);
+    stroke(400);
     point(x, y);
 
 }
@@ -66,25 +77,8 @@ if(problem1.x > width){
   //problem.size = random(0, 500);
 }
 
-/** if(mouseX < problem1.x) {
-  problem1.ax = -problem1.acceleration;
-}
-else {
-  problem1.ax = problem1.acceleration;
-}
 
-if(mouseY < problem1.y){
-  problem1.ay = -problem1.acceleration;
-}
-else{
-  problem1.ay = problem1.acceleration;
-}
 
-problem1.vx= problem1.vx + problem1.ax;
-problem1.vx = constrain(problem1.vx, -problem1.maxSpeed, problem1.maxSpeed);
-problem1.vy= problem1.vy + problem1.ay;
-problem1.vy = constrain(problem1.vy, -problem1.maxSpeed, problem1.maxSpeed);
-**/
 
 
 problem1.x = problem1.x + problem1.vx;
@@ -94,13 +88,40 @@ problem1.y = problem1.y + problem1.vy;
 
 
 // allows the user to move with the mouse movements
-user.x = mouseX;
-user.y = mouseY;
+if(mouseX < user.x) {
+  user.ax = -user.acceleration;
+}
+else {
+  user.ax = user.acceleration;
+}
 
+if(mouseY < user.y){
+  user.ay = -user.acceleration;
+}
+else{
+  user.ay = user.acceleration;
+}
+
+user.vx= user.vx + user.ax;
+user.vx = constrain(user.vx, -user.maxSpeed, user.maxSpeed);
+user.vy= user.vy + user.ay;
+user.vy = constrain(user.vy, -user.maxSpeed, user.maxSpeed);
+
+user.x = user.x + user.vx;
+user.y = user.y + user.vy;
+
+//stops everything if the user touches problem 1s
 let d = dist(user.x, user.y, problem1.x, problem1.y);
 if (d < problem1.size/2 + user.size/2) {
-    noLoop();
+  user.size = user.size - 100 ;
   }
+  if(user.size < 50){
+
+      noLoop();
+        text(s, 200, 200);
+        text(s2, 500, 800);
+  }
+
 
   imageMode(CENTER);
   image(problem1.image, problem1.x, problem1.y, problem1.size, problem1.size);
