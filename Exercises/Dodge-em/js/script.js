@@ -1,6 +1,7 @@
 
 //Dodge Em
 //Ines Pioselli
+//Exercise 02
 
 let bg ={
   r: 41,
@@ -8,6 +9,8 @@ let bg ={
   b: 105
 
 }
+
+//text for when the loop ends
 let s = 'RIP';
 let s2= 'Better luck next time';
 
@@ -39,8 +42,8 @@ let user = {
 }
 
 let circle1 ={
-  x: 0,
-  y: 255,
+//  x: 0,
+//  y:0,
   size: 100,
   speed: 5
 
@@ -57,7 +60,7 @@ function preload() {
 }
 
 
-
+//setup
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
@@ -72,7 +75,6 @@ function setup() {
 //draw function
 function draw() {
 
-  background(bg.r, bg.g, bg.b);
 
 //changes the colour of the background as the user moves across the page
   if (user.x < width/2){
@@ -85,26 +87,20 @@ function draw() {
       background(bg.r, bg.g, bg.b);
     }
 
-  //add sparkling effect
+  //adds sparkling effect
   for (let i = 0; i <1000; i++){
     let x = random(0, width);
     let y = random(0, height);
     stroke(400);
-    //fill(217, 199, 37);
     point(x, y);
 
 }
 
-w
-
+//randomizes the starting point of the knife
 if(problem1.x > width){
   problem1.x = 0;
   problem1.y = random(0, height);
 }
-
-
-
-
 
 problem1.x = problem1.x + problem1.vx;
 problem1.y = problem1.y + problem1.vy;
@@ -135,11 +131,12 @@ user.vy = constrain(user.vy, -user.maxSpeed, user.maxSpeed);
 user.x = user.x + user.vx;
 user.y = user.y + user.vy;
 
-//stops everything if the user touches problem 1s
+//shrinks the user when it keeps touching the knife
 let d = dist(user.x, user.y, problem1.x, problem1.y);
 if (d < problem1.size/2 + user.size/2) {
   user.size = user.size - 100 ;
   }
+  //stops the loop when it less than 50
   if(user.size < 50){
 
       noLoop();
@@ -151,6 +148,7 @@ if (d < problem1.size/2 + user.size/2) {
   imageMode(CENTER);
   image(problem1.image, problem1.x, problem1.y, problem1.size, problem1.size);
   image(user.image, user.x, user.y, user.size, user.size);
-//  ellipse(circle1.x, circle1.y, circle1.size);
+
+
 
 }
