@@ -1,10 +1,16 @@
 /**
-Title of Project
+5.3 Functions with return values
 Author Name
 
 */
 function setup() {
   createCanvas(500,500);
+
+  let hotCelsius = toCelsius(100);
+  console.log(`100 degrees Fahrenheit is ${hotCelsius} degrees Celsius`);
+
+  let coldCelsius = toCelsius(10);
+  console.log(`10 degrees Fahrenheit is ${coldCelsius} degrees Celsius`);
 
 }
 
@@ -14,10 +20,11 @@ Description of draw()
 */
 function draw() {
   background(0);
+}
 
-  let x = random(0, width);
-  let y = random(0, height);
+function toCelsius(fahrenheit){
 
-  ellipse(x, y, 100);
+  let celsius = (fahrenheit -32) * 5/9;
+  return celsius;
 
 }
