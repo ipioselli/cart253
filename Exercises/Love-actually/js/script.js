@@ -14,12 +14,12 @@ let ghost1 = {
 };
 
 let ghost2 = {
-  x: 0,
+  x: 250,
   y:250,
-  size:100,
+  size:300,
   vx:0,
   vy:0,
-  speed:3
+  speed:5
 };
 
 let bg={
@@ -32,7 +32,7 @@ let bg={
 //preloads all the images from the project folder
 function preload() {
   ghost1.image = loadImage("assets/images/ghost1.png");
-  //ghost2.image = loadImage();
+  ghost2.image = loadImage("assets/images/ghost2.png");
   bg.image = loadImage("assets/images/background.jpg");
   myFont = loadFont('assets/fonts/mummy-halloween-font/MummyHalloween-jEWq7.TTF');
 
@@ -50,12 +50,12 @@ function setup() {
 }
 
 function setupGhosts(){
-  ghost1.x = width/3;
-  ghost2.x = 2 * width/3;
+  ghost1.x = width/2;
+  ghost1.y= height/2;
+  //ghost2.x = 2 * width/3;
 
-  //ghost2.vx = random(-circle2.speed, circle2.speed);
-  //ghost2.vy = random(-circle2.speed, circle2.speed);
-
+  ghost2.vx = random(-ghost2.speed, ghost2.speed);
+  ghost2.vy = random(-ghost2.speed, ghost2.speed);
 
 }
 
@@ -92,12 +92,12 @@ function title(){
   rectMode(CENTER);
   rect(width/2, height/2, 500, 500);
   textAlign(CENTER, CENTER);
-  textSize(40);
+  textSize(100);
   fill(210, 0, 30);
   text(`Spooky Romance`, width/2, height/2);
-  textSize(20);
+  textSize(50);
   fill(200, 200, 200);
-  text(`Press the spacebar to start!`, width/2, height-150);
+  text(`Press the spacebar to start!`, width/2, height-250);
   pop();
 
 
@@ -105,6 +105,7 @@ function title(){
 
 function simulation(){
   move();
+  userInput()
   checkOffScreen();
   checkOverlap();
   checkCandy();
@@ -129,8 +130,79 @@ function sadness(){
   text(`Sadness`, width/2, height/2);
 }
 
+function move(){
+
+  ghost1.x = ghost1.x + ghost1.vx;
+  ghost1.y = ghost1.y + ghost1.vy;
+
+  ghost2.x = ghost2.x + ghost2.vx;
+  ghost2.y = ghost2.y + ghost2.vy;
+}
+
+function userInput(){
+
+  if(keyIsDown(LEFT_ARROW)){
+    ghost1.vx = -ghost1.speed;
+  }
+  else if(keyIsDown(RIGHT_ARROW)){
+    ghost1.vx = ghost1.speed;
+  }
+  else{
+    ghost1.vx =0;
+  }
+
+  if(keyIsDown(UP_ARROW)){
+    ghost1.vy = -ghost1.speed;
+  }
+  else if(keyIsDown(DOWN_ARROW)){
+      ghost1.vy = ghost1.speed;
+  }
+  else{
+    ghost1.vy =0;
+  }
+
+}
+
+function checkOffScreen(){
+  if(isOffScreen(ghost1) || isOffScreen(ghost2)){
+    state = `sadness`;
+  }
+}
+
+function isOffScreen(ghost){
+  if (ghost.x < 0 || ghost.x > width || ghost.y < 0 || ghost.y > height){
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+function checkOverlap(){
+  let d = dist(ghost1.x, ghost1.y, ghost2.x, ghost2.y);
+  if(d < ghost1.size/2 + ghost2.size/2){
+    state = `love`;
+  }
+}
+
+function checkCandy(){
+
+}
+
 function display(){
   imageMode(CENTER);
   image(ghost1.image, ghost1.x, ghost1.y, ghost1.size, ghost1.size);
+  image(ghost2.image, ghost2.x, ghost2.y, ghost2.size, ghost2.size);
 
+
+}
+
+
+
+function keyPressed(){
+  if(keyCode === 32){
+    if(state===`title`){
+      state = `simulation`;
+    }
+  }
 }
