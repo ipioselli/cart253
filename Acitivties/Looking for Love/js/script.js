@@ -135,8 +135,11 @@ function display(){
   ellipse(circle2.x, circle2.y, circle2.size);
 }
 
-function mousePressed(){
-  if(state ===`title`){
-    state = `simulation`;
+function keyPressed(){
+  if(keyCode === 32){
+    if(state ===`title`){
+      state = `simulation`;
+    }
   }
+
 }
