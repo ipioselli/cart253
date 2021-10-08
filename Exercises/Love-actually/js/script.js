@@ -74,8 +74,8 @@ function setupGhosts(){
   ghost2.x = random(0, width); // randomizes the position of the second ghost
   ghost2.y= random(0, height);
 
-  candy1.x = random(0, width);  // randomizes the position of the candy
-  candy1.y= random(0, height);
+  candy1.x = random(50, width);  // randomizes the position of the candy
+  candy1.y= random(50, height);
 
   //randomizes the speed for both ghosts
   ghost1.vx = random(-ghost2.speed, ghost2.speed);
@@ -245,7 +245,7 @@ function isOffScreen(ghost){
 //check if ghost1 overlaps with ghost2
 function checkOverlap(){
   let d = dist(ghost1.x, ghost1.y, ghost2.x, ghost2.y);
-  if(d < ghost1.size/2-50 + ghost2.size/2-50){ // -100 so that it finds its match when its on top of the image
+  if(d < ghost1.size/2-50 + ghost2.size/2-50){ // -100 so that it finds its match when its really close to the image
     state = `love`;
   }
 }
@@ -254,7 +254,7 @@ function checkOverlap(){
 function checkCandy(){
 
   let d2 = dist(ghost1.x, ghost1.y, candy1.x, candy1.y);
-  if(d2 < ghost1.size/2 + candy1.size/2 -100){
+  if(d2 < ghost1.size/2-50 + candy1.size/2 -50){
     state = `candy`;
   }
 
