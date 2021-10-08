@@ -34,7 +34,7 @@ function preload() {
   ghost1.image = loadImage("assets/images/ghost1.png");
   ghost2.image = loadImage("assets/images/ghost2.png");
   bg.image = loadImage("assets/images/background.jpg");
-  myFont = loadFont('assets/fonts/mummy-halloween-font/MummyHalloween-jEWq7.TTF');
+  myFont = loadFont('assets/fonts/HalloweenBlack-4BRdx.otf');
 
 }
 
