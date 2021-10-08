@@ -7,7 +7,7 @@ Ines Pioselli
 let ghost1 = {
   x: 960,
   y:540,
-  size:300,
+  size:400,
   vx:0,
   vy:0,
   speed:3
@@ -16,7 +16,7 @@ let ghost1 = {
 let ghost2 = {
   x: 250,
   y:250,
-  size:300,
+  size:400,
   vx:0,
   vy:0,
   speed:5
@@ -25,7 +25,7 @@ let ghost2 = {
 let candy1 ={
   x: 640,
   y: 360,
-  size: 200,
+  size: 300,
 };
 
 let bg={
@@ -99,7 +99,7 @@ function title(){
   rectMode(CENTER);
   rect(width/2, height/2, 500, 500);
   textAlign(CENTER, CENTER);
-  textSize(100);
+  textSize(80);
   fill(210, 0, 30);
   text(`Spooky Romance`, width/2, height/2);
   textSize(50);
@@ -122,8 +122,8 @@ function simulation(){
 function love(){
   push();
   textFont(myFont);
-  textSize(90);
-  fill(115, 26, 27);
+  textSize(50);
+  fill(250, 250, 250);
   textAlign(CENTER, CENTER);
   text(`You found your match!`, width/2, height/2);
   pop();
