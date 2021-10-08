@@ -22,6 +22,12 @@ let ghost2 = {
   speed:5
 };
 
+let candy1 ={
+  x: 640,
+  y: 360,
+  size: 200,
+};
+
 let bg={
 
   size: 500,
@@ -33,6 +39,7 @@ let bg={
 function preload() {
   ghost1.image = loadImage("assets/images/ghost1.png");
   ghost2.image = loadImage("assets/images/ghost2.png");
+  candy1.image = loadImage("assets/images/candy.png");
   bg.image = loadImage("assets/images/background.jpg");
   myFont = loadFont('assets/fonts/HalloweenBlack-4BRdx.otf');
 
@@ -131,6 +138,16 @@ function sadness(){
   text(`Sadness`, width/2, height/2);
 }
 
+function candy(){
+  push();
+  textFont(myFont);
+  textSize(30);
+  fill(255, 255, 255);
+  textAlign(CENTER, CENTER);
+  text(`RIP! You are poisoned!`, width/2, height/2);
+  pop();
+}
+
 function move(){
 
   ghost1.x = ghost1.x + ghost1.vx;
@@ -188,13 +205,18 @@ function checkOverlap(){
 
 function checkCandy(){
 
+  let d2 = dist(ghost1.x, ghost1.y, candy1.x, candy1.y);
+  if(d2 < ghost1.size/2 + candy1.size/2){
+    state = `candy`;
+  }
+
 }
 
 function display(){
   imageMode(CENTER);
   image(ghost1.image, ghost1.x, ghost1.y, ghost1.size, ghost1.size);
   image(ghost2.image, ghost2.x, ghost2.y, ghost2.size, ghost2.size);
-  image(candy.image, candy.x, candy.y, candy.size, candy.size);
+  image(candy1.image, candy1.x, candy1.y, candy1.size, candy1.size);
 
 
 }
