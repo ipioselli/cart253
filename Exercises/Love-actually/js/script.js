@@ -95,16 +95,24 @@ function draw() {
 function title(){
   push();
   textFont(myFont);
-  fill(0, 0, 0, 100);
-  rectMode(CENTER);
-  rect(width/2, height/2, 500, 500);
+  //fill(0, 0, 0, 100);
+  //rectMode(CENTER);
+  //rect(width/2, height/2, 500, 500);
+
   textAlign(CENTER, CENTER);
-  textSize(80);
-  fill(210, 0, 30);
-  text(`Spooky Romance`, width/2, height/2);
-  textSize(50);
+  textSize(60);
+  fill(144, 38, 38);
+  text(`Spooky Romance`, width/2, height-800);
+
+  textSize(40);
   fill(200, 200, 200);
-  text(`Press the spacebar to start!`, width/2, height-250);
+  text(`Press the spacebar to start!`, width/2, height-500);
+
+  textSize(20);
+  fill(200, 200, 200);
+  text(`And use the arrow keys to nagivate!`, width/2, height-300);
+
+
   pop();
 
 
