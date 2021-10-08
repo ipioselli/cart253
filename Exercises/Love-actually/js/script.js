@@ -116,7 +116,7 @@ function love(){
   push();
   textFont(myFont);
   textSize(90);
-  fill(255, 100, 100);
+  fill(115, 26, 27);
   textAlign(CENTER, CENTER);
   text(`You found your match!`, width/2, height/2);
   pop();
@@ -124,8 +124,9 @@ function love(){
 
 function sadness(){
   push();
+  textFont(myFont);
   textSize(64);
-  fill(255, 100, 100);
+  fill(115, 26, 27);
   textAlign(CENTER, CENTER);
   text(`Sadness`, width/2, height/2);
 }
@@ -193,6 +194,7 @@ function display(){
   imageMode(CENTER);
   image(ghost1.image, ghost1.x, ghost1.y, ghost1.size, ghost1.size);
   image(ghost2.image, ghost2.x, ghost2.y, ghost2.size, ghost2.size);
+  image(candy.image, candy.x, candy.y, candy.size, candy.size);
 
 
 }
