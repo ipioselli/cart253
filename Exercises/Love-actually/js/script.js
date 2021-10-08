@@ -10,7 +10,7 @@ let ghost1 = {
   size:400,
   vx:0,
   vy:0,
-  speed:3
+  speed:4
 };
 
 let ghost2 = {
@@ -57,10 +57,18 @@ function setup() {
 }
 
 function setupGhosts(){
-  ghost1.x = width/2;
-  ghost1.y= height/2;
+  ghost1.x = random(0, width);
+  ghost1.y= random(0, height);
+
+  ghost2.x = random(0, width);
+  ghost2.y= random(0, height);
+
+  candy1.x = random(0, width);
+  candy1.y= random(0, height);
   //ghost2.x = 2 * width/3;
 
+  ghost1.vx = random(-ghost2.speed, ghost2.speed);
+  ghost1.vy = random(-ghost2.speed, ghost2.speed);
   ghost2.vx = random(-ghost2.speed, ghost2.speed);
   ghost2.vy = random(-ghost2.speed, ghost2.speed);
 
@@ -90,6 +98,9 @@ function draw() {
     else if(state===`sadness`){
       sadness();
     }
+    else if(state ===`self love`){
+      selfLove();
+    }
 }
 
 function title(){
@@ -111,8 +122,6 @@ function title(){
   textSize(20);
   fill(200, 200, 200);
   text(`And use the arrow keys to nagivate!`, width/2, height-300);
-
-
   pop();
 
 
@@ -144,6 +153,15 @@ function sadness(){
   fill(115, 26, 27);
   textAlign(CENTER, CENTER);
   text(`Sadness`, width/2, height/2);
+}
+
+function selfLove(){
+  push();
+  textFont(myFont);
+  textSize(40);
+  fill(255, 255, 255);
+  textAlign(CENTER, CENTER);
+  text(`You don't need no man!`, width/2, height/2);
 }
 
 function candy(){
@@ -190,9 +208,11 @@ function userInput(){
 }
 
 function checkOffScreen(){
-  if(isOffScreen(ghost1) || isOffScreen(ghost2)){
+  if(isOffScreen(ghost2)){
     state = `sadness`;
   }
+  else if(isOffScreen(ghost1))
+  state = `self love`;
 }
 
 function isOffScreen(ghost){
@@ -214,7 +234,7 @@ function checkOverlap(){
 function checkCandy(){
 
   let d2 = dist(ghost1.x, ghost1.y, candy1.x, candy1.y);
-  if(d2 < ghost1.size/2 + candy1.size/2){
+  if(d2 < ghost1.size/2 + candy1.size/2 -100){
     state = `candy`;
   }
 
