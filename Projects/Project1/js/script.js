@@ -1,6 +1,6 @@
 /**
-Title of Project
-Author Name
+Project 01:
+Ines Pioselli
 
 This is a template. You must fill in the title,
 author, and this description to match your project!
