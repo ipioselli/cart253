@@ -1,8 +1,9 @@
 /**
-Project 01:
-Ines Pioselli
+Title of Project
+Author Name
 
-This is a Bunny Planet Astrology Simulator
+This is a template. You must fill in the title,
+author, and this description to match your project!
 */
 
 "use strict";
