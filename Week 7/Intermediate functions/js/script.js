@@ -104,11 +104,11 @@ function displayFood(food){
 }
 
 
-function displayFood(food) {
-  if (!food.eaten) {
-    push();
-    fill(255, 100, 100);
-    ellipse(food.x, food.y, food.size);
-    pop();
-  }
-}
+// function displayFood(food) {
+//   if (!food.eaten) {
+//     push();
+//     fill(255, 100, 100);
+//     ellipse(food.x, food.y, food.size);
+//     pop();
+//   }
+// }
