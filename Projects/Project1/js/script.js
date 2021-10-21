@@ -199,6 +199,7 @@ user.vy = random(-user.speed, user.speed);
 Description of draw()
 */
 function draw() {
+  console.log("userX=" + user.x + "userY=" + user.y);
 
   background(0);
   imageMode(CENTER, CENTER);
@@ -300,9 +301,6 @@ function learnMercury(){
 }
 
 
-
-
-
 function sunStar(){
   image(sun.image, sun.x, sun.y, sun.size, sun.size);
 
@@ -327,7 +325,8 @@ function checkMars(){
 function checkMercury(){
   let d = dist(user.x, user.y, mercury.x, mercury.y);
   if(d < user.size/2  + mercury.size/2 ){
-    state = `learnMercury`;
+
+    console.log("hit");
   }
 }
 
