@@ -168,7 +168,7 @@ let state = `title`; //launches the title screen
 Description of setup
 */
 function setup() {
-  createCanvas(1080, 1080);
+  createCanvas(1000, 1000);
   setupPlanets();
 
 
@@ -267,7 +267,7 @@ function orbits(){
   let planets = 9;
   for (let i =0; i<planets; i++){
 
-    let diameter = 6 + ((planets -i)*112);
+    let diameter = 6 + ((planets -i)*115);
 
     strokeWeight(6);
     stroke(255,255,255,30);
