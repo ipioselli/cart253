@@ -134,6 +134,9 @@ let pluto= {  //in my heart pluto is still a planet
 
 };
 
+let sunState = {
+  size:500,
+}
 
 let centerX = 450;
 let centerY = 450;
@@ -159,6 +162,8 @@ saturn.image = loadImage("assets/images/Saturn.png");
 uranus.image = loadImage("assets/images/Uranus.png");
 neptune.image = loadImage("assets/images/Neptune.png");
 pluto.image = loadImage("assets/images/Pluto.png");
+
+sunState.image = loadImage("assets/images/sunState.png")
 
 }
 
@@ -275,6 +280,7 @@ function surprise(){
   textSize(40);
   fill(200, 200, 200);
   text(`SURPRISE`, width/2, height/2);
+  image(sunState.image, width/2, height/2, 900, 900);
 }
 
 function learnMars(){
