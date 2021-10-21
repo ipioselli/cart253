@@ -126,7 +126,7 @@ function title(){
 
   textSize(40);
   fill(200, 200, 200);
-  text(`Press the spacebar to start!`, width/2, height-500);
+  text(`Press the spacebar to start!`, width/2, height/2);
 
   textSize(20);
   fill(200, 200, 200);
