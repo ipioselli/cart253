@@ -21,16 +21,16 @@ let bg = {
 };
 
 let sun = {
-  x: 540,
-  y: 540,
-  size: 130,
+  x: 400,
+  y: 400,
+  size: 100,
 
 }
 
 let user = {
   x:100,
   y:100,
-  size:150,
+  size:120,
   vx:0,
   vy:0,
   speed:5
@@ -135,8 +135,8 @@ let pluto= {  //in my heart pluto is still a planet
 };
 
 
-let centerX = 540;
-let centerY = 540;
+let centerX = 400;
+let centerY = 400;
 
 
 //loads all the assets in my project folder
@@ -168,7 +168,7 @@ let state = `title`; //launches the title screen
 Description of setup
 */
 function setup() {
-  createCanvas(1000, 1000);
+  createCanvas(800, 800);
   setupPlanets();
 
 
@@ -267,12 +267,12 @@ function orbits(){
   let planets = 9;
   for (let i =0; i<planets; i++){
 
-    let diameter = 6 + ((planets -i)*115);
+    let diameter = 6 + ((planets -i)*90);
 
     strokeWeight(6);
     stroke(255,255,255,30);
     noFill();
-    ellipse(540,540, diameter, diameter);
+    ellipse(400,400, diameter, diameter);
 
   }
 
