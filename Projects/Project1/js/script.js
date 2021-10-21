@@ -267,12 +267,12 @@ function orbits(){
   let planets = 9;
   for (let i =0; i<planets; i++){
 
-    let diameter = 6 + ((planets -i)*115);
+    let diameter = 6 + ((planets -i)*112);
 
     strokeWeight(6);
     stroke(255,255,255,30);
     noFill();
-    ellipse(540,540,diameter, diameter);
+    ellipse(540,540, diameter, diameter);
 
   }
 
