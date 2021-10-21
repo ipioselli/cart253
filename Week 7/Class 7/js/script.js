@@ -40,6 +40,8 @@ for(let i = 0; i < numBalloons; i++){
 function draw() {
   background(0);
 
+
+
   push();
   noStroke();
   fill(balloon.fill);

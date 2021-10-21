@@ -21,16 +21,16 @@ let bg = {
 };
 
 let sun = {
-  x: 400,
-  y: 400,
-  size: 100,
+  x: 450,
+  y: 450,
+  size: 80,
 
 }
 
 let user = {
   x:100,
   y:100,
-  size:120,
+  size:100,
   vx:0,
   vy:0,
   speed:5
@@ -48,18 +48,18 @@ let shootingStar = {
 let mercury= {
   x:0,
   y:0,
-  size: 50,
+  size: 40,
   angle: 0,
-  radius: 60,
+  radius: 45,
   speed: -0.005,
 };
 
 let venus= {
   x:0,
   y:0,
-  size: 60,
+  size: 45,
   angle: 0,
-  radius: 120,
+  radius: 90,
   speed: -0.003,
 
 };
@@ -68,8 +68,8 @@ let earth= {
   x:0,
   y:0,
   angle: 0,
-  size: 70,
-  radius: 180,
+  size: 45,
+  radius: 135,
   speed: -0.002,
 
 };
@@ -78,8 +78,8 @@ let mars= {
   x:0,
   y:0,
   angle: 0,
-  radius: 240,
-  size: 72,
+  radius: 175,
+  size: 50,
   speed: -0.0013,
 
 };
@@ -88,8 +88,8 @@ let jupiter= {
   x:0,
   y:0,
   angle: 0,
-  size: 95,
-  radius: 295,
+  size: 65,
+  radius: 215,
   speed: -0.0009,
 
 };
@@ -98,8 +98,8 @@ let saturn= {
   x:0,
   y:0,
   angle: 0,
-  size:90,
-  radius: 350,
+  size:77,
+  radius: 255,
   speed: -0.0007,
 
 };
@@ -108,8 +108,8 @@ let uranus= {
   x:0,
   y:0,
   angle: 0,
-  size:77,
-  radius: 410,
+  size:73,
+  radius: 300,
   speed: -0.0006,
 
 };
@@ -118,8 +118,8 @@ let neptune= {
   x:0,
   y:0,
   angle: 0,
-  size:80,
-  radius: 470,
+  size:73,
+  radius: 345,
   speed: -0.0005,
 
 };
@@ -129,14 +129,14 @@ let pluto= {  //in my heart pluto is still a planet
   y:0,
   angle: 0,
   size:40,
-  radius: 505,
+  radius: 385,
   speed: -0.0004,
 
 };
 
 
-let centerX = 400;
-let centerY = 400;
+let centerX = 450;
+let centerY = 450;
 
 
 //loads all the assets in my project folder
@@ -168,7 +168,7 @@ let state = `title`; //launches the title screen
 Description of setup
 */
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(900, 900);
   setupPlanets();
 
 
@@ -202,10 +202,21 @@ function draw() {
  //launches each function depending on the state
   if (state === `title`) {
     title();
-  } else if (state === `simulation`) {
+  }
+  else if (state === `simulation`) {
     simulation();
-  } else if (state === `dead`) {
+  }
+  else if (state === `dead`) {
     dead();
+  }
+  else if(state===`surprise`){
+    surprise();
+  }
+  else if(state ===`learnMercury`){
+    learnMercury();
+  }
+    else if (state ===`learnMars`){
+    learnMars();
   }
 
   }
@@ -217,7 +228,7 @@ function displayPlanets(){
   mercuryPlanet();
   venusPlanet();
   earthPlanet();
-  marsPlanet()
+  marsPlanet();
   jupiterPlanet();
   saturnPlanet();
   uranusPlanet();
@@ -233,7 +244,7 @@ function title(){
   textAlign(CENTER, CENTER);
   textSize(60);
   fill(200, 200, 200);
-  text(`Press the spacebar to start!`, width/2, height/2+400);
+  text(`Press the spacebar to start!`, width/2, height/2+300);
 
 }
 
@@ -242,7 +253,10 @@ function simulation(){
   display();
   userInput();
   move();
-  checkShootingStar()
+  checkShootingStar();
+  checkSun();
+  checkMercury();
+  checkMars();
   orbits();
 
 }
@@ -255,6 +269,32 @@ function dead(){
   text(`RIP`, width/2, height/2);
 }
 
+function surprise(){
+  textFont(myFont);
+
+  textSize(40);
+  fill(200, 200, 200);
+  text(`SURPRISE`, width/2, height/2);
+}
+
+function learnMars(){
+  textFont(myFont);
+
+  textSize(40);
+  fill(200, 200, 200);
+  text(`HELLO`, width/2, height/2);
+}
+
+function learnMercury(){
+  textFont(myFont);
+
+  textSize(40);
+  fill(200, 200, 200);
+  text(`HELLO`, width/2, height/2);
+}
+
+
+
 
 
 function sunStar(){
@@ -262,23 +302,28 @@ function sunStar(){
 
 }
 
-function orbits(){
-
-  let planets = 9;
-  for (let i =0; i<planets; i++){
-
-    let diameter = 6 + ((planets -i)*90);
-
-    strokeWeight(6);
-    stroke(255,255,255,30);
-    noFill();
-    ellipse(400,400, diameter, diameter);
-
+function checkSun(){
+  let d = dist(user.x, user.y, sun.x, sun.y);
+  if(d<user.size/2 -20 + sun.size/2-20){
+    state = `surprise`;
   }
-
 }
 
 
+
+function checkMars(){
+  let d = dist(user.x, user.y, mars.x, mars.y);
+  if(d < user.size/2  + mars.size/2 ){
+    state = `learnMars`;
+  }
+}
+
+function checkMercury(){
+  let d = dist(user.x, user.y, mercury.x, mercury.y);
+  if(d < user.size/2  + mercury.size/2 ){
+    state = `learnMercury`;
+  }
+}
 
 function mercuryPlanet(){
   push();
@@ -288,14 +333,6 @@ function mercuryPlanet(){
   mercury.angle = mercury.angle + mercury.speed;
   image(mercury.image,mercury.radius, 0, mercury.size, mercury.size);
   pop();
-
-
-  // push();
-  // strokeWeight(6);
-  // stroke(255,255,255,30);
-  // noFill();
-  // circle(540,540,orbitAngle);
-  // pop();
 
 }
 
@@ -307,13 +344,6 @@ function venusPlanet(){
   image(venus.image,venus.radius, 0, venus.size, venus.size);
   pop();
 
-
-  // push();
-  // strokeWeight(6);
-  // stroke(255,255,255,30);
-  // noFill();
-  // circle(540,540,orbitAngle + 95);
-  // pop();
 }
 
 function earthPlanet(){
@@ -325,17 +355,11 @@ function earthPlanet(){
   pop();
 
 
-  //orbit for earth
-  // push();
-  // strokeWeight(6);
-  // stroke(255,255,255,30);
-  // noFill();
-  // circle(540,540,orbitAngle + 185);
-  // pop();
 }
 
 
 function marsPlanet(){
+
   push();
   translate(centerX, centerY);
   rotate(mars.angle);
@@ -343,12 +367,6 @@ function marsPlanet(){
   image(mars.image,mars.radius, 0, mars.size, mars.size);
   pop();
 
-  // push();
-  // strokeWeight(6);
-  // stroke(255,255,255,30);
-  // noFill();
-  // circle(540,540,orbitAngle + 295);
-  // pop();
 }
 
 
@@ -360,12 +378,6 @@ function jupiterPlanet(){
   image(jupiter.image,jupiter.radius, 0, jupiter.size, jupiter.size);
   pop();
 
-  // push();
-  // strokeWeight(6);
-  // stroke(255,255,255,30);
-  // noFill();
-  // circle(540,540,orbitAngle + 415 );
-  // pop();
 }
 
 function saturnPlanet(){
@@ -401,6 +413,22 @@ function plutoPlanet(){
   pluto.angle = pluto.angle + pluto.speed;
   image(pluto.image,pluto.radius, 0, pluto.size, pluto.size);
   pop();
+}
+
+function orbits(){
+
+  let planets = 9;
+  for (let i =0; i<planets; i++){
+
+    let diameter = 5 +((planets -i)*85);
+
+    strokeWeight(6);
+    stroke(255,255,255,30);
+    noFill();
+    ellipse(centerX,centerY, diameter, diameter);
+
+  }
+
 }
 
 
@@ -461,6 +489,8 @@ function checkShootingStar(){
     state = `dead`;
   }
 }
+
+
 
 
 function display(){
