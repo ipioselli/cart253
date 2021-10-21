@@ -35,6 +35,11 @@ Description of preload
 function preload() {
   user.image= loadImage("assets/images/chicken.png");
 
+  for(let i =0; i< schoolSize; i++){
+    let loadedImage = loadImage(`assets/images/chick-${i}.png`);
+    school.push(loadedImage);
+  }
+
 
   // for (var i=0; i<8; i++) {
   //   school[i] = loadImage("assets/images/chick.png");
@@ -145,6 +150,6 @@ function displayUser(){
 
 function displayChicks(chicks){
   if(!chicks.home){
-      ellipse(chicks.x, chicks.y, chicks.size);
+      image(school.image, width/2, height/2);
   }
 }
