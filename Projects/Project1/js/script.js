@@ -139,9 +139,27 @@ let sunState = {
   size:500,
 }
 
+let mercuryState = {
+  size:500,
+}
+
+let venusState = {
+  size:500,
+}
+
+let earthState = {
+  size:500,
+}
+
+let marsState = {
+  size:500,
+}
+
 let uranusState = {
   size:500,
 }
+
+
 
 let centerX = 450;
 let centerY = 450;
@@ -166,7 +184,6 @@ jupiter.image = loadImage("assets/images/Jupiter.png");
 saturn.image = loadImage("assets/images/Saturn.png");
 uranus.image = loadImage("assets/images/Uranus.png");
 neptune.image = loadImage("assets/images/Neptune.png");
-//pluto.image = loadImage("assets/images/Pluto.png");
 moon.image = loadImage("assets/images/moon.png");
 
 
@@ -174,15 +191,15 @@ moon.image = loadImage("assets/images/moon.png");
 //display the images for each state
 sunState.image = loadImage("assets/images/sunState.png");
 dead.image = loadImage("assets/images/dead.png");
-//mercuryState =loadImage("assets/images/mercuryState.png");
-//venusState =loadImage("assets/images/venusState.png");
-//earthState =loadImage("assets/images/earthState.png");
-//marsState =loadImage("assets/images/marsState.png");
-//jupiterState =loadImage("assets/images/jupiterState.png");
-//saturnState =loadImage("assets/images/saturnState.png");
+mercuryState.image =loadImage("assets/images/mercuryState.png");
+venusState.image =loadImage("assets/images/venusState.png");
+//earthState.image =loadImage("assets/images/earthState.png");
+marsState.image =loadImage("assets/images/marsState.png");
+//jupiterState.image =loadImage("assets/images/jupiterState.png");
+//saturnState.image =loadImage("assets/images/saturnState.png");
 uranusState.image =loadImage("assets/images/uranusState.png");
-//neptuneState =loadImage("assets/images/neptuneState.png");
-//moonState =loadImage("assets/images/moonState.png");
+//neptuneState.image =loadImage("assets/images/neptuneState.png");
+//moonState.image =loadImage("assets/images/moonState.png");
 
 }
 
@@ -399,19 +416,11 @@ function learnSun(){
 }
 
 function learnMars(){
-  textFont(myFont);
-
-  textSize(40);
-  fill(200, 200, 200);
-  text(`mars`, width/2, height/2);
+image(marsState.image, width/2, height/2, 900, 900);
 }
 
 function learnVenus(){
-  textFont(myFont);
-
-  textSize(40);
-  fill(200, 200, 200);
-  text(`venus`, width/2, height/2);
+  image(venusState.image, width/2, height/2, 900, 900);
 }
 
 function learnEarth(){
@@ -423,11 +432,7 @@ function learnEarth(){
 }
 
 function learnMercury(){
-  textFont(myFont);
-
-  textSize(40);
-  fill(200, 200, 200);
-  text(`mercury`, width/2, height/2);
+  image(mercuryState.image, width/2, height/2, 900, 900);
 }
 
 function learnJupiter(){
