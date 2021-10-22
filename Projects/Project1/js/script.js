@@ -155,6 +155,10 @@ let marsState = {
   size:500,
 }
 
+let jupiterState = {
+  size:500,
+}
+
 let uranusState = {
   size:500,
 }
@@ -195,7 +199,7 @@ mercuryState.image =loadImage("assets/images/mercuryState.png");
 venusState.image =loadImage("assets/images/venusState.png");
 //earthState.image =loadImage("assets/images/earthState.png");
 marsState.image =loadImage("assets/images/marsState.png");
-//jupiterState.image =loadImage("assets/images/jupiterState.png");
+jupiterState.image =loadImage("assets/images/jupiterState.png");
 //saturnState.image =loadImage("assets/images/saturnState.png");
 uranusState.image =loadImage("assets/images/uranusState.png");
 //neptuneState.image =loadImage("assets/images/neptuneState.png");
@@ -436,11 +440,7 @@ function learnMercury(){
 }
 
 function learnJupiter(){
-  textFont(myFont);
-
-  textSize(40);
-  fill(200, 200, 200);
-  text(`jupiter`, width/2, height/2);
+  image(jupiterState.image, width/2, height/2, 900, 900);
 }
 
 function learnSaturn(){
