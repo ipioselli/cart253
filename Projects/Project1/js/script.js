@@ -486,7 +486,7 @@ function sunStar(){
 
 function checkSun(){
   let d = dist(user.x, user.y, sun.x, sun.y);
-  if(d<user.size/2 -20 + sun.size/2-20){
+  if(d<user.size/2 -30 + sun.size/2-30){
     state = `learnSun`;
     user.x = random(0,width);
     user.y = random(0,height);
@@ -496,7 +496,7 @@ function checkSun(){
 
 function checkMars(){
   let d = dist(user.x, user.y, mars.x, mars.y);
-  if(d < user.size/2-20  + mars.size/2-20 ){
+  if(d < user.size/2-30  + mars.size/2-30 ){
     user.x = random(0,width);
     user.y = random(0,height);
     state = `learnMars`;
@@ -505,7 +505,7 @@ function checkMars(){
 
 function checkVenus(){
   let d = dist(user.x, user.y, venus.x, venus.y);
-  if(d < user.size/2-20  + venus.size/2-20 ){
+  if(d < user.size/2-30  + venus.size/2-30 ){
     user.x = random(0,width);
     user.y = random(0,height);
     state = `learnVenus`;
@@ -514,7 +514,7 @@ function checkVenus(){
 
 function checkEarth(){
   let d = dist(user.x, user.y, earth.x, earth.y);
-  if(d < user.size/2-20  + earth.size/2-20 ){
+  if(d < user.size/2-30  + earth.size/2-30 ){
     user.x = random(0,width);
     user.y = random(0,height);
     state = `learnEarth`;
@@ -525,7 +525,7 @@ function checkEarth(){
 
 function checkMercury(){
   let d = dist(user.x, user.y, mercury.x, mercury.y);
-  if(d < user.size/2  + mercury.size/2 ){
+  if(d < user.size/2-30  + mercury.size/2-30 ){
     user.x = random(0,width);
     user.y = random(0,height);
   state = `learnMercury`;
@@ -534,7 +534,7 @@ function checkMercury(){
 
 function checkJupiter(){
   let d = dist(user.x, user.y, jupiter.x, jupiter.y);
-  if(d < user.size/2-20 + jupiter.size/2-20 ){
+  if(d < user.size/2-35 + jupiter.size/2-35 ){
     user.x = random(0,width);
     user.y = random(0,height);
   state = `learnJupiter`;
@@ -543,7 +543,7 @@ function checkJupiter(){
 
 function checkSaturn(){
   let d = dist(user.x, user.y, saturn.x, saturn.y);
-  if(d < user.size/2  + saturn.size/2 ){
+  if(d < user.size/2-30  + saturn.size/2-30 ){
     user.x = random(0,width);
     user.y = random(0,height);
   state = `learnSaturn`;
@@ -553,7 +553,7 @@ function checkSaturn(){
 
 function checkUranus(){
   let d = dist(user.x, user.y, uranus.x, uranus.y);
-  if(d < user.size/2  + uranus.size/2 ){
+  if(d < user.size/2-30  + uranus.size/2-30 ){
     user.x = random(0,width);
     user.y = random(0,height);
   state = `learnUranus`;
@@ -562,7 +562,7 @@ function checkUranus(){
 
 function checkNeptune(){
   let d = dist(user.x, user.y, neptune.x, neptune.y);
-  if(d < user.size/2  + neptune.size/2 ){
+  if(d < user.size/2-30  + neptune.size/2-30 ){
     user.x = random(0,width);
     user.y = random(0,height);
   state = `learnNeptune`;
@@ -571,7 +571,7 @@ function checkNeptune(){
 
 function checkMoon(){
   let d = dist(user.x, user.y, moon.x, moon.y);
-  if(d < user.size/2  + moon.size/2 ){
+  if(d < user.size/2-30  + moon.size/2-30 ){
     user.x = random(0,width);
     user.y = random(0,height);
   state = `learnMoon`;
