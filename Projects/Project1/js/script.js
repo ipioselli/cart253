@@ -87,7 +87,7 @@ let mars= {
 let jupiter= {
   x:0,
   y:0,
-  size:150,
+  size:180,
   vx:0,
   vy:0,
   speed:5
@@ -97,7 +97,7 @@ let jupiter= {
 let saturn= {
   x:0,
   y:0,
-  size:180,
+  size:150,
   vx:0,
   vy:0,
   speed:5
@@ -159,7 +159,19 @@ let jupiterState = {
   size:500,
 }
 
+let saturnState = {
+  size:500,
+}
+
 let uranusState = {
+  size:500,
+}
+
+let neptuneState = {
+  size:500,
+}
+
+let moonState = {
   size:500,
 }
 
@@ -197,13 +209,13 @@ sunState.image = loadImage("assets/images/sunState.png");
 dead.image = loadImage("assets/images/dead.png");
 mercuryState.image =loadImage("assets/images/mercuryState.png");
 venusState.image =loadImage("assets/images/venusState.png");
-//earthState.image =loadImage("assets/images/earthState.png");
+earthState.image =loadImage("assets/images/earthState.png");
 marsState.image =loadImage("assets/images/marsState.png");
 jupiterState.image =loadImage("assets/images/jupiterState.png");
-//saturnState.image =loadImage("assets/images/saturnState.png");
+saturnState.image =loadImage("assets/images/saturnState.png");
 uranusState.image =loadImage("assets/images/uranusState.png");
-//neptuneState.image =loadImage("assets/images/neptuneState.png");
-//moonState.image =loadImage("assets/images/moonState.png");
+neptuneState.image =loadImage("assets/images/neptuneState.png");
+moonState.image =loadImage("assets/images/moonState.png");
 
 }
 
@@ -428,11 +440,7 @@ function learnVenus(){
 }
 
 function learnEarth(){
-  textFont(myFont);
-
-  textSize(40);
-  fill(200, 200, 200);
-  text(`earth`, width/2, height/2);
+  image(earthState.image, width/2, height/2, 900, 900);
 }
 
 function learnMercury(){
@@ -444,11 +452,7 @@ function learnJupiter(){
 }
 
 function learnSaturn(){
-  textFont(myFont);
-
-  textSize(40);
-  fill(200, 200, 200);
-  text(`saturn`, width/2, height/2);
+image(saturnState.image, width/2, height/2, 900, 900);
 }
 
 function learnUranus(){
@@ -458,19 +462,11 @@ function learnUranus(){
 }
 
 function learnNeptune(){
-  textFont(myFont);
-
-  textSize(40);
-  fill(200, 200, 200);
-  text(`neptune`, width/2, height/2);
+  image(neptuneState.image, width/2, height/2, 900, 900);
 }
 
 function learnMoon(){
-  textFont(myFont);
-
-  textSize(40);
-  fill(200, 200, 200);
-  text(`moon`, width/2, height/2);
+  image(moonState.image, width/2, height/2, 900, 900);
 }
 
 //----------------------------------------------------------------------------------
