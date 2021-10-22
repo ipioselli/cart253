@@ -23,14 +23,14 @@ let bg = {
 let sun = {
   x: 450,
   y: 450,
-  size: 80,
+  size: 100,
 
 }
 
 let user = {
-  x:100,
-  y:100,
-  size:100,
+  x:50,
+  y:50,
+  size:120,
   vx:0,
   vy:0,
   speed:5
@@ -48,93 +48,98 @@ let shootingStar = {
 let mercury= {
   x:0,
   y:0,
-  size: 40,
-  angle: 0,
-  radius: 45,
-  speed: -0.005,
+  size:70,
+  vx:0,
+  vy:0,
+  speed:5
 };
 
 let venus= {
   x:0,
   y:0,
-  size: 45,
-  angle: 0,
-  radius: 90,
-  speed: -0.003,
+  size:70,
+  vx:0,
+  vy:0,
+  speed:5
 
 };
 
 let earth= {
   x:0,
   y:0,
-  angle: 0,
-  size: 45,
-  radius: 135,
-  speed: -0.002,
+  size:90,
+  vx:0,
+  vy:0,
+  speed:5
 
 };
 
 let mars= {
   x:0,
   y:0,
-  angle: 0,
-  radius: 175,
-  size: 50,
-  speed: -0.0013,
+  size:100,
+  vx:0,
+  vy:0,
+  speed:5
 
 };
 
 let jupiter= {
   x:0,
   y:0,
-  angle: 0,
-  size: 65,
-  radius: 215,
-  speed: -0.0009,
+  size:150,
+  vx:0,
+  vy:0,
+  speed:5
 
 };
 
 let saturn= {
   x:0,
   y:0,
-  angle: 0,
-  size:77,
-  radius: 255,
-  speed: -0.0007,
+  size:180,
+  vx:0,
+  vy:0,
+  speed:5
 
 };
 
 let uranus= {
   x:0,
   y:0,
-  angle: 0,
-  size:73,
-  radius: 300,
-  speed: -0.0006,
+  size:150,
+  vx:0,
+  vy:0,
+  speed:5
 
 };
 
 let neptune= {
   x:0,
   y:0,
-  angle: 0,
-  size:73,
-  radius: 345,
-  speed: -0.0005,
+  size:180,
+  vx:0,
+  vy:0,
+  speed:5
 
 };
 
-let pluto= {  //in my heart pluto is still a planet
+
+
+let moon = {
   x:0,
   y:0,
-  angle: 0,
-  size:40,
-  radius: 385,
-  speed: -0.0004,
-
-};
+  size:170,
+  vx:0,
+  vy:0,
+  speed:5
+}
 
 let sunState = {
+  size:500,
+}
+
+let uranusState = {
   size:500,
 }
 
@@ -161,17 +166,29 @@ jupiter.image = loadImage("assets/images/Jupiter.png");
 saturn.image = loadImage("assets/images/Saturn.png");
 uranus.image = loadImage("assets/images/Uranus.png");
 neptune.image = loadImage("assets/images/Neptune.png");
-pluto.image = loadImage("assets/images/Pluto.png");
+//pluto.image = loadImage("assets/images/Pluto.png");
+moon.image = loadImage("assets/images/moon.png");
 
-sunState.image = loadImage("assets/images/sunState.png")
+
+
+//display the images for each state
+sunState.image = loadImage("assets/images/sunState.png");
+dead.image = loadImage("assets/images/dead.png");
+//mercuryState =loadImage("assets/images/mercuryState.png");
+//venusState =loadImage("assets/images/venusState.png");
+//earthState =loadImage("assets/images/earthState.png");
+//marsState =loadImage("assets/images/marsState.png");
+//jupiterState =loadImage("assets/images/jupiterState.png");
+//saturnState =loadImage("assets/images/saturnState.png");
+uranusState.image =loadImage("assets/images/uranusState.png");
+//neptuneState =loadImage("assets/images/neptuneState.png");
+//moonState =loadImage("assets/images/moonState.png");
 
 }
 
 let state = `title`; //launches the title screen
 
-/**
-Description of setup
-*/
+
 function setup() {
   createCanvas(900, 900);
   setupPlanets();
@@ -180,8 +197,8 @@ function setup() {
 }
 
 function setupPlanets(){
-user.x = 100;
-user.y = 100;
+user.x = random(0,width);
+user.y = random(0,height);
 
 shootingStar.x = random(0,width);
 shootingStar.y = random(0, height);
@@ -192,6 +209,72 @@ shootingStar.vy = random(-shootingStar.speed, shootingStar.speed);
 user.vx = random(-user.speed, user.speed);
 user.vy = random(-user.speed, user.speed);
 
+//planet mercury
+mercury.x = random(0,width);
+mercury.y = random(0, height);
+
+mercury.vx = random(-mercury.speed, mercury.speed);
+mercury.vy = random(-mercury.speed, mercury.speed);
+
+//planet venus
+venus.x = random(0,width);
+venus.y = random(0, height);
+
+venus.vx = random(-venus.speed, venus.speed);
+venus.vy = random(-venus.speed, venus.speed);
+
+//planet earth
+earth.x = random(0,width);
+earth.y = random(0, height);
+
+earth.vx = random(-earth.speed, earth.speed);
+earth.vy = random(-earth.speed, earth.speed);
+
+//planet mars
+mars.x = random(0,width);
+mars.y = random(0, height);
+
+mars.vx = random(-mars.speed, mars.speed);
+mars.vy = random(-mars.speed, mars.speed);
+
+//planet jupiter
+jupiter.x = random(0,width);
+jupiter.y = random(0, height);
+
+jupiter.vx = random(-jupiter.speed, jupiter.speed);
+jupiter.vy = random(-jupiter.speed,jupiter.speed);
+
+//planet saturn
+saturn.x = random(0,width);
+saturn.y = random(0, height);
+
+saturn.vx = random(-saturn.speed, saturn.speed);
+saturn.vy = random(-saturn.speed, saturn.speed);
+
+//planet uranus
+uranus.x = random(0,width);
+uranus.y = random(0, height);
+
+uranus.vx = random(-uranus.speed, uranus.speed);
+uranus.vy = random(-uranus.speed, uranus.speed);
+
+//planet neptune
+neptune.x = random(0, width);
+neptune.y = random(0, height);
+
+neptune.vx = random(-neptune.speed, neptune.speed);
+neptune.vy = random(-neptune.speed, neptune.speed);
+
+//planet moon
+moon.x = random(0,width);
+moon.y = random(0, height);
+
+moon.vx = random(-moon.speed, moon.speed);
+moon.vy = random(-moon.speed, moon.speed);
+
+
+
+
 }
 
 
@@ -199,8 +282,6 @@ user.vy = random(-user.speed, user.speed);
 Description of draw()
 */
 function draw() {
-  console.log("userX=" + user.x + "userY=" + user.y);
-
   background(0);
   imageMode(CENTER, CENTER);
   image(bg.image, width/2, height/2, 1920, 1080);
@@ -215,17 +296,37 @@ function draw() {
   else if (state === `dead`) {
     dead();
   }
-  else if(state===`surprise`){
-    surprise();
+  else if(state===`learnSun`){
+    learnSun();
   }
   else if(state ===`learnMercury`){
     learnMercury();
   }
+  else if(state ===`learnVenus`){
+    learnVenus();
+  }
+  else if(state ===`learnEarth`){
+    learnEarth();
+  }
     else if (state ===`learnMars`){
     learnMars();
   }
-
+  else if (state ===`learnJupiter`){
+    learnJupiter();
   }
+  else if (state ===`learnSaturn`){
+    learnSaturn();
+  }
+  else if (state ===`learnUranus`){
+    learnUranus();
+  }
+  else if (state ===`learnNeptune`){
+    learnNeptune();
+  }
+  else if (state ===`learnMoon`){
+    learnMoon();
+  }
+}
 
 
 //function to display all the planets on the simulation page
@@ -239,18 +340,30 @@ function displayPlanets(){
   saturnPlanet();
   uranusPlanet();
   neptunePlanet();
-  plutoPlanet();
+  moonSetup();
 }
 
+
+//---------------------------------------------------------------------------------
+//functions for each state
+//---------------------------------------------------------------------------------
 function title(){
   push();
   image(user.image, width/2, height/2, user.size*5, user.size*5);
   pop();
   textFont(myFont);
   textAlign(CENTER, CENTER);
+  textSize(70);
+  fill(255, 255, 255);
+  text(`Bunny Space Astrology Simulator`, width/2, height/2-300);
+  push();
   textSize(60);
-  fill(200, 200, 200);
-  text(`Press the spacebar to start!`, width/2, height/2+300);
+  text(`Press the spacebar to start!`, width/2, height/2+255);
+  textSize(40);
+  text(`Press R to go back to the simulation `, width/2, height/2+315);
+  text(`use the arrow keys to navigate`, width/2, height/2+365);
+  pop();
+
 
 }
 
@@ -262,25 +375,26 @@ function simulation(){
   checkShootingStar();
   checkSun();
   checkMercury();
+  checkVenus();
+  checkEarth();
   checkMars();
+  checkJupiter();
+  checkSaturn();
+  checkUranus();
+  checkNeptune();
+  checkMoon();
   orbits();
-
 }
 
 function dead(){
   textFont(myFont);
-
-  textSize(40);
-  fill(200, 200, 200);
-  text(`RIP`, width/2, height/2);
+  image(dead.image,width/2, height/2, 900, 900)
 }
 
-function surprise(){
+function learnSun(){
   textFont(myFont);
 
-  textSize(40);
-  fill(200, 200, 200);
-  text(`SURPRISE`, width/2, height/2);
+
   image(sunState.image, width/2, height/2, 900, 900);
 }
 
@@ -289,7 +403,23 @@ function learnMars(){
 
   textSize(40);
   fill(200, 200, 200);
-  text(`HELLO`, width/2, height/2);
+  text(`mars`, width/2, height/2);
+}
+
+function learnVenus(){
+  textFont(myFont);
+
+  textSize(40);
+  fill(200, 200, 200);
+  text(`venus`, width/2, height/2);
+}
+
+function learnEarth(){
+  textFont(myFont);
+
+  textSize(40);
+  fill(200, 200, 200);
+  text(`earth`, width/2, height/2);
 }
 
 function learnMercury(){
@@ -297,67 +427,220 @@ function learnMercury(){
 
   textSize(40);
   fill(200, 200, 200);
-  text(`HELLO`, width/2, height/2);
+  text(`mercury`, width/2, height/2);
 }
 
+function learnJupiter(){
+  textFont(myFont);
+
+  textSize(40);
+  fill(200, 200, 200);
+  text(`jupiter`, width/2, height/2);
+}
+
+function learnSaturn(){
+  textFont(myFont);
+
+  textSize(40);
+  fill(200, 200, 200);
+  text(`saturn`, width/2, height/2);
+}
+
+function learnUranus(){
+
+
+  image(uranusState.image,width/2, height/2, 900, 900);
+}
+
+function learnNeptune(){
+  textFont(myFont);
+
+  textSize(40);
+  fill(200, 200, 200);
+  text(`neptune`, width/2, height/2);
+}
+
+function learnMoon(){
+  textFont(myFont);
+
+  textSize(40);
+  fill(200, 200, 200);
+  text(`moon`, width/2, height/2);
+}
+
+//----------------------------------------------------------------------------------
 
 function sunStar(){
   image(sun.image, sun.x, sun.y, sun.size, sun.size);
 
+
 }
+
+//------------------------------------------------------------------------------------
+//check for overlaps between the planets and the user
+//-----------------------------------------------------------------------------------
 
 function checkSun(){
   let d = dist(user.x, user.y, sun.x, sun.y);
   if(d<user.size/2 -20 + sun.size/2-20){
-    state = `surprise`;
+    state = `learnSun`;
+    user.x = random(0,width);
+    user.y = random(0,height);
   }
 }
-
 
 
 function checkMars(){
   let d = dist(user.x, user.y, mars.x, mars.y);
-  if(d < user.size/2  + mars.size/2 ){
+  if(d < user.size/2-20  + mars.size/2-20 ){
+    user.x = random(0,width);
+    user.y = random(0,height);
     state = `learnMars`;
   }
 }
 
-function checkMercury(){
-  let d = dist(user.x, user.y, mercury.x, mercury.y);
-  if(d < user.size/2  + mercury.size/2 ){
-
-    console.log("hit");
+function checkVenus(){
+  let d = dist(user.x, user.y, venus.x, venus.y);
+  if(d < user.size/2-20  + venus.size/2-20 ){
+    user.x = random(0,width);
+    user.y = random(0,height);
+    state = `learnVenus`;
   }
 }
 
-function mercuryPlanet(){
-  push();
-  translate(centerX, centerY);
-  image(mercury.image, 960, 540, 50, 50);
-  rotate(mercury.angle);
-  mercury.angle = mercury.angle + mercury.speed;
-  image(mercury.image,mercury.radius, 0, mercury.size, mercury.size);
-  pop();
+function checkEarth(){
+  let d = dist(user.x, user.y, earth.x, earth.y);
+  if(d < user.size/2-20  + earth.size/2-20 ){
+    user.x = random(0,width);
+    user.y = random(0,height);
+    state = `learnEarth`;
+  }
+}
 
+
+
+function checkMercury(){
+  let d = dist(user.x, user.y, mercury.x, mercury.y);
+  if(d < user.size/2  + mercury.size/2 ){
+    user.x = random(0,width);
+    user.y = random(0,height);
+  state = `learnMercury`;
+  }
+}
+
+function checkJupiter(){
+  let d = dist(user.x, user.y, jupiter.x, jupiter.y);
+  if(d < user.size/2-20 + jupiter.size/2-20 ){
+    user.x = random(0,width);
+    user.y = random(0,height);
+  state = `learnJupiter`;
+  }
+}
+
+function checkSaturn(){
+  let d = dist(user.x, user.y, saturn.x, saturn.y);
+  if(d < user.size/2  + saturn.size/2 ){
+    user.x = random(0,width);
+    user.y = random(0,height);
+  state = `learnSaturn`;
+  }
+}
+
+
+function checkUranus(){
+  let d = dist(user.x, user.y, uranus.x, uranus.y);
+  if(d < user.size/2  + uranus.size/2 ){
+    user.x = random(0,width);
+    user.y = random(0,height);
+  state = `learnUranus`;
+  }
+}
+
+function checkNeptune(){
+  let d = dist(user.x, user.y, neptune.x, neptune.y);
+  if(d < user.size/2  + neptune.size/2 ){
+    user.x = random(0,width);
+    user.y = random(0,height);
+  state = `learnNeptune`;
+  }
+}
+
+function checkMoon(){
+  let d = dist(user.x, user.y, moon.x, moon.y);
+  if(d < user.size/2  + moon.size/2 ){
+    user.x = random(0,width);
+    user.y = random(0,height);
+  state = `learnMoon`;
+  }
+}
+
+
+
+function checkShootingStar(){
+  let d = dist(user.x, user.y, shootingStar.x, shootingStar.y);
+  if(d < user.size/2 -20 + shootingStar.size/2 -20){
+    user.x = random(0,width);
+    user.y = random(0,height);
+    state = `dead`;
+  }
+}
+
+//-------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------
+//function to set up the speed of the planets
+//----------------------------------------------------------------------------------
+
+function mercuryPlanet(){
+
+  mercury.x = mercury.x + mercury.vx;
+  mercury.y = mercury.y + mercury.vy;
+
+
+  mercury.x  = constrain(mercury.x , 0, width);
+  mercury.y  = constrain(mercury.y , 0, height);
+
+  //make the star bounce off the walls of the simulation
+  if(mercury.x >= width || mercury.x <= 0){
+    mercury.vx = -mercury.vx;
+  }
+  if(mercury.y >= height || mercury.y <= 0){
+    mercury.vy = -mercury.vy;
+  }
 }
 
 function venusPlanet(){
-  push();
-  translate(centerX, centerY);
-  rotate(venus.angle);
-  venus.angle = venus.angle + venus.speed;
-  image(venus.image,venus.radius, 0, venus.size, venus.size);
-  pop();
+  venus.x = venus.x + venus.vx;
+  venus.y = venus.y + venus.vy;
 
+
+  venus.x  = constrain(venus.x , 0, width);
+  venus.y  = constrain(venus.y , 0, width);
+
+  //make the star bounce off the walls of the simulation
+  if(venus.x >= width || venus.x <= 0){
+    venus.vx = -venus.vx;
+  }
+  if(venus.y >= height || venus.y <= 0){
+    venus.vy = -venus.vy;
+  }
 }
 
 function earthPlanet(){
-  push();
-  translate(centerX, centerY);
-  rotate(earth.angle);
-  earth.angle = earth.angle + earth.speed;
-  image(earth.image,earth.radius, 0, earth.size, earth.size);
-  pop();
+  earth.x = earth.x + earth.vx;
+  earth.y = earth.y + earth.vy;
+
+
+  earth.x  = constrain(earth.x , 0, width);
+  earth.y  = constrain(earth.y , 0, width);
+
+  //make the star bounce off the walls of the simulation
+  if(earth.x >= width || earth.x <= 0){
+    earth.vx = -earth.vx;
+  }
+  if(earth.y >= height || earth.y <= 0){
+    earth.vy = -earth.vy;
+  }
 
 
 }
@@ -365,72 +648,123 @@ function earthPlanet(){
 
 function marsPlanet(){
 
-  push();
-  translate(centerX, centerY);
-  rotate(mars.angle);
-  mars.angle = mars.angle + mars.speed;
-  image(mars.image,mars.radius, 0, mars.size, mars.size);
-  pop();
+  mars.x = mars.x + mars.vx;
+  mars.y = mars.y + mars.vy;
+
+
+  mars.x  = constrain(mars.x , 0, width);
+  mars.y  = constrain(mars.y , 0, width);
+
+  //make the star bounce off the walls of the simulation
+  if(mars.x >= width || mars.x <= 0){
+    mars.vx = -mars.vx;
+  }
+  if(mars.y >= height || mars.y <= 0){
+    mars.vy = -mars.vy;
+  }
 
 }
 
 
 function jupiterPlanet(){
-  push();
-  translate(centerX, centerY);
-  rotate(jupiter.angle);
-  jupiter.angle = jupiter.angle + jupiter.speed;
-  image(jupiter.image,jupiter.radius, 0, jupiter.size, jupiter.size);
-  pop();
+  jupiter.x = jupiter.x + jupiter.vx;
+  jupiter.y = jupiter.y + jupiter.vy
+
+  jupiter.x  = constrain(jupiter.x , 0, width);
+  jupiter.y  = constrain(jupiter.y , 0, height);
+
+  //make the star bounce off the walls of the simulation
+  if(jupiter.x >= width || jupiter.x <= 0){
+    jupiter.vx = -jupiter.vx;
+  }
+  if(jupiter.y >= height || jupiter.y <= 0){
+    jupiter.vy = -jupiter.vy;
+  }
 
 }
 
 function saturnPlanet(){
-  push();
-  translate(centerX, centerY);
-  rotate(saturn.angle);
-  saturn.angle = saturn.angle + saturn.speed;
-  image(saturn.image,saturn.radius, 0, saturn.size, saturn.size);
-  pop();
+  saturn.x = saturn.x + saturn.vx;
+  saturn.y = saturn.y + saturn.vy;
+
+
+  saturn.x  = constrain(saturn.x , 0, width);
+  saturn.y  = constrain(saturn.y , 0, height);
+
+  //make the star bounce off the walls of the simulation
+  if(saturn.x >= width || saturn.x <= 0){
+    saturn.vx = -saturn.vx;
+  }
+  if(saturn.y >= height || saturn.y <= 0){
+  saturn.vy = -saturn.vy;
+  }
 }
+
+
 function uranusPlanet(){
-  push();
-  translate(centerX, centerY);
-  rotate(uranus.angle);
-  uranus.angle = uranus.angle + uranus.speed;
-  image(uranus.image,uranus.radius, 0, uranus.size, uranus.size);
-  pop();
+  uranus.x = uranus.x + uranus.vx;
+  uranus.y = uranus.y + uranus.vy;
+
+
+  uranus.x  = constrain(uranus.x , 0, width);
+  uranus.y  = constrain(uranus.y , 0, width);
+
+  //make the star bounce off the walls of the simulation
+  if(uranus.x >= width || uranus.x <= 0){
+    uranus.vx = -uranus.vx;
+  }
+  if(uranus.y >= height || uranus.y <= 0){
+    uranus.vy = -uranus.vy;
+  }
 }
 
 function neptunePlanet(){
-  push();
-  translate(centerX, centerY);
-  rotate(neptune.angle);
-  neptune.angle = neptune.angle + neptune.speed;
-  image(neptune.image,neptune.radius, 0, neptune.size, neptune.size);
-  pop();
+  neptune.x = neptune.x + neptune.vx;
+  neptune.y = neptune.y + neptune.vy;
+
+
+  neptune.x  = constrain(neptune.x , 0, width);
+  neptune.y  = constrain(neptune.y , 0, height);
+
+  //make the star bounce off the walls of the simulation
+  if(neptune.x >= width ||neptune.x <= 0){
+  neptune.vx = -neptune.vx;
+  }
+  if(neptune.y >= height ||neptune.y <= 0){
+  neptune.vy = -neptune.vy;
+  }
 }
 
-function plutoPlanet(){
-  push();
-  translate(centerX, centerY);
-  rotate(pluto.angle);
-  pluto.angle = pluto.angle + pluto.speed;
-  image(pluto.image,pluto.radius, 0, pluto.size, pluto.size);
-  pop();
+function moonSetup(){
+  moon.x = moon.x + moon.vx;
+  moon.y = moon.y + moon.vy;
+
+
+  moon.x  = constrain(moon.x , 0, width);
+  moon.y  = constrain(moon.y , 0, width);
+
+  //make the star bounce off the walls of the simulation
+  if(moon.x >= width || moon.x <= 0){
+    moon.vx = -moon.vx;
+  }
+  if(moon.y >= height || moon.y <= 0){
+    moon.vy = -moon.vy;
+  }
 }
 
 function orbits(){
 
-  let planets = 9;
+  let planets = 10;
   for (let i =0; i<planets; i++){
 
-    let diameter = 5 +((planets -i)*85);
+    let diameter =((planets -i)*85);
 
+    push();
     strokeWeight(6);
     stroke(255,255,255,30);
     noFill();
     ellipse(centerX,centerY, diameter, diameter);
+    pop();
 
   }
 
@@ -488,12 +822,7 @@ function userInput(){
 
 }
 
-function checkShootingStar(){
-  let d = dist(user.x, user.y, shootingStar.x, shootingStar.y);
-  if(d < user.size/2 -20 + shootingStar.size/2 -20){
-    state = `dead`;
-  }
-}
+
 
 
 
@@ -501,6 +830,15 @@ function checkShootingStar(){
 function display(){
   image(user.image, user.x, user.y, user.size, user.size);
   image(shootingStar.image, shootingStar.x, shootingStar.y, shootingStar.size, shootingStar.size);
+  image(mercury.image,mercury.x, mercury.y, mercury.size, mercury.size);
+  image(venus.image,venus.x, venus.y, venus.size, venus.size);
+  image(earth.image,earth.x, earth.y, earth.size, earth.size);
+  image(mars.image,mars.x, mars.y, mars.size, mars.size);
+  image(jupiter.image,jupiter.x, jupiter.y, jupiter.size, jupiter.size);
+  image(saturn.image,saturn.x, saturn.y, saturn.size, saturn.size);
+  image(uranus.image,uranus.x, uranus.y, uranus.size, uranus.size);
+  image(neptune.image,neptune.x, neptune.y, neptune.size, neptune.size);
+  image(moon.image,moon.x, moon.y, moon.size, moon.size);
 
 }
 
@@ -511,9 +849,15 @@ function keyPressed(){
     }
   }
   if(keyCode === 82){
-    if(state != `simulation`){
+    if(state != `simulation` && state != `dead`){
       state = `simulation`;
 
+    }
+  }
+
+  if(keyCode === 32){
+    if(state ===`dead`){
+      state =`title`;
     }
   }
 }
