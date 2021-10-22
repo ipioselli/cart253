@@ -8,7 +8,10 @@ Requirements:
 3. aesthetic should make sense
 4. Have a beginning, middle, and end
 
-This is a Bunny Planet Astrology Simulator
+--------This is a Bunny Planet Astrology Simulator-----------
+Move the bunny spaceship using the arrows keys and exploring
+the bouncing planets in the solar system
+Watch out for the shooting star bouncing around with the planets (its very dangerous)
 */
 
 "use strict";
@@ -229,13 +232,17 @@ function setup() {
 
 }
 
+//function to set up the random speeds and positions of all the planets and user
 function setupPlanets(){
+
+//user
 user.x = random(0,width);
 user.y = random(0,height);
 
 shootingStar.x = random(0,width);
 shootingStar.y = random(0, height);
 
+//shooting star
 shootingStar.vx = random(-shootingStar.speed, shootingStar.speed);
 shootingStar.vy = random(-shootingStar.speed, shootingStar.speed);
 
@@ -298,21 +305,17 @@ neptune.y = random(0, height);
 neptune.vx = random(-neptune.speed, neptune.speed);
 neptune.vy = random(-neptune.speed, neptune.speed);
 
-//planet moon
+//moon
 moon.x = random(0,width);
 moon.y = random(0, height);
 
 moon.vx = random(-moon.speed, moon.speed);
 moon.vy = random(-moon.speed, moon.speed);
-
-
-
-
 }
 
 
 /**
-Description of draw()
+function to draw the background and all the states when they are called
 */
 function draw() {
   background(0);
@@ -362,7 +365,7 @@ function draw() {
 }
 
 
-//function to display all the planets on the simulation page
+//function to display all the planets on the simulation state
 function displayPlanets(){
   sunStar();
   mercuryPlanet();
@@ -400,6 +403,7 @@ function title(){
 
 }
 
+//function for the simulation state
 function simulation(){
   displayPlanets();
   display();
@@ -425,9 +429,6 @@ function dead(){
 }
 
 function learnSun(){
-  textFont(myFont);
-
-
   image(sunState.image, width/2, height/2, 900, 900);
 }
 
@@ -471,6 +472,8 @@ function learnMoon(){
 
 //----------------------------------------------------------------------------------
 
+
+//displays the sun at the center of the simulation
 function sunStar(){
   image(sun.image, sun.x, sun.y, sun.size, sun.size);
 
@@ -601,7 +604,7 @@ function mercuryPlanet(){
   mercury.x  = constrain(mercury.x , 0, width);
   mercury.y  = constrain(mercury.y , 0, height);
 
-  //make the star bounce off the walls of the simulation
+  //make mercury bounce off the walls of the simulation
   if(mercury.x >= width || mercury.x <= 0){
     mercury.vx = -mercury.vx;
   }
@@ -616,9 +619,9 @@ function venusPlanet(){
 
 
   venus.x  = constrain(venus.x , 0, width);
-  venus.y  = constrain(venus.y , 0, width);
+  venus.y  = constrain(venus.y , 0, height);
 
-  //make the star bounce off the walls of the simulation
+  //make venus bounce off the walls of the simulation
   if(venus.x >= width || venus.x <= 0){
     venus.vx = -venus.vx;
   }
@@ -633,9 +636,9 @@ function earthPlanet(){
 
 
   earth.x  = constrain(earth.x , 0, width);
-  earth.y  = constrain(earth.y , 0, width);
+  earth.y  = constrain(earth.y , 0, height);
 
-  //make the star bounce off the walls of the simulation
+  //make the earth bounce off the walls of the simulation
   if(earth.x >= width || earth.x <= 0){
     earth.vx = -earth.vx;
   }
@@ -654,9 +657,9 @@ function marsPlanet(){
 
 
   mars.x  = constrain(mars.x , 0, width);
-  mars.y  = constrain(mars.y , 0, width);
+  mars.y  = constrain(mars.y , 0, height);
 
-  //make the star bounce off the walls of the simulation
+  //make mars bounce off the walls of the simulation
   if(mars.x >= width || mars.x <= 0){
     mars.vx = -mars.vx;
   }
@@ -674,7 +677,7 @@ function jupiterPlanet(){
   jupiter.x  = constrain(jupiter.x , 0, width);
   jupiter.y  = constrain(jupiter.y , 0, height);
 
-  //make the star bounce off the walls of the simulation
+  //make jupiter bounce off the walls of the simulation
   if(jupiter.x >= width || jupiter.x <= 0){
     jupiter.vx = -jupiter.vx;
   }
@@ -692,7 +695,7 @@ function saturnPlanet(){
   saturn.x  = constrain(saturn.x , 0, width);
   saturn.y  = constrain(saturn.y , 0, height);
 
-  //make the star bounce off the walls of the simulation
+  //make saturn bounce off the walls of the simulation
   if(saturn.x >= width || saturn.x <= 0){
     saturn.vx = -saturn.vx;
   }
@@ -708,9 +711,9 @@ function uranusPlanet(){
 
 
   uranus.x  = constrain(uranus.x , 0, width);
-  uranus.y  = constrain(uranus.y , 0, width);
+  uranus.y  = constrain(uranus.y , 0, height);
 
-  //make the star bounce off the walls of the simulation
+  //make uranus bounce off the walls of the simulation
   if(uranus.x >= width || uranus.x <= 0){
     uranus.vx = -uranus.vx;
   }
@@ -727,7 +730,7 @@ function neptunePlanet(){
   neptune.x  = constrain(neptune.x , 0, width);
   neptune.y  = constrain(neptune.y , 0, height);
 
-  //make the star bounce off the walls of the simulation
+  //make neptune bounce off the walls of the simulation
   if(neptune.x >= width ||neptune.x <= 0){
   neptune.vx = -neptune.vx;
   }
@@ -742,9 +745,9 @@ function moonSetup(){
 
 
   moon.x  = constrain(moon.x , 0, width);
-  moon.y  = constrain(moon.y , 0, width);
+  moon.y  = constrain(moon.y , 0, height);
 
-  //make the star bounce off the walls of the simulation
+  //make the moon bounce off the walls of the simulation
   if(moon.x >= width || moon.x <= 0){
     moon.vx = -moon.vx;
   }
@@ -753,6 +756,9 @@ function moonSetup(){
   }
 }
 
+
+//function to draw all the orbits in the simulation
+//for aesthetic purposes
 function orbits(){
 
   let planets = 10;
@@ -827,7 +833,7 @@ function userInput(){
 
 
 
-
+//displays all the planets in the simulation
 function display(){
   image(user.image, user.x, user.y, user.size, user.size);
   image(shootingStar.image, shootingStar.x, shootingStar.y, shootingStar.size, shootingStar.size);
@@ -843,21 +849,25 @@ function display(){
 
 }
 
+//function to receive keyboard input
 function keyPressed(){
+  // if you are on the title state and press spacebar
+  //it will bring you to the simulation state
   if(keyCode === 32){
     if(state ===`title`){
       state = `simulation`;
+
     }
   }
   if(keyCode === 82){
-    if(state != `simulation` && state != `dead`){
-      state = `simulation`;
+    if(state != `simulation` && state != `dead`){ //if the state is not simulation or dead
+      state = `simulation`; //it will bring you back to the simulation if you press `r`
 
     }
   }
 
   if(keyCode === 32){
-    if(state ===`dead`){
+    if(state ===`dead`){ //if the state is dead and you click spacebar it will bring you back to the title state
       state =`title`;
     }
   }
