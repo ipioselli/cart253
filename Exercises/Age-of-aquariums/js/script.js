@@ -8,24 +8,23 @@ Brief :
 3. change the fish (change size )
 4. Add at least 2 endings
 */
-
 "use strict";
 
 let user = {
   x: 0,
   y: 0,
-  size:100
+  size: 100
 
 };
 
 let bg = {
   r: 255,
-  g:166,
+  g: 166,
   b: 163,
 };
 
-let school = [];
-let schoolSize = 8;
+let chickFamily = [];
+let familySize = 8;
 //let chicks;
 
 
@@ -33,11 +32,11 @@ let schoolSize = 8;
 Description of preload
 */
 function preload() {
-  user.image= loadImage("assets/images/chicken.png");
+  user.image = loadImage("assets/images/chicken.png");
 
-  for(let i =0; i< schoolSize; i++){
-    let loadedImage = loadImage(`assets/images/chick-${i}.png`);
-    school.push(loadedImage);
+  for (let i = 0; i < familySize; i++) {
+    chickFamily[i] = loadImage("assets/images/chick-" + (7) + ".png");
+
   }
 
 
@@ -53,28 +52,28 @@ Description of setup
 */
 function setup() {
 
-  createCanvas(1920,1080);
+  createCanvas(1000, 1000);
 
-//creates 8 fish randomly using i
-for(let i =0; i<schoolSize; i++){
-  school[i]= createChicks(random(0, width), random(0, height))
+  //creates 8 fish randomly using i
+  for (let i = 0; i < familySize; i++) {
+    chickFamily[i] = createChicks(random(0, width), random(0, height));
+  }
+
+  user.x = random(0, width);
+  user.y = random(0, height);
+
+
 }
 
-user.x = random(0, width);
-user.y = random(0, height);
 
-
-}
-
-
-function createChicks(x, y){
+function createChicks(x, y) {
   let chicks = {
     x: x,
-    y:y,
-    size: 50,
+    y: y,
+    size: 100,
     vx: 0,
-    vy:0,
-    speed:2,
+    vy: 0,
+    speed: 2,
     home: false,
   };
   return chicks;
@@ -89,40 +88,42 @@ function draw() {
   moveUser();
 
 
-  for(let i=0; i<school.length; i++){
-    checkChicks(school[i]);
+  for (let i = 0; i < chickFamily.length; i++) {
+    checkChicks(chickFamily[i]);
   }
 
-  for(let i=0; i<school.length; i++){
-    moveChicks(school[i]);
+  for (let i = 0; i < chickFamily.length; i++) {
+    moveChicks(chickFamily[i]);
+  }
+
+  displayUser();
+
+
+  for (let i = 0; i < chickFamily.length; i++) {
+    displayChicks(chickFamily[i]);
+  }
+
+
+
 }
 
-displayUser();
-for(let i=0; i<school.length; i++){
-    displayChicks(school[i]);
-}
-
-
-
-}
-
-function moveUser(){
+function moveUser() {
   user.x = mouseX;
   user.y = mouseY;
 }
 
-function checkChicks(chicks){
-    if(!chicks.home){
-      let d = dist(user.x, user.y, chicks.x, chicks.y);
-      if(d < user.size /2, + chicks.size /2){
-        chicks.home = true;
+function checkChicks(chicks) {
+  if (!chicks.home) {
+    let d = dist(user.x, user.y, chicks.x, chicks.y);
+    if (d < user.size / 2 -20 + chicks.size / 2-20) {
+      chicks.home = true;
 
 
-      }
     }
+  }
 }
 
-function moveChicks(chicks){
+function moveChicks(chicks) {
   let change = random(0, 1);
   if (change < 0.05) { //5% change of direction will happen so they jiggle every now and then
     chicks.vx = random(-chicks.speed, chicks.speed); //random velocity
@@ -141,15 +142,19 @@ function moveChicks(chicks){
 
 
 //displays the chicken user
-function displayUser(){
+function displayUser() {
   push();
   imageMode(CENTER);
-  image(user.image, user.x, user.y, user.size ,user.size);
+  image(user.image, user.x, user.y, user.size, user.size);
   pop();
 }
 
-function displayChicks(chicks){
-  if(!chicks.home){
-      image(school.image, width/2, height/2);
+function displayChicks(chicks) {
+  if (!chicks.home) {
+    push();
+    ellipse(chicks.x, chicks.y, chicks.size);
+    //image(chicks.image, chicks.x, chicks.y, chicks.size, chicks.size);
+    pop();
+
   }
 }
