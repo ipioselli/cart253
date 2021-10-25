@@ -35,34 +35,37 @@ let chickImgStart = {
 
 }
 
-let chickFamily = [];
-let familySize = 10;
+let yay = {
+  x:150,
+  y:150,
+  size:600,
+}
+
+let chickFamily = []; // array of chicks
+let familySize = 10; // array size
 let chickImg;
 let chicksCought = 0;
 
 let state = `start`;
 
-let startInstructionTimer = 400;
-let startInstructionVisible = false;
+let chickTimer = 600;
+let chickTimerDone = false;
 
 let myFont;
 
 
-/**
-Description of preload
-*/
+// Preload all my assets
 function preload() {
   user.image = loadImage("assets/images/chicken.png");
   chickImg = loadImage("assets/images/chick-0.png");
   chickImgStart.image = loadImage("assets/images/chick-0.png");
   myFont = loadFont(`fonts/ChickenPie-8MevB.otf`)
+  yay.image = loadImage("assets/images/confetti.gif");
 
 }
 
 
-/**
-Description of setup
-*/
+//setup canvas size and user and chick positions
 function setup() {
 
   createCanvas(1000, 1000);
@@ -72,16 +75,18 @@ function setup() {
     chickFamily[i] = createChicks(random(0, width), random(0, height));
   }
 
+  // set a random position for the user
   user.x = random(0, width);
   user.y = random(0, height);
 
+  //gives the user a random speed
   user.vx = random(-user.speed, user.speed);
   user.vy = random(-user.speed, user.speed);
 
 
 }
 
-
+//function that creates the chicks
 function createChicks(x, y) {
   let chicks = {
     x: x,
@@ -95,9 +100,7 @@ function createChicks(x, y) {
   return chicks;
 }
 
-/**
-Description of draw()
-*/
+//draws the background and calls each function when their state changes
 function draw() {
   background(bg.r, bg.g, bg.b);
 
@@ -113,6 +116,8 @@ function draw() {
 
 }
 
+// title screen
+//Prompts the user to press enter to start the simulation
 function start() {
   push();
   textFont(myFont);
@@ -132,22 +137,29 @@ function start() {
   pop();
 }
 
+
+//simulation function
+// calls all the functions that allow the user to interact with the chicks
 function simulation() {
   moveUser();
   displayUser();
 
+  //calls the checkChicks function for the array of chicks
   for (let i = 0; i < chickFamily.length; i++) {
     checkChicks(chickFamily[i]);
   }
 
+  //calls the moveChicks function for the array of chicks
   for (let i = 0; i < chickFamily.length; i++) {
     moveChicks(chickFamily[i]);
   }
 
+  //calls the displayChicks for the array of chicks
   for (let i = 0; i < chickFamily.length; i++) {
     displayChicks(chickFamily[i]);
   }
 
+  //calls the checkChicksCought for the array of chicks
   for (let i = 0; i < chickFamily.length; i++) {
     checkChicksCought(chickFamily[i]);
   }
@@ -156,42 +168,48 @@ function simulation() {
     chicksSize(chickFamily[i]);
   }
 
-  startInstructionTimer -= 1;
-  if(startInstructionTimer <=0){
-    startInstructionVisible = true;
+  //timer in the simulation to activate the gameover state
+  chickTimer -= 1;
+  if(chickTimer <=0){
+    chickTimerDone = true;
   }
 
-  if(startInstructionVisible){
-    state = `gameover`;
+  if(chickTimerDone){
+    state = `gameover`; // if the chickTimer is <= 0 then the gameover state is called
   }
 
 }
 
+//Winner State called when the simulation is done before the timer runs out
 function winner() {
   push();
-  //textFont(myFont);
+  textFont(myFont);
   textAlign(CENTER, CENTER);
   textSize(60);
   fill(144, 38, 38);
-  text(`Winner`, width / 2, height / 2);
+  text(`You WON!`, width / 2, height / 2 - 200);
+  image(yay.image, yay.x, yay.y, yay.size, yay.size);
+  text(`Congrats!`, width / 2, height / 2 +200);
+
 }
 
+//calls the gameover function from the gameover state
 function gameover() {
   push();
-  //textFont(myFont);
+  textFont(myFont);
   textAlign(CENTER, CENTER);
-  textSize(60);
+  textSize(100);
   fill(144, 38, 38);
   text(`game over`, width / 2, height / 2);
 }
 
 
 
-
+//function to check if the chicks overlap with the user
 function checkChicks(chicks) {
   if (!chicks.home) {
     let d = dist(user.x, user.y, chicks.x, chicks.y);
-    if (d < user.size / 2 - 20 + chicks.size / 2 - 30) {
+    if (d < user.size / 2 - 50 + chicks.size / 2 - 50) {
       chicks.home = true;
       chicksCought += 1;
 
@@ -200,6 +218,7 @@ function checkChicks(chicks) {
   }
 }
 
+//function to move the chicks
 function moveChicks(chicks) {
   let change = random(0, 1);
   if (change < 0.05) { //5% change of direction will happen so they jiggle every now and then
@@ -210,19 +229,17 @@ function moveChicks(chicks) {
   chicks.x = chicks.x + chicks.vx;
   chicks.y = chicks.y + chicks.vy;
 
-  // Constrain the fish to the canvas
+  // Constrain the chicksS to the canvas
   chicks.x = constrain(chicks.x, 0, width - 50);
   chicks.y = constrain(chicks.y, 0, height - 50);
 }
 
+//function to vary the size of the chicks when it reaches more than 1/2 the width of the canvas
 function chicksSize(chicks) {
   if (chicks.x > width / 2) {
-    chicks.size = 150;
+    chicks.size = 120;
   }
 }
-
-//moves the chicken user
-
 
 //displays the chicken user
 function displayUser() {
@@ -232,6 +249,7 @@ function displayUser() {
   pop();
 }
 
+//function to display the image for each chick in the array
 function displayChicks(chicks) {
   if (!chicks.home) {
     push();
@@ -241,6 +259,7 @@ function displayChicks(chicks) {
   }
 }
 
+//function to check of all the chicks have been cough
 function checkChicksCought(chicks) {
   if (chicks.home && chicksCought === chickFamily.length) {
     state = `winner`;
@@ -248,6 +267,7 @@ function checkChicksCought(chicks) {
 
 }
 
+//function to move the user using the arrow keys
 function moveUser() {
 
   user.x = user.x + user.vx;
@@ -284,4 +304,5 @@ function keyPressed() {
       state = `simulation`;
     }
   }
+
 }
