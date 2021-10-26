@@ -22,20 +22,23 @@ let garden = {
   }
 };
 
-/**
-Description of preload
-*/
+
 function preload() {
 
 }
 
-
-/**
-Description of setup
-*/
 function setup() {
+  createCanvas(600, 600);
 
+
+  for (let i = 0; i < garden.numFlowers; i++) {
+
+    let flower = new Flower(); //calls the constructor from the flower class
+
+    garden.flowers.push(flower);
+  }
 }
+
 
 
 /**
@@ -43,4 +46,12 @@ Description of draw()
 */
 function draw() {
 
+//display the grass
+  background(garden.grassColor.r, garden.grassColor.g, garden.grassColor.b);
+
+    // Loop through all the flowers in the array and display them
+    for (let i = 0; i < garden.flowers.length; i++) {
+      let flower = garden.flowers[i];
+      flower.display(); //calls the display function from the flower class
+    }
 }
