@@ -195,6 +195,8 @@ Description of draw()
 */
 function draw() {
 
+  console.log("userX = " + mars.x + " userY = " + user.y);
+
   background(0);
   imageMode(CENTER, CENTER);
   image(bg.image, width/2, height/2, 1920, 1080);
@@ -209,7 +211,7 @@ function draw() {
   else if (state === `dead`) {
     dead();
   }
-  else if(state===`surprise`){
+  else if(state ===`surprise`){
     surprise();
   }
   else if(state ===`learnMercury`){
@@ -328,7 +330,6 @@ function checkMercury(){
 function mercuryPlanet(){
   push();
   translate(centerX, centerY);
-  image(mercury.image, 960, 540, 50, 50);
   rotate(mercury.angle);
   mercury.angle = mercury.angle + mercury.speed;
   image(mercury.image,mercury.radius, 0, mercury.size, mercury.size);
@@ -364,7 +365,7 @@ function marsPlanet(){
   translate(centerX, centerY);
   rotate(mars.angle);
   mars.angle = mars.angle + mars.speed;
-  image(mars.image,mars.radius, 0, mars.size, mars.size);
+  image(mars.image, mars.radius, 0, mars.size, mars.size);
   pop();
 
 }
