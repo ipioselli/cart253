@@ -6,6 +6,7 @@ class Bee {
     this.y = y;
     this.size = 40;
     this.minSize = 10; // If we get smaller than this minimum we're dead
+    this.maxSize = 40;
     this.vx = 0;
     this.vy = 0;
     this.speed = 5;
@@ -23,6 +24,19 @@ class Bee {
       // If so, we're dead
       this.alive = false;
     }
+  }
+
+  tryToPollinate(flower){
+    let d = dist(this.x, this.y, flower.x, flower.y);
+    if(d< this.size/2 + flower.size/2 + flower.petalThickness){
+      this.grow();
+      flower.pollinate();
+    }
+  }
+
+  grow(){
+    this.size = this.size + this.growRate;
+    this.size = constrain(this.size, this.minSize, this.maxSize);
   }
 
   // move() moves the bee by potentially changing direction

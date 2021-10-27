@@ -1,6 +1,6 @@
 /**
-Title of Project
-Author Name
+8.4 Interacting Objects
+Ines Pioselli
 
 This is a template. You must fill in the title,
 author, and this description to match your project!
@@ -15,12 +15,12 @@ let garden = {
   // How many flowers in the garden
 
 
-  numFlowers: 20,
+  numFlowers: 30,
   // The color of the grass (background)
 
   bees:[],
 
-  numBees: 7,
+  numBees: 30,
   grassColor: {
     r: 120,
     g: 180,
@@ -85,6 +85,14 @@ function draw() {
         bee.shrink();
         bee.move();
         bee.display();
+
+        for(let j = 0; j<garden.flowers.length; j++){
+          let flower = garden.flowers[j];
+          if(flower.alive){
+            bee.tryToPollinate(flower);
+          }
+
+        }
       }
     }
 }
