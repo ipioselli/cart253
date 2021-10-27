@@ -23,7 +23,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  paddle = new Paddle(300, 20);
+  paddle = new Paddle(300, 20); //parameters x, y
 
 }
 
