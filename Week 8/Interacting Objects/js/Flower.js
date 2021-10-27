@@ -22,6 +22,17 @@ class Flower {
       g: 0,
       b: 0
     };
+    this.alive = true;
+  }
+
+  shrink() {
+    let shrinkage = random(0,0.1);
+    this.size = this.size - shrinkage;
+    this.petalThickness = this.petalThickness - shrinkage/10;
+
+    if(this.size <= 0 || this.petalThickness <= 0 ){
+      this.alive = false; // flower dies
+    }
   }
 
   display(){

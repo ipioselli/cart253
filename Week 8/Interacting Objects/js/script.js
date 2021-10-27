@@ -13,8 +13,14 @@ let garden = {
   // An array to store the individual flowers
   flowers: [],
   // How many flowers in the garden
+
+
   numFlowers: 20,
   // The color of the grass (background)
+
+  bees:[],
+
+  numBees: 7,
   grassColor: {
     r: 120,
     g: 180,
@@ -46,6 +52,11 @@ function setup() {
 
     garden.flowers.push(flower);
   }
+
+  for (let i =0; i<garden.numBees; i++){
+    let bee = new Bee (random(0, width), random(0,height));
+    garden.bees.push(bee);
+  }
 }
 
 
@@ -61,6 +72,19 @@ function draw() {
     // Loop through all the flowers in the array and display them
     for (let i = 0; i < garden.flowers.length; i++) {
       let flower = garden.flowers[i];
-      flower.display(); //calls the display function from the flower class
+      if (flower.alive){
+        flower.shrink();
+        flower.display(); //calls the display function from the flower class
+      }
+
+    }
+
+    for (let i =0; i<garden.bees.length; i++){
+      let bee = garden.bees[i];
+      if(bee.alive){
+        bee.shrink();
+        bee.move();
+        bee.display();
+      }
     }
 }
