@@ -83,3 +83,12 @@ branch1.display();
 branch2.display();
 branch3.display();
 }
+
+function keyPressed() {
+  if (keyCode === 13) {
+    if (state === `start`) {
+      state = `simulation`;
+    }
+  }
+
+}
