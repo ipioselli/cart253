@@ -22,7 +22,9 @@ let tree = {
 
 let flowers = {
 
-  size:500,
+  y:500,
+  x:500,
+  size:1000,
 }
 
 let branch1;
@@ -49,6 +51,9 @@ let state = `start`;
 
 let cuteFont;
 
+//image used for the array of acorns
+let acornImg = undefined;
+
 
 /**
 Description of preload
@@ -56,7 +61,8 @@ Description of preload
 function preload() {
 tree.image = loadImage("assets/images/tree.png");
 flowers.image = loadImage("assets/images/flowers.png");
-cuteFont = loadFont(`assets/fonts/HashedBrowns-WyJgn`);
+cuteFont = loadFont(`assets/fonts/HashedBrowns-WyJgn.otf`);
+acornImg = loadImage("assets/images/acorn.png");
 }
 
 
@@ -64,7 +70,7 @@ cuteFont = loadFont(`assets/fonts/HashedBrowns-WyJgn`);
 Description of setup
 */
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(1920, 1080);
 
   branch1 = new Branch1(300, 30); //parameters x, y
   branch2 = new Branch2(350, 30, random(0, width), random(0, height));
@@ -74,7 +80,7 @@ function setup() {
   for ( let i=0; i<numAcorns; i++){
     let x = random(0, width);
     let y = random(-400,-100);
-    let acorn = new Acorn(x, y);
+    let acorn = new Acorn(x, y, acornImg);
     acorns.push(acorn);
   }
 
@@ -108,11 +114,22 @@ else if(state === `dead`){
 function start(){
   push();
   textFont(cuteFont);
+  textAlign(CENTER, CENTER);
   imageMode(CENTER, CENTER);
+  fill(202, 65, 129);
+  textSize(60);
+  image(flowers.image, 1920/2, 1080/2, 1920, 1080);
+  text(`Tree Simulation!`, width/2, height/2 - 400);
   textSize(50);
-  text(`Tree Simulation!`)
-  textSize(40);
-  image(flowers.image, width/2, height/2, 1920, 1080);
+
+  text(`Try Bounce all the acorns off the branches!`, width/2 , height/2 -200 );
+  text(`Try to bounce as many as you can before the timer runs out!`, width/2, height/2 -100);
+  text(`Press ENTER to begin!`, width/2, height/2);
+  text(`And use the left and arrow keys to move the main branch!`, width/2, height/2 + 100);
+
+
+
+  pop();
 
 }
 

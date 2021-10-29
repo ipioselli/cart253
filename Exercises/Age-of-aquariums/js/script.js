@@ -59,7 +59,7 @@ function preload() {
   user.image = loadImage("assets/images/chicken.png");
   chickImg = loadImage("assets/images/chick-0.png");
   chickImgStart.image = loadImage("assets/images/chick-0.png");
-  myFont = loadFont(`fonts/ChickenPie-8MevB.otf`)
+  myFont = loadFont(`fonts/ChickenPie-8MevB.otf`);
   yay.image = loadImage("assets/images/confetti.gif");
 
 }

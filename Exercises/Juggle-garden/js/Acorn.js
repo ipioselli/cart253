@@ -1,6 +1,6 @@
 class Acorn{
 
-  constructor(x, y){
+  constructor(x, y, image){
     this.x = x;
     this.y = y;
     this.vx = 0;
@@ -8,7 +8,8 @@ class Acorn{
     this.ax = 0;
     this.ay = 0;
     this.maxSpeed = 10;
-    this.size = 40;
+    this.size = 100;
+    this.image = image;
     this.active = true;
 
 
@@ -31,11 +32,11 @@ class Acorn{
 
     if (this.y - this.size/2 > height){
       this.active = false;
-    
+
     }
   }
 
-  bounce(branch) {
+  bounce(branch, height) {
 
     if (this.x > branch.x - branch.width / 2 &&
       this.x < branch.x + branch.width / 2 &&
@@ -49,6 +50,7 @@ class Acorn{
       this.vy = -this.vy;
       this.ay = 0;
 
+
   }
 }
 
@@ -56,13 +58,8 @@ class Acorn{
     push();
     fill(255, 50, 50);
     stroke(0);
-    ellipse(this.x, this.y, this.size);
+    image(this.image, this.x, this.y, this.size, this.size);
     pop();
   }
 
-//   checkAcorns(numAcorns, acornsFallen, isDead){
-//     if(this.active && acornsFallen === (numAcorns-1)){
-//       isDead = true;
-//     }
-//   }
 }

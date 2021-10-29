@@ -14,8 +14,6 @@ This is a Bunny Planet Astrology Simulator
 "use strict";
 let myFont;
 
-let orbitAngle = 160;
-
 let bg = {
   size:500
 };
