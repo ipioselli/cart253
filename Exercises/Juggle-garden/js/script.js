@@ -43,18 +43,25 @@ let gravityForce = 0.0025;
 
 let acornsFallen = 0;
 
-let bg = {
-  r:77,
-  g:181,
-  b: 219
-};
 
-let state = `start`;
+let state = `start`; //the exercise starts with the start state
 
 let cuteFont;
 
 //image used for the array of acorns
 let acornImg = undefined;
+
+let squirrel = {
+  x: 500,
+  y:500,
+  size: 1000,
+}
+
+let win = {
+  x: 500,
+  y:500,
+  size:100,
+}
 
 let acornTimer = 1000;
 let acornTimerDone = false;
@@ -68,6 +75,8 @@ tree.image = loadImage("assets/images/tree.png");
 flowers.image = loadImage("assets/images/flowers.png");
 cuteFont = loadFont(`assets/fonts/HashedBrowns-WyJgn.otf`);
 acornImg = loadImage("assets/images/acorn.png");
+squirrel.image = loadImage("assets/images/squirrel.png");
+win.image = loadImage("assets/images/winner.png");
 }
 
 
@@ -80,7 +89,7 @@ function setup() {
   branch1 = new Branch1(300, 30); //parameters x, y
   branch2 = new Branch2(350, 30, random(0, width), random(0, height));
   branch3 = new Branch3(370, 30, random(0, width), random(0, height));
-  branch4 = new Branch4(370, 30, random(0, width), random(0, height));
+  branch4 = new Branch4(390, 30, random(0, width), random(0, height));
 
 
   for ( let i=0; i<numAcorns; i++){
@@ -110,7 +119,7 @@ else if (state === `winner`){
 }
 
 else if(state === `gameover`){
-  gaemover();
+  gameover();
 }
 
 
@@ -141,25 +150,45 @@ function start(){
 
 function gameover(){
   push();
+  textFont(cuteFont);
+  textAlign(CENTER, CENTER);
+  imageMode(CENTER, CENTER);
+  fill(202, 65, 129);
+  textSize(60);
+  image(squirrel.image, 1920/2, 1080/2, 1920, 1080);
+  text(`Rip! The squirrel stole all the acorns!`, width/2, height/2 + 350);
+
 
   pop();
 }
 
 function winner(){
-  background(234);
+
+  push();
+  textFont(cuteFont);
+  textAlign(CENTER, CENTER);
+  imageMode(CENTER, CENTER);
+  fill(255, 222, 0);
+  textSize(60);
+  image(win.image, 1920/2, 1080/2, 1920, 1080);
+  text(`YAY you made it!`, width/2, height/2 +400);
+  pop();
+
 }
 
+
+//simulation state
+// draws the canvas and displays all the elements in the simulation
 function simulation(){
   imageMode(CENTER, CENTER);
   image(tree.image, width/2, height/2, 1920, 1080);
-  //background(bg.r, bg.g, bg.b);
 
 
   branch1.move();
-  branch1.display();
-  branch2.display();
-  branch3.display();
-  branch4.display();
+  branch1.display(); //displays the main moving branch
+  branch2.display(); // displays the second branch
+  branch3.display(); //displays the third branch
+  branch4.display(); //displays the 4th branch
 
   let numActiveAcorns = 0;
 
@@ -178,16 +207,20 @@ function simulation(){
 
         }
       }
+
+      //if the active number of acorns is equal to 0 then the gameover state is called
       if(numActiveAcorns === 0){
         state = `gameover`;
       }
 
+      //timer starts at 1000 and goes down by 1
       acornTimer -= 1;
       if(acornTimer <= 0){
         acornTimerDone = true;
       }
+
       if(acornTimerDone){
-        state = 'winner';
+        state = 'winner'; // when the timer is less than 0 then the winner state is called
       }
 
 
@@ -197,7 +230,7 @@ function simulation(){
 function keyPressed() {
   if (keyCode === 13) {
     if (state === `start`) {
-      state = `simulation`;
+      state = `simulation`; // when you press enter on the start state then the simulation state is called
     }
   }
 
