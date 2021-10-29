@@ -33,6 +33,8 @@ let branch2;
 
 let branch3;
 
+let branch4;
+
 let acorns = [];
 
 let numAcorns = 10;
@@ -54,6 +56,9 @@ let cuteFont;
 //image used for the array of acorns
 let acornImg = undefined;
 
+let acornTimer = 1000;
+let acornTimerDone = false;
+
 
 /**
 Description of preload
@@ -74,7 +79,8 @@ function setup() {
 
   branch1 = new Branch1(300, 30); //parameters x, y
   branch2 = new Branch2(350, 30, random(0, width), random(0, height));
-  branch3 = new Branch2(370, 30, random(0, width), random(0, height));
+  branch3 = new Branch3(370, 30, random(0, width), random(0, height));
+  branch4 = new Branch4(370, 30, random(0, width), random(0, height));
 
 
   for ( let i=0; i<numAcorns; i++){
@@ -103,8 +109,8 @@ else if (state === `winner`){
   winner();
 }
 
-else if(state === `dead`){
-  dead();
+else if(state === `gameover`){
+  gaemover();
 }
 
 
@@ -133,8 +139,10 @@ function start(){
 
 }
 
-function dead(){
-  background(255);
+function gameover(){
+  push();
+
+  pop();
 }
 
 function winner(){
@@ -151,6 +159,7 @@ function simulation(){
   branch1.display();
   branch2.display();
   branch3.display();
+  branch4.display();
 
   let numActiveAcorns = 0;
 
@@ -164,15 +173,21 @@ function simulation(){
         acorn.bounce(branch1);
         acorn.bounce(branch2);
         acorn.bounce(branch3);
+        acorn.bounce(branch4);
         acorn.display();
 
         }
-
-
+      }
+      if(numActiveAcorns === 0){
+        state = `gameover`;
       }
 
-      if(numActiveAcorns === 0){
-        state = `dead`;
+      acornTimer -= 1;
+      if(acornTimer <= 0){
+        acornTimerDone = true;
+      }
+      if(acornTimerDone){
+        state = 'winner';
       }
 
 
