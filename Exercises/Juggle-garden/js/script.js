@@ -26,7 +26,7 @@ let branch2;
 
 let branch3;
 
-let acorn = [];
+let acorns = [];
 
 let numAcorns = 10;
 
@@ -37,6 +37,8 @@ let bg = {
   g:181,
   b: 219
 };
+
+let state = `start`;
 
 
 /**
@@ -61,9 +63,11 @@ function setup() {
   for ( let i=0; i<numAcorns; i++){
     let x = random(0, width);
     let y = random(-400,-100);
-    //let acorn = new Acorn(x, y);
-    //acorns.push(acorn);
+    let acorn = new Acorn(x, y);
+    acorns.push(acorn);
   }
+
+
 }
 
 
@@ -71,6 +75,21 @@ function setup() {
 Description of draw()
 */
 function draw() {
+if(state === `start`){
+  start();
+}
+else if(state === `simulation`){
+  simulation();
+}
+
+else if (state === `winner`){
+  winner();
+}
+
+else if(state === `dead`){
+  dead();
+}
+
 
 imageMode(CENTER, CENTER);
 image(tree.image, width/2, height/2, 1920, 1080);
@@ -82,6 +101,20 @@ branch1.display();
 
 branch2.display();
 branch3.display();
+
+for (let i =0; i< acorns.length; i++){
+    let acorn = acorns[i];
+
+    if(acorn.active){
+      acorn.gravity(gravityForce);
+      acorn.move();
+      acorn.bounce(branch1);
+      acorn.bounce(branch2);
+      acorn.bounce(branch3);
+      acorn.display();
+    }
+
+  }
 }
 
 function keyPressed() {
