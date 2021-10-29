@@ -10,13 +10,15 @@ class Acorn{
     this.maxSpeed = 10;
     this.size = 40;
     this.active = true;
+
+
   }
 
   gravity(force){
     this.ay = this.ay + force;
   }
 
-  move(){
+  move(acornsFallen){
     this.vx = this.vx + this.ax;
     this.vy = this.vy + this.ay;
 
@@ -29,6 +31,7 @@ class Acorn{
 
     if (this.y - this.size/2 > height){
       this.active = false;
+    
     }
   }
 
@@ -41,6 +44,7 @@ class Acorn{
 
       let dx = this.x - branch.x;
       this.vx = this.vx + map(dx, -branch.width/2, branch.width/2, -2, 2 );
+
       //Bounce
       this.vy = -this.vy;
       this.ay = 0;
@@ -55,4 +59,10 @@ class Acorn{
     ellipse(this.x, this.y, this.size);
     pop();
   }
+
+//   checkAcorns(numAcorns, acornsFallen, isDead){
+//     if(this.active && acornsFallen === (numAcorns-1)){
+//       isDead = true;
+//     }
+//   }
 }

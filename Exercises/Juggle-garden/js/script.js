@@ -20,6 +20,11 @@ let tree = {
 
 }
 
+let flowers = {
+
+  size:500,
+}
+
 let branch1;
 
 let branch2;
@@ -32,6 +37,8 @@ let numAcorns = 10;
 
 let gravityForce = 0.0025;
 
+let acornsFallen = 0;
+
 let bg = {
   r:77,
   g:181,
@@ -40,12 +47,16 @@ let bg = {
 
 let state = `start`;
 
+let cuteFont;
+
 
 /**
 Description of preload
 */
 function preload() {
 tree.image = loadImage("assets/images/tree.png");
+flowers.image = loadImage("assets/images/flowers.png");
+cuteFont = loadFont(`assets/fonts/HashedBrowns-WyJgn`);
 }
 
 
@@ -56,8 +67,8 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   branch1 = new Branch1(300, 30); //parameters x, y
-  branch2 = new Branch2(300, 30, random(0, width), random(0, height));
-  branch3 = new Branch2(300, 30, random(0, width), random(0, height));
+  branch2 = new Branch2(350, 30, random(0, width), random(0, height));
+  branch3 = new Branch2(370, 30, random(0, width), random(0, height));
 
 
   for ( let i=0; i<numAcorns; i++){
@@ -91,31 +102,65 @@ else if(state === `dead`){
 }
 
 
-imageMode(CENTER, CENTER);
-image(tree.image, width/2, height/2, 1920, 1080);
-//background(bg.r, bg.g, bg.b);
 
-
-branch1.move();
-branch1.display();
-
-branch2.display();
-branch3.display();
-
-for (let i =0; i< acorns.length; i++){
-    let acorn = acorns[i];
-
-    if(acorn.active){
-      acorn.gravity(gravityForce);
-      acorn.move();
-      acorn.bounce(branch1);
-      acorn.bounce(branch2);
-      acorn.bounce(branch3);
-      acorn.display();
-    }
-
-  }
 }
+
+function start(){
+  push();
+  textFont(cuteFont);
+  imageMode(CENTER, CENTER);
+  textSize(50);
+  text(`Tree Simulation!`)
+  textSize(40);
+  image(flowers.image, width/2, height/2, 1920, 1080);
+
+}
+
+function dead(){
+  background(255);
+}
+
+function winner(){
+  background(234);
+}
+
+function simulation(){
+  imageMode(CENTER, CENTER);
+  image(tree.image, width/2, height/2, 1920, 1080);
+  //background(bg.r, bg.g, bg.b);
+
+
+  branch1.move();
+  branch1.display();
+  branch2.display();
+  branch3.display();
+
+  let numActiveAcorns = 0;
+
+  for (let i =0; i< acorns.length; i++){
+      let acorn = acorns[i];
+
+      if(acorn.active){
+        numActiveAcorns++;
+        acorn.gravity(gravityForce);
+        acorn.move();
+        acorn.bounce(branch1);
+        acorn.bounce(branch2);
+        acorn.bounce(branch3);
+        acorn.display();
+
+        }
+
+
+      }
+
+      if(numActiveAcorns === 0){
+        state = `dead`;
+      }
+
+
+
+    }
 
 function keyPressed() {
   if (keyCode === 13) {
