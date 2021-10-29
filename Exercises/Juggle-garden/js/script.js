@@ -8,18 +8,27 @@ Brief:
 2. add a new class and objects
 3. add at least 2 endings
 
+Exercise 05:
+- Press enter to start the Simulation
+- Use the arrow keys to navigate the branches and bounce as many acorns as you can
+off the branches
+- If all the acorns fall off the tree the evil squirrel will take them all and the game is over
+- If you manage to bounce the acorns before the timer runs out then you win!
+
 */
 
 "use strict";
 
-let user;
 
+//tree background in the simulation state
 let tree = {
 
   size:500,
 
 }
 
+
+//flowers that go on the start state
 let flowers = {
 
   y:500,
@@ -27,48 +36,47 @@ let flowers = {
   size:1000,
 }
 
+//branches
 let branch1;
-
 let branch2;
-
 let branch3;
-
 let branch4;
 
-let acorns = [];
+let acorns = []; //acorn array
 
 let numAcorns = 10;
 
 let gravityForce = 0.0025;
 
-let acornsFallen = 0;
-
 
 let state = `start`; //the exercise starts with the start state
 
-let cuteFont;
+let cuteFont; // font from the internet
 
 //image used for the array of acorns
 let acornImg = undefined;
 
+//squirrel image at the game over state
 let squirrel = {
   x: 500,
   y:500,
   size: 1000,
 }
 
+//winner image in the winner state
 let win = {
   x: 500,
   y:500,
   size:100,
 }
 
+//timer
 let acornTimer = 1000;
 let acornTimerDone = false;
 
 
 /**
-Description of preload
+Preloads all the images and fonts
 */
 function preload() {
 tree.image = loadImage("assets/images/tree.png");
@@ -81,17 +89,18 @@ win.image = loadImage("assets/images/winner.png");
 
 
 /**
-Description of setup
+creates the acorn and branches from their classes
 */
 function setup() {
   createCanvas(1920, 1080);
 
   branch1 = new Branch1(300, 30); //parameters x, y
-  branch2 = new Branch2(350, 30, random(0, width), random(0, height));
+  branch2 = new Branch2(350, 30, random(0, width), random(0, height)); // random x and y position for all 3 still branches
   branch3 = new Branch3(370, 30, random(0, width), random(0, height));
   branch4 = new Branch4(390, 30, random(0, width), random(0, height));
 
 
+  //creates the acorn array
   for ( let i=0; i<numAcorns; i++){
     let x = random(0, width);
     let y = random(-400,-100);
@@ -104,26 +113,19 @@ function setup() {
 
 
 /**
-Description of draw()
+calls all the states
 */
+
 function draw() {
-if(state === `start`){
-  start();
-}
-else if(state === `simulation`){
-  simulation();
-}
-
-else if (state === `winner`){
-  winner();
-}
-
-else if(state === `gameover`){
-  gameover();
-}
-
-
-
+  if (state === `start`) {
+    start();
+  } else if (state === `simulation`) {
+    simulation();
+  } else if (state === `winner`) {
+    winner();
+  } else if (state === `gameover`) {
+    gameover();
+  }
 }
 
 function start(){
@@ -195,7 +197,7 @@ function simulation(){
   for (let i =0; i< acorns.length; i++){
       let acorn = acorns[i];
 
-      if(acorn.active){
+      if(acorn.active){ // if the acorns are still on the screen then all the functions will called
         numActiveAcorns++;
         acorn.gravity(gravityForce);
         acorn.move();
