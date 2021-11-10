@@ -3,9 +3,9 @@ class Motorcycle {
   constructor(x, y){
     this.x = x;
     this.y = y;
-    this.width = 50;
-    this.height = 20;
-    this.vx = 5;
+    this.width = 30;
+    this.height = 10;
+    this.vx = 10;
     this.vy = 0;
   }
 
@@ -14,7 +14,7 @@ class Motorcycle {
     this.y += this.vy;
   }
 
-  wrap() {
+  wrap(){
     if(this.x > width){
       this.x -= width;
     }
