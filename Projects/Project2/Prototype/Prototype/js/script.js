@@ -42,7 +42,7 @@ let page2Background = {
 
 let user;
 
-let balls = [];
+let ball;
 let numBalls = 20;
 
 
