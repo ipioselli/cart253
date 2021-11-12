@@ -6,8 +6,9 @@ class User{
     this.size = 100;
     this.vx = 0;
     this.vy = 0;
-    this.speed = 10;
-    this.alive = true;
+    this.speed = 5;
+    this.foundLover = true;
+    this.ballHit = true;
   }
 
   move(){
@@ -18,6 +19,9 @@ class User{
     this.x = constrain(this.x, 0, width);
     this.y = constrain(this.y, 0, height);
 
+  }
+
+  handleInput(){
 
     if(keyIsDown(LEFT_ARROW)){
       this.vx = - this.speed;
@@ -42,12 +46,21 @@ class User{
   }
 
   checkHit(lover){
-    if (this.x > lover.x - lover.width/2 &&
-        this.x < lover.x + lover.width/2 &&
-        this.y > lover.y - lover.height/2 &&
-        this.y < lover.y + lover.height/2) {
-      this.alive = false;
+
+    let d = dist(this.x, this.y, lover.x, lover.y);
+    if(d < this.size + lover.size){
+      this.foundLover = false;
     }
+  }
+
+    checkHitBall(ball){
+
+      let d = dist(this.x, this.y, ball.x, ball.y);
+      if(d < this.size + ball.size){
+        this.ballHit = false;
+      }
+
+
   }
 
   display(){

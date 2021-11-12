@@ -17,14 +17,13 @@ class Lover{
     this.x = constrain(this.x, 0, width);
     this.y = constrain(this.y, 0, height);
 
+
     if(this.x >= width || this.x <=0){
       this.vx = -this.vx;
     }
     if(this.y >= height || this.y <=0){
       this.vy = -this.vy;
     }
-    this.vx = random(-this.speed, this.speed);
-    this.vy = random(-this.speed, this.speed);
 
   }
 

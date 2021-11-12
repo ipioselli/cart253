@@ -45,7 +45,7 @@ let lover;
 let ball;
 
 
-let state = `title`; // the prototype starts with the title state
+let state = `minigame1`; // the prototype starts with the title state
 
 let tutorialFont;
 let titleMusic;
@@ -74,6 +74,24 @@ function setup() {
 
   user = new User(random(0, width), random(0, height)); // random x and y position
   lover = new Lover(random(0, width), random(0, height));
+  ball = new Ball(random(0, width), random(0, height));
+
+  // let r = random(0, 1);
+  // if(r < 0.5){
+  //    lover.vx = -lover.speed;
+  //
+  //  }
+  //  else{
+  //   lover.vx = lover.speed;
+  // }
+
+  lover.vx = random(-lover.speed, lover.speed);
+  lover.vy = random(-lover.speed, lover.speed);
+
+  ball.vx = random(-ball.speed, ball.speed);
+  ball.vy = random(-ball.speed, ball.speed);
+
+
 
   //titleMusic.play();
 
@@ -101,6 +119,12 @@ function draw() {
   }
   else if(state === `minigame1`){
     minigame1();
+  }
+  else if(state === `happyEnding`){
+    happyEnding();
+  }
+  else if(state === `sadEnding`){
+    sadEnding();
   }
 
 }
@@ -202,9 +226,30 @@ function minigame1(){
   background(99, 145, 186);
   user.move();
   user.display();
+  user.handleInput();
+  user.checkHit(lover);
+  user.checkHitBall(ball);
+  ball.move();
+  ball.display();
   lover.move();
   lover.display();
 
+  if(!user.foundLover){
+    state = `happyEnding`;
+  }
+  if(!user.ballHit){
+   state = `sadEnding`;
+   }
+
+
+}
+
+function happyEnding(){
+  background(191, 66, 245);
+}
+
+function sadEnding(){
+  background(150, 116, 101);
 }
 
 function displayTutorialButton(){
