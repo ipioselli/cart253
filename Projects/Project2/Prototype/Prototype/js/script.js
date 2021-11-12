@@ -119,6 +119,14 @@ function tutorial(){
 function page01(){
   push();
   image(page1Background.image, page1Background.x, page1Background.y, page1Background.size, page1Background.size);
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+  text(`It's your first day of art school and you are very excited to start!`, width/2, height/2 +210);
+  text(`You really want to join a club but not sure which one.`, width/2, height/2 +250);
+  text(`While you look around you see 2 tall mysterious fish `, width/2, height/2 +290);
+  text(`approach you`, width/2, height/2 +330);
   pop();
 }
 
