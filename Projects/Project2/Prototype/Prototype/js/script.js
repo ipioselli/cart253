@@ -14,6 +14,12 @@ let tutorialButton = {
   size:200,
 }
 
+let nextButton = {
+  x:600,
+  y:750,
+  size:100,
+}
+
 
 //image for the title state
 let titleScreen = {
@@ -28,6 +34,13 @@ let page1Background = {
   size:800,
 }
 
+let page2Background = {
+  x:400,
+  y:400,
+  size:800,
+}
+
+
 
 let state = `title`; // the prototype starts with the title state
 
@@ -40,7 +53,9 @@ Description of preload
 function preload() {
   titleScreen.image = loadImage("assets/images/titleScreen.png");
   tutorialButton.image = loadImage("assets/images/tutorialButton.png");
+  nextButton.image = loadImage("assets/images/nextButton.png");
   page1Background.image = loadImage("assets/images/page01.png");
+  page2Background.image = loadImage("assets/images/page02.png");
   tutorialFont = loadFont(`assets/fonts/Blackberries.otf`);
   titleMusic = loadSound(`assets/sounds/Brasil.mp3`);
 
@@ -70,6 +85,15 @@ function draw() {
   }
   else if(state === `page01`){
     page01();
+  }
+  else if(state === `page02`){
+    page02();
+  }
+  else if(state === `end`){
+    end();
+  }
+  else if(state === `minigame1`){
+    minigame1();
   }
 
 }
@@ -117,8 +141,15 @@ function tutorial(){
 
 
 function page01(){
-  push();
+
+
+  imageMode(CENTER, CENTER);
   image(page1Background.image, page1Background.x, page1Background.y, page1Background.size, page1Background.size);
+  checkNextButtonClicked()
+  displayNextButton()
+  push();
+
+  //text box for page 1
   textFont(tutorialFont);
   textAlign(CENTER, CENTER);
   textSize(30);
@@ -126,13 +157,43 @@ function page01(){
   text(`It's your first day of art school and you are very excited to start!`, width/2, height/2 +210);
   text(`You really want to join a club but not sure which one.`, width/2, height/2 +250);
   text(`While you look around you see 2 tall mysterious fish `, width/2, height/2 +290);
-  text(`approach you`, width/2, height/2 +330);
+  text(`approach you!`, width/2, height/2 +330);
+
   pop();
+}
+
+function page02(){
+  imageMode(CENTER, CENTER);
+  image(page2Background.image, page2Background.x, page2Background.y, page2Background.size, page2Background.size);
+
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+  text(`Orange fish: Hi there! My name is Jake! want to join the `, width/2, height/2 +210);
+  text(`photography club? `, width/2, height/2 +250);
+  text(`White fish: Don't listen to him. My name is Edward and you`, width/2, height/2 + 290);
+  text(`should join the music club!`, width/2, height/2 + 330);
+  text(`A. Join the music club     B.Join the photography club`, width/2, height/2 +360);
+  pop();
+}
+
+function end(){
+  background(78, 90, 55);
+}
+
+function minigame1(){
+  background(89, 255, 78);
 }
 
 function displayTutorialButton(){
   image(tutorialButton.image, tutorialButton.x, tutorialButton.y, tutorialButton.size, tutorialButton.size);
 
+}
+
+function displayNextButton(){
+  image(nextButton.image, nextButton.x, nextButton.y, nextButton.size, nextButton.size);
 }
 
 
@@ -144,6 +205,13 @@ function checkTutorialButtonClicked(){
   }
 }
 
+function checkNextButtonClicked(){
+  let d = dist(mouseX, mouseY, nextButton.x, nextButton.y );
+  if (d <nextButton.size /2 - 20){
+    state = `page02`;
+  }
+}
+
 function keyPressed(){
   if (keyCode === 13){ //if you press enter
     state = `page01`;
@@ -151,4 +219,13 @@ function keyPressed(){
   if (keyCode === 8){ // if you
     state = `title`;
   }
+  if(state === `page02`){
+    if(keyCode === 65){
+      state = `minigame1`;
+    }
+    else if(keyCode === 66){
+      state = `end`;
+    }
+  }
+
 }
