@@ -40,6 +40,10 @@ let page2Background = {
   size:800,
 }
 
+let user;
+
+let balls = [];
+let numBalls = 20;
 
 
 let state = `title`; // the prototype starts with the title state
@@ -180,11 +184,19 @@ function page02(){
 }
 
 function end(){
-  background(78, 90, 55);
+  background(99, 145, 186);
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(45);
+  fill(255, 255, 255);
+  text(`For now this is the end but will add more for the final :3`, width/2, height/2);
+
+  pop();
 }
 
 function minigame1(){
-  background(89, 255, 78);
+  background(99, 145, 186);
 }
 
 function displayTutorialButton(){
@@ -216,14 +228,14 @@ function keyPressed(){
   if (keyCode === 13){ //if you press enter
     state = `page01`;
   }
-  if (keyCode === 8){ // if you
+  if (keyCode === 8){ // keycode for
     state = `title`;
   }
   if(state === `page02`){
-    if(keyCode === 65){
+    if(keyCode === 65){ // keycode for letter A
       state = `minigame1`;
     }
-    else if(keyCode === 66){
+    else if(keyCode === 66){ //keycode for letter B
       state = `end`;
     }
   }
