@@ -41,9 +41,8 @@ let page2Background = {
 }
 
 let user;
-
+let lover;
 let ball;
-let numBalls = 20;
 
 
 let state = `title`; // the prototype starts with the title state
@@ -72,6 +71,10 @@ Description of setup
 */
 function setup() {
   createCanvas(800, 800);
+
+  user = new User(random(0, width), random(0, height)); // random x and y position
+  lover = new Lover(random(0, width), random(0, height));
+
   //titleMusic.play();
 
 }
@@ -197,6 +200,11 @@ function end(){
 
 function minigame1(){
   background(99, 145, 186);
+  user.move();
+  user.display();
+  lover.move();
+  lover.display();
+
 }
 
 function displayTutorialButton(){
