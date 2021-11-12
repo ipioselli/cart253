@@ -60,7 +60,7 @@ let lover;
 let ball;
 
 
-let state = `minigame1`; // the prototype starts with the title state
+let state = `title`; // the prototype starts with the title state
 
 let tutorialFont;
 
@@ -198,6 +198,7 @@ function page01(){
   pop();
 }
 
+
 function page02(){
   imageMode(CENTER, CENTER);
   image(page2Background.image, page2Background.x, page2Background.y, page2Background.size, page2Background.size);
@@ -252,10 +253,25 @@ function minigame1(){
 
 function happyEnding(){
   background(191, 66, 245);
+
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+  text(`You fell in love with Edward and rode off into the sunset`, width/2, height/2);
+  pop();
 }
 
 function sadEnding(){
   background(150, 116, 101);
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+
+  pop();
 }
 
 function displayTutorialButton(){
