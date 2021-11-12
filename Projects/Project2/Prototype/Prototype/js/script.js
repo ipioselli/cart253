@@ -3,18 +3,22 @@ Project 2 Prototype
 Long Leg Fishy Dating Simulator
 Ines Pioselli
 
+This is a prototype of my love simulator. The first few states show examples of how the style will look.
+The minigame is a very rough and samll scale of what will happen. The user will have an array of balls bouncing around and they must doge them and
+get to their fish lover to win their heart back. For now I just used 3 ellipses to show what will happen.
+
 
 */
 
 "use strict";
 
-let tutorialButton = {
+let tutorialButton = { // button to access the tutorial state
   x:150,
   y:750,
   size:200,
 }
 
-let nextButton = {
+let nextButton = { // button to access the first page of the game
   x:600,
   y:750,
   size:100,
@@ -28,18 +32,29 @@ let titleScreen = {
   size:800,
 }
 
+//image for the first page
 let page1Background = {
   x:400,
   y:400,
   size:800,
 }
 
+
+//image for the 2nd page
 let page2Background = {
   x:400,
   y:400,
   size:800,
 }
 
+let gymClass = {
+  x:400,
+  y:400,
+  size:800,
+}
+
+
+//minigame variables
 let user;
 let lover;
 let ball;
@@ -48,7 +63,6 @@ let ball;
 let state = `minigame1`; // the prototype starts with the title state
 
 let tutorialFont;
-let titleMusic;
 
 /**
 Description of preload
@@ -59,6 +73,7 @@ function preload() {
   nextButton.image = loadImage("assets/images/nextButton.png");
   page1Background.image = loadImage("assets/images/page01.png");
   page2Background.image = loadImage("assets/images/page02.png");
+  gymClass.image = loadImage("assets/images/gymClass.png");
   tutorialFont = loadFont(`assets/fonts/Blackberries.otf`);
   titleMusic = loadSound(`assets/sounds/Brasil.mp3`);
 
@@ -72,35 +87,23 @@ Description of setup
 function setup() {
   createCanvas(800, 800);
 
+  //creates each class
   user = new User(random(0, width), random(0, height)); // random x and y position
-  lover = new Lover(random(0, width), random(0, height));
-  ball = new Ball(random(0, width), random(0, height));
+  lover = new Lover(random(0, width), random(0, height)); // random x and y position
+  ball = new Ball(random(0, width), random(0, height)); // random x and y position
 
-  // let r = random(0, 1);
-  // if(r < 0.5){
-  //    lover.vx = -lover.speed;
-  //
-  //  }
-  //  else{
-  //   lover.vx = lover.speed;
-  // }
-
+  //random speed for the fish lover
   lover.vx = random(-lover.speed, lover.speed);
   lover.vy = random(-lover.speed, lover.speed);
 
+  //random speed for the ball
   ball.vx = random(-ball.speed, ball.speed);
   ball.vy = random(-ball.speed, ball.speed);
-
-
-
-  //titleMusic.play();
 
 }
 
 
-/**
-Description of draw()
-*/
+//Draws all the states for the game
 function draw() {
   if(state === `title`){
     title();
@@ -129,6 +132,8 @@ function draw() {
 
 }
 
+
+//title state : homepage
 function title(){
   imageMode(CENTER, CENTER);
   image(titleScreen.image, titleScreen.x, titleScreen.y, titleScreen.size, titleScreen.size);
@@ -223,7 +228,8 @@ function end(){
 }
 
 function minigame1(){
-  background(99, 145, 186);
+  imageMode(CENTER, CENTER);
+  image(gymClass.image, gymClass.x, gymClass.y, gymClass.size, gymClass.size);
   user.move();
   user.display();
   user.handleInput();
@@ -270,6 +276,7 @@ function checkTutorialButtonClicked(){
   }
 }
 
+//hover over the nextButton to access the second page
 function checkNextButtonClicked(){
   let d = dist(mouseX, mouseY, nextButton.x, nextButton.y );
   if (d <nextButton.size /2 - 20){
@@ -278,10 +285,10 @@ function checkNextButtonClicked(){
 }
 
 function keyPressed(){
-  if (keyCode === 13){ //if you press enter
+  if (keyCode === 13){ //keycode for ENTER
     state = `page01`;
   }
-  if (keyCode === 8){ // keycode for
+  if (keyCode === 8){ // keycode for backspace
     state = `title`;
   }
   if(state === `page02`){
