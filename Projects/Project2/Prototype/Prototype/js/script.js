@@ -176,6 +176,7 @@ function tutorial(){
 }
 
 
+//displays the first page with the main character
 function page01(){
 
 
@@ -198,7 +199,7 @@ function page01(){
   pop();
 }
 
-
+//displays the second page with the 2 love interests
 function page02(){
   imageMode(CENTER, CENTER);
   image(page2Background.image, page2Background.x, page2Background.y, page2Background.size, page2Background.size);
@@ -216,6 +217,8 @@ function page02(){
   pop();
 }
 
+
+//if you select B. photography club you will end up on this state
 function end(){
   background(99, 145, 186);
   push();
@@ -228,6 +231,8 @@ function end(){
   pop();
 }
 
+
+//if you select A. The music club you will end up on this state
 function minigame1(){
   imageMode(CENTER, CENTER);
   image(gymClass.image, gymClass.x, gymClass.y, gymClass.size, gymClass.size);
@@ -251,6 +256,8 @@ function minigame1(){
 
 }
 
+
+//happy ending for the minigame
 function happyEnding(){
   background(191, 66, 245);
 
@@ -259,10 +266,12 @@ function happyEnding(){
   textAlign(CENTER, CENTER);
   textSize(30);
   fill(255, 255, 255);
-  text(`You fell in love with Edward and rode off into the sunset`, width/2, height/2);
+  text(`You fell in love with Edward and rode off into the sunset!`, width/2, height/2);
   pop();
 }
 
+
+//sad ending for the minigame
 function sadEnding(){
   background(150, 116, 101);
   push();
@@ -270,15 +279,19 @@ function sadEnding(){
   textAlign(CENTER, CENTER);
   textSize(30);
   fill(255, 255, 255);
-
+  text(`You ended up sad and alone :( `, width/2, height/2);
   pop();
 }
 
+
+//displays the tutorial button
 function displayTutorialButton(){
   image(tutorialButton.image, tutorialButton.x, tutorialButton.y, tutorialButton.size, tutorialButton.size);
 
 }
 
+
+//displays next button
 function displayNextButton(){
   image(nextButton.image, nextButton.x, nextButton.y, nextButton.size, nextButton.size);
 }
@@ -300,6 +313,8 @@ function checkNextButtonClicked(){
   }
 }
 
+
+//keyboard input
 function keyPressed(){
   if (keyCode === 13){ //keycode for ENTER
     state = `page01`;

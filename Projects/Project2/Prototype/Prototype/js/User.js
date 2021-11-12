@@ -1,16 +1,21 @@
 class User{
 
   constructor(x, y){
+    //position
     this.x = x;
     this.y = y;
+    //size
     this.size = 100;
+    //velocity
     this.vx = 0;
     this.vy = 0;
+    //speed
     this.speed = 5;
-    this.foundLover = true;
-    this.ballHit = true;
+    this.foundLover = true; //check if you found your lover
+    this.ballHit = true; //check if the ball hit you
   }
 
+//function to move the user
   move(){
 
     this.x = this.x + this.vx;
@@ -21,6 +26,7 @@ class User{
 
   }
 
+//keyboard input
   handleInput(){
 
     if(keyIsDown(LEFT_ARROW)){
@@ -45,6 +51,7 @@ class User{
     }
   }
 
+  //check if the user hit their lover
   checkHit(lover){
 
     let d = dist(this.x, this.y, lover.x, lover.y);
@@ -53,6 +60,7 @@ class User{
     }
   }
 
+  //check if the user hit the ball
     checkHitBall(ball){
 
       let d = dist(this.x, this.y, ball.x, ball.y);
@@ -63,6 +71,7 @@ class User{
 
   }
 
+//displays the user
   display(){
     push();
     fill(255, 255, 255);
