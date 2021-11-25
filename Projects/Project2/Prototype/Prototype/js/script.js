@@ -4,7 +4,7 @@ Long Leg Fishy Dating Simulator
 Ines Pioselli
 
 This is a prototype of my love simulator. The first few states show examples of how the style will look.
-The minigame is a very rough and samll scale of what will happen. The user will have an array of balls bouncing around and they must doge them and
+The minigame is a very rough and small scale of what will happen. The user will have an array of balls bouncing around and they must doge them and
 get to their fish lover to win their heart back. For now I just used 3 ellipses to show what will happen.
 
 
@@ -117,6 +117,9 @@ function draw() {
   else if(state === `page02`){
     page02();
   }
+  else if (state === `photographyRoom`){
+    photographyRoom();
+  }
   else if(state === `end`){
     end();
   }
@@ -217,6 +220,18 @@ function page02(){
   pop();
 }
 
+function photographyRoom(){
+  imageMode(CENTER, CENTER);
+  image(photographyRoom.image, photographyRoom.x, photographyRoom.y, photographyRoom.size, photographyRoom.size);
+
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+  text(``)
+  pop();
+}
 
 //if you select B. photography club you will end up on this state
 function end(){
