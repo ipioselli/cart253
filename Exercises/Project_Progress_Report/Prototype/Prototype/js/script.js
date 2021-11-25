@@ -66,6 +66,17 @@ let state = `title`; // the prototype starts with the title state
 
 let tutorialFont;
 
+//MADELINE ADDED CODE//
+
+let typeWriterTime = 0;
+let typeWriterSpeed = 100;
+let typeWriterCursor = 0;
+let typeWriterText = "";
+
+let sentence0 = `You are a lovely fish who has just started their first day of college.`;
+
+//
+
 
 /**
 Description of preload
@@ -104,12 +115,11 @@ function setup() {
   //random speed for the ball
   ball.vx = random(-ball.speed, ball.speed);
   ball.vy = random(-ball.speed, ball.speed);
-
 }
-
 
 //Draws all the states for the game
 function draw() {
+
   if(state === `title`){
     title();
   }
@@ -135,6 +145,7 @@ function draw() {
     sadEnding();
   }
 
+
 }
 
 
@@ -154,8 +165,6 @@ function title(){
 
   pop();
 
-
-
 }
 
 
@@ -169,7 +178,10 @@ function tutorial(){
   fill(255, 255, 255);
   text(`Long Leg Fish Love Story!`, width / 2, height / 2-300);
   textSize(35);
-  text(`You are a lovely fish who has just started their first day of college.`, width / 2, height / 2-200);
+
+
+  drawTypeWriter(width / 2, height / 2 - 200);
+  // text(`You are a lovely fish who has just started their first day of college.`, width / 2, height / 2-200);
   text(`You are asked to join clubs and meet new fish.`, width / 2, height / 2-150);
   text(`However, you encounter 2 love interests and must make a hard decision` ,width / 2, height / 2-100);
   text(`and choose one of them do date!` ,width / 2, height / 2-50);
@@ -309,6 +321,10 @@ function checkTutorialButtonClicked(){
   let d = dist(mouseX, mouseY, tutorialButton.x, tutorialButton.y );
   if (d <tutorialButton.size /2 - 60){
     state = `tutorial`;
+
+    //MADELINE ADDED CODE//
+    startTypeWriter(sentence0);
+    //
   }
 }
 
@@ -340,3 +356,31 @@ function keyPressed(){
   }
 
 }
+
+//MADELINE ADDED CODE//
+
+function startTypeWriter(sentence){
+    typeWriterTime = typeWriterSpeed;
+    typeWriterCursor = 0;
+    typeWriterText = sentence;
+}
+
+
+function drawTypeWriter(x,y) {
+
+    //MADELINE ADDED CODE//
+    typeWriterTime -= deltaTime;
+
+    if (typeWriterTime <= 0) {
+
+      if (typeWriterCursor < typeWriterText.length){
+        typeWriterCursor++;
+      }
+      typeWriterTime = typeWriterSpeed;
+    }
+    if (typeWriterCursor > 0){
+      text(typeWriterText.substring(0, typeWriterCursor), x, y);
+    }
+
+}
+//
