@@ -59,10 +59,13 @@ let user;
 let lover;
 let ball;
 
+let song1;
+
 
 let state = `title`; // the prototype starts with the title state
 
 let tutorialFont;
+
 
 /**
 Description of preload
@@ -75,7 +78,8 @@ function preload() {
   page2Background.image = loadImage("assets/images/page02.png");
   gymClass.image = loadImage("assets/images/gymClass.png");
   tutorialFont = loadFont(`assets/fonts/Blackberries.otf`);
-  titleMusic = loadSound(`assets/sounds/Brasil.mp3`);
+  //titleMusic = loadSound(`assets/sounds/Brasil.mp3`);
+  song1 = loadSound('assets/sounds/Brasil.mp3');
 
 
 }
@@ -86,6 +90,7 @@ Description of setup
 */
 function setup() {
   createCanvas(800, 800);
+  song1.play();
 
   //creates each class
   user = new User(random(0, width), random(0, height)); // random x and y position
@@ -148,6 +153,8 @@ function title(){
   text(`Press ENTER to start!`, width / 2 + 50, height / 2+350);
 
   pop();
+
+
 
 }
 
@@ -318,6 +325,7 @@ function checkNextButtonClicked(){
 function keyPressed(){
   if (keyCode === 13){ //keycode for ENTER
     state = `page01`;
+    song1.stop();
   }
   if (keyCode === 8){ // keycode for backspace
     state = `title`;
