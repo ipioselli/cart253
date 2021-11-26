@@ -91,7 +91,7 @@ let door3;
 let song1;
 
 
-let state = `minigame2`; // the prototype starts with the title state
+let state = `start`; // the prototype starts with the title state
 
 let tutorialFont;
 
@@ -204,6 +204,12 @@ function stateChange(){
   }
   else if(state === `door01Outcome`){
     door01Outcome();
+  }
+  else if(state === `door02Outcome`){
+    door02Outcome();
+  }
+  else if(state === `door03Outcome`){
+    door03Outcome();
   }
   else if(state === `happyEnding`){
     happyEnding();
