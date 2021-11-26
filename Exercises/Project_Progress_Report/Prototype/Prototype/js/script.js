@@ -63,12 +63,14 @@ let photographyRoomBg = {
 
 }
 
+//picture bg with Jake
 let pictureTimeBg = {
   x: 400,
   y:400,
   size: 800,
 }
 
+//maze placeholder image
 let maze = {
   x:400,
   y:400,
@@ -88,10 +90,8 @@ let door1;
 let door2;
 let door3;
 
-let song1;
 
-
-let state = `start`; // the prototype starts with the title state
+let state = `start`; // the prototype starts with the start state
 
 let tutorialFont;
 
@@ -171,6 +171,7 @@ stateChange();
 
 }
 
+//creates all the states for the game
 function stateChange(){
 
   if (state === `start`){
@@ -227,6 +228,8 @@ function stateChange(){
 
 }
 
+
+//page before the title page
 function start(){
   background(0);
   push();
@@ -422,8 +425,16 @@ function minigame2(){
   if(!user2.door01Opened){
     state = `door01Outcome`;
   }
+  if(!user2.door02Opened){
+    state = `door02Outcome`;
+  }
+  if(!user2.door03Opened){
+    state = `door03Outcome`;
+  }
 
 }
+
+
 
 function door01Outcome(){
   background(0);
@@ -436,8 +447,30 @@ function door01Outcome(){
   pop();
 }
 
+function door02Outcome (){
+  background(0);
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+  text(`You found your soulmate!`, width/2, height/2);
+  pop();
+}
 
-//happy ending for the minigame
+function door03Outcome(){
+  background(0);
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+  text(`Wrong door :(`, width/2, height/2);
+  pop();
+}
+
+
+//happy ending for the minigame1
 function happyEnding(){
   background(191, 66, 245);
 
@@ -451,7 +484,7 @@ function happyEnding(){
 }
 
 
-//sad ending for the minigame
+//sad ending for the minigame1
 function sadEnding(){
   background(150, 116, 101);
   push();
@@ -474,6 +507,7 @@ function displayNextButton(){
   image(nextButton.image, nextButton.x, nextButton.y, nextButton.size, nextButton.size);
 }
 
+
 //keyboard input
 function keyPressed(){
 
@@ -491,8 +525,6 @@ function keyPressed(){
       }
     }
   }
-
-
   if (state === `tutorial`) {
     if (keyCode === 8) { // keycode for backspace
         state = `title`;
@@ -519,8 +551,8 @@ function keyPressed(){
     }
 
     if(state === `pictureTime`){
-      if(keyCode === 13){
-        state = `minigame1`;
+      if(keyCode === 13){ //keycode for Enter
+        state = `minigame2`;
       }
     }
 
