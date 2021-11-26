@@ -18,6 +18,8 @@ let tutorialButton = { // button to access the tutorial state
   size:200,
 }
 
+let button;
+
 let nextButton = { // button to access the first page of the game
   x:600,
   y:750,
@@ -201,7 +203,10 @@ function title(){
   imageMode(CENTER, CENTER);
   image(titleScreen.image, titleScreen.x, titleScreen.y, titleScreen.size, titleScreen.size);
   displayTutorialButton();
-  checkTutorialButtonClicked();
+  //checkTutorialButtonClicked();
+  button = createButton(`tutorial`);
+  button.position(400, 400  );
+  button.mousePressed(tutorial);
 
   push();
   textFont(tutorialFont);
@@ -387,16 +392,14 @@ function displayNextButton(){
 
 
 //hover your mouse over the tutorial button to access it
-function checkTutorialButtonClicked(){
-  let d = dist(mouseX, mouseY, tutorialButton.x, tutorialButton.y );
-  if (d <tutorialButton.size /2 - 60){
-    state = `tutorial`;
-
-    //MADELINE ADDED CODE//
-
-    //
-  }
-}
+// function checkTutorialButtonClicked(){
+//
+//
+//     //MADELINE ADDED CODE//
+//
+//     //
+//   }
+// }
 
 //hover over the nextButton to access the second page
 function checkNextButtonClicked(){
@@ -450,6 +453,13 @@ function keyPressed(){
 
   }
 
+}
+
+function mousePressed(){
+  let d = dist(mouseX, mouseY, tutorialButton.x, tutorialButton.y );
+  if (d <tutorialButton.size /2 - 60){
+    state = `tutorial`;
+}
 }
 
 //MADELINE ADDED CODE//
