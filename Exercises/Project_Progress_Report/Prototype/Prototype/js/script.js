@@ -178,6 +178,9 @@ function stateChange(){
   else if(state === `minigame1`){
     minigame1();
   }
+  else if(state === `minigame2`){
+    minigame2();
+  }
   else if(state === `happyEnding`){
     happyEnding();
   }
@@ -366,6 +369,11 @@ function minigame1(){
    state = `sadEnding`;
    }
 
+
+}
+
+function minigame2(){
+  background(0);
 
 }
 
