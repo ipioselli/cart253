@@ -63,6 +63,12 @@ let photographyRoomBg = {
 
 }
 
+let pictureTimeBg = {
+  x: 400,
+  y:400,
+  size: 800,
+}
+
 
 //minigame variables
 let user;
@@ -81,7 +87,7 @@ let titleMusic;
 //MADELINE ADDED CODE//
 
 let typeWriterTime = 0;
-let typeWriterSpeed = 70;
+let typeWriterSpeed = 65;
 let typeWriterCursor = 0;
 let typeWriterText = "";
 
@@ -102,6 +108,7 @@ function preload() {
   page2Background.image = loadImage("assets/images/page02.png");
   gymClass.image = loadImage("assets/images/gymClass.png");
   photographyRoomBg.image = loadImage("assets/images/photographyRoom.png");
+  pictureTimeBg.image = loadImage("assets/images/pictureTime.gif");
 
   //load fonts
   tutorialFont = loadFont(`assets/fonts/Blackberries.otf`);
@@ -179,6 +186,9 @@ function stateChange(){
   }
   else if(state === `pictureTime`){
     pictureTime();
+  }
+  else if(state === `notPictureTime`){
+    notPictureTime();
   }
 
 
@@ -307,8 +317,28 @@ function photographyRoom(){
 // if you say yes for a picture you will end up on the this state
 function pictureTime(){
   imageMode(CENTER, CENTER);
-  image()
+  image(pictureTimeBg.image, pictureTimeBg.x, pictureTimeBg.y, pictureTimeBg.size, pictureTimeBg.size );
 
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(40);
+  fill(255, 255, 255);
+  text(`You just took a picture with Jake! \nPress ENTER to see what happens next`,  width/2, height/2 + 330);
+  pop();
+
+
+}
+
+function notPictureTime(){
+  background(0);
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(40);
+  fill(255, 255, 255);
+  text(`:( \n place holder for now`,  width/2, height/2 );
+  pop();
 }
 
 
@@ -370,20 +400,12 @@ function sadEnding(){
 //displays the tutorial button
 function displayTutorialButton(){
   image(tutorialButton.image, tutorialButton.x, tutorialButton.y, tutorialButton.size, tutorialButton.size);
-
 }
 
-
-//displays next button
+//displays the next button
 function displayNextButton(){
   image(nextButton.image, nextButton.x, nextButton.y, nextButton.size, nextButton.size);
 }
-
-
-
-
-
-
 
 //keyboard input
 function keyPressed(){
@@ -394,14 +416,15 @@ function keyPressed(){
       titleMusic.loop();
     }
   }
-
-  if (keyCode === 13){ //keycode for ENTER
-    state = `page01`;
-    if(titleMusic.isPlaying()){
-      titleMusic.stop();
+  if(state === `title`){
+    if (keyCode === 13){ //keycode for ENTER
+      state = `page01`;
+      if(titleMusic.isPlaying()){
+        titleMusic.stop();
+      }
     }
-
   }
+
 
   if (state === `tutorial`) {
     if (keyCode === 8) { // keycode for backspace
@@ -417,6 +440,7 @@ function keyPressed(){
       state = `photographyRoom`;
       startTypeWriter(sentence03);
     }
+  }
 
     if(state=== `photographyRoom`){
       if(keyCode === 89){ //keycode for the letter Y
@@ -429,7 +453,7 @@ function keyPressed(){
 
   }
 
-}
+
 
 
 //function to click buttons to change states
