@@ -148,7 +148,9 @@ function setup() {
   //creates each class for minigame 2
   user2 = new User02(50, 50);
   maze1 = new Maze(160, 580, 250, 20);
-  door1
+  door1 = new Door(400, 180, 70, 110);
+  door2 = new Door(700, 500, 70, 110);
+  door3 = new Door(110,500, 70, 110 );
 
   //random speed for the fish lover
   lover.vx = random(-lover.speed, lover.speed);
@@ -199,6 +201,9 @@ function stateChange(){
   }
   else if(state === `minigame2`){
     minigame2();
+  }
+  else if(state === `door01Outcome`){
+    door01Outcome();
   }
   else if(state === `happyEnding`){
     happyEnding();
@@ -399,8 +404,30 @@ function minigame2(){
   user2.move();
   user2.handleInput()
   user2.bounce(maze1);
+  user2.checkOpenedDoor01(door1);
+  user2.checkOpenedDoor02(door2);
+  user2.checkOpenedDoor03(door3);
   maze1.display();
+  door1.display();
+  door2.display();
+  door3.display();
 
+
+  if(!user2.door01Opened){
+    state = `door01Outcome`;
+  }
+
+}
+
+function door01Outcome(){
+  background(0);
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+  text(`You are alone in the void :(`, width/2, height/2);
+  pop();
 }
 
 

@@ -11,9 +11,9 @@ class User02{
     this.vy = 0;
     //speed
     this.speed = 5;
-    this.door01 = true; //check if you opened the first door
-    this.door02 = true; //check if you opened the second door
-    this.door03 = true; // check if you opened the third door
+    this.door01Opened = true; //check if you opened the first door
+    this.door02Opened = true; //check if you opened the second door
+    this.door03Opened = true; // check if you opened the third door
   }
 
 //function to move the user
@@ -73,28 +73,28 @@ class User02{
   }
 
   //check if the user hit their lover
-  checkOpenedDoor01(Door01){
+  checkOpenedDoor01(door01){
 
     let d = dist(this.x, this.y, door01.x, door01.y);
     if(d < this.size + door01.size){
-      this.door01 = false;
+      this.door01Opened = false;
     }
   }
 
   //check if the user hit the ball
-    checkOpenedDoor01(Door02){
+    checkOpenedDoor02(door02){
 
       let d = dist(this.x, this.y, door02.x, door02.y);
       if(d < this.size + door02.size){
-        this.door02 = false;
+        this.door02Opened = false;
       }
     }
 
-    checkOpenedDoor01(Door02){
+    checkOpenedDoor03(door03){
 
-      let d = dist(this.x, this.y, door02.x, door02.y);
-      if(d < this.size + door02.size){
-        this.door02 = false;
+      let d = dist(this.x, this.y, door03.x, door03.y);
+      if(d < this.size + door03.size){
+        this.door03Opened = false;
       }
     }
 
