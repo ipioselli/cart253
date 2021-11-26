@@ -5,7 +5,7 @@ class User02{
     this.x = x;
     this.y = y;
     //size
-    this.size = 100;
+    this.size = 50;
     //velocity
     this.vx = 0;
     this.vy = 0;
@@ -24,6 +24,26 @@ class User02{
 
     this.x = constrain(this.x, 0, width);
     this.y = constrain(this.y, 0, height);
+
+  }
+
+  bounce(door){
+
+    if(this.x > door.x - door.width /2 &&
+    this.x < door.x + door.width /2 &&
+    this.y + this.size / 2 > door.y - door.height / 2 &&
+    this.y - this.size / 2 < door.y + door.height / 2){
+
+
+      let dx = this.x - door.x;
+      this.vx = this.vx + map(dx, -door.width/2, door.width/2, -2, 2);
+
+      //bounce off the wall
+      this.vy = -this.vy;
+    }
+
+
+
 
   }
 

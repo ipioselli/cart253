@@ -69,16 +69,29 @@ let pictureTimeBg = {
   size: 800,
 }
 
+let maze = {
+  x:400,
+  y:400,
+  size:800,
+}
 
-//minigame variables
+
+//minigame1 variables
 let user;
 let lover;
 let ball;
 
+//minigame2 variables
+let user2;
+let maze1;
+let door1;
+let door2;
+let door3;
+
 let song1;
 
 
-let state = `start`; // the prototype starts with the title state
+let state = `minigame2`; // the prototype starts with the title state
 
 let tutorialFont;
 
@@ -109,6 +122,7 @@ function preload() {
   gymClass.image = loadImage("assets/images/gymClass.png");
   photographyRoomBg.image = loadImage("assets/images/photographyRoom.png");
   pictureTimeBg.image = loadImage("assets/images/pictureTime.gif");
+  maze.image = loadImage("assets/images/mazeTest.png");
 
   //load fonts
   tutorialFont = loadFont(`assets/fonts/Blackberries.otf`);
@@ -130,6 +144,11 @@ function setup() {
   user = new User(random(0, width), random(0, height)); // random x and y position
   lover = new Lover(random(0, width), random(0, height)); // random x and y position
   ball = new Ball(random(0, width), random(0, height)); // random x and y position
+
+  //creates each class for minigame 2
+  user2 = new User02(50, 50);
+  maze1 = new Maze(160, 580, 250, 20);
+  door1
 
   //random speed for the fish lover
   lover.vx = random(-lover.speed, lover.speed);
@@ -373,7 +392,14 @@ function minigame1(){
 }
 
 function minigame2(){
-  background(0);
+  imageMode(CENTER, CENTER);
+  image(maze.image, maze.x, maze.y, maze.size, maze.size);
+
+  user2.display();
+  user2.move();
+  user2.handleInput()
+  user2.bounce(maze1);
+  maze1.display();
 
 }
 
@@ -456,6 +482,12 @@ function keyPressed(){
       }
       else if(keyCode === 78){ //keycode for the letter N
         state = `notPictureTime`;
+      }
+    }
+
+    if(state === `pictureTime`){
+      if(keyCode === 13){
+        state = `minigame1`;
       }
     }
 

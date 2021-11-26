@@ -1,14 +1,14 @@
 class Maze{
 
-  constructor(w, h){
+  constructor(x, y, w, h){
 
     //size
 this.width = w;
 this.height = h;
 
 //position
-this.x = 0;
-this.y =  height - this.height/2;
+this.x = x;
+this.y =  y;
   }
 
 
