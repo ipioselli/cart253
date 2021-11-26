@@ -70,7 +70,7 @@ let ball;
 let song1;
 
 
-let state = `title`; // the prototype starts with the title state
+let state = `start`; // the prototype starts with the title state
 
 let tutorialFont;
 
@@ -106,7 +106,7 @@ function preload() {
   tutorialFont = loadFont(`assets/fonts/Blackberries.otf`);
 
   //load music
-  //titleMusic = loadSound(`assets/sounds/Brasil.mp3`);
+  titleMusic = loadSound(`assets/sounds/Brasil.mp3`);
 
 
 
@@ -130,20 +130,27 @@ function setup() {
   //random speed for the ball
   ball.vx = random(-ball.speed, ball.speed);
   ball.vy = random(-ball.speed, ball.speed);
+
+
 }
 
 //Draws all the states for the game
 function draw() {
 
 stateChange();
-//musicChange();
+
 
 }
 
 function stateChange(){
 
-  if(state === `title`){
+  if (state === `start`){
+    start();
+  }
+
+  else if(state === `title`){
     title();
+
   }
   else if(state === `tutorial`){
     tutorial();
@@ -155,7 +162,7 @@ function stateChange(){
     page02();
   }
   else if (state === `photographyRoom`){
-  photographyRoom();
+    photographyRoom();
 }
   else if(state === `end`){
     end();
@@ -169,17 +176,22 @@ function stateChange(){
   else if(state === `sadEnding`){
     sadEnding();
   }
+  else if(state === `pictureTime`){
+    pictureTime();
+  }
 
 
 }
 
-function musicChange(){
-  if (state === `title`){
-      titleMusic.play();
-  }
-  else if(state !=`title`){
-    titleMusic.stop();
-  }
+function start(){
+  background(0);
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(50);
+  fill(255, 255, 255);
+  text(`Welcome! Press spacebar`, width / 2, height / 2);
+  pop();
 }
 
 
@@ -290,6 +302,11 @@ function photographyRoom(){
   pop();
 }
 
+function pictureTime(){
+  imageMode(CENTER, CENTER);
+  image()
+}
+
 //if you select B. photography club you will end up on this state
 function end(){
   background(99, 145, 186);
@@ -392,8 +409,19 @@ function checkNextButtonClicked(){
 
 //keyboard input
 function keyPressed(){
+
+  if(state === `start`){
+    if(keyCode === 32){ // keycode for spacebar
+      state = `title`
+      titleMusic.loop();
+    }
+  }
   if (keyCode === 13){ //keycode for ENTER
     state = `page01`;
+    if(titleMusic.isPlaying()){
+      titleMusic.stop();
+    }
+
   }
 
   if (state === `tutorial`) {
@@ -415,7 +443,7 @@ function keyPressed(){
       if(keyCode === 89){ //keycode for the letter Y
         state = `pictureTime`;
       }
-      else if(keyCode === 78){
+      else if(keyCode === 78){ //keycode for the letter N
         state = `notPictureTime`;
       }
     }
