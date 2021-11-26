@@ -18,7 +18,7 @@ let tutorialButton = { // button to access the tutorial state
   size:200,
 }
 
-let button;
+
 
 let nextButton = { // button to access the first page of the game
   x:600,
@@ -85,7 +85,6 @@ let typeWriterSpeed = 70;
 let typeWriterCursor = 0;
 let typeWriterText = "";
 
-let sentence0 = `You are a lovely fish who has just started their first day of college.`;
 
 let sentence03 = `This is the first time I see such a fine fish strolling around. \n Would you like me to take a picture of you ;) ? \nY. Yess \nN. uhh no kinda creepy`
 
@@ -203,10 +202,7 @@ function title(){
   imageMode(CENTER, CENTER);
   image(titleScreen.image, titleScreen.x, titleScreen.y, titleScreen.size, titleScreen.size);
   displayTutorialButton();
-  //checkTutorialButtonClicked();
-  button = createButton(`tutorial`);
-  button.position(400, 400  );
-  button.mousePressed(tutorial);
+
 
   push();
   textFont(tutorialFont);
@@ -220,7 +216,7 @@ function title(){
 }
 
 
-//When you hover over the tutorial button it will bring you to the tutorial state
+//When you click on the tutorial button it will bring you to the tutorial state
 function tutorial(){
   push();
   background(64, 175, 222);
@@ -253,7 +249,6 @@ function page01(){
 
   imageMode(CENTER, CENTER);
   image(page1Background.image, page1Background.x, page1Background.y, page1Background.size, page1Background.size);
-  checkNextButtonClicked()
   displayNextButton()
 
   push();
@@ -288,10 +283,12 @@ function page02(){
   text(`photography club? `, width/2, height/2 +250);
   text(`White fish: Don't listen to him. My name is Edward and you`, width/2, height/2 + 290);
   text(`should join the music club!`, width/2, height/2 + 330);
-  text(`A. Join the music club     B.Join the photography club`, width/2, height/2 +360);
+  text(`A. Join the music club     B.Join the photography club`, width/2, height/2 +355);
   pop();
 }
 
+
+//if you select B. photography club you will end up on this state
 function photographyRoom(){
   imageMode(CENTER, CENTER);
   image(photographyRoomBg.image, photographyRoomBg.x, photographyRoomBg.y, photographyRoomBg.size, photographyRoomBg.size);
@@ -307,23 +304,15 @@ function photographyRoom(){
   pop();
 }
 
+// if you say yes for a picture you will end up on the this state
 function pictureTime(){
   imageMode(CENTER, CENTER);
   image()
+
 }
 
-//if you select B. photography club you will end up on this state
-function end(){
-  background(99, 145, 186);
-  push();
-  textFont(tutorialFont);
-  textAlign(CENTER, CENTER);
-  textSize(45);
-  fill(255, 255, 255);
-  text(`For now this is the end but will add more for the final :3`, width/2, height/2);
 
-  pop();
-}
+
 
 
 //if you select A. The music club you will end up on this state
@@ -391,23 +380,9 @@ function displayNextButton(){
 }
 
 
-//hover your mouse over the tutorial button to access it
-// function checkTutorialButtonClicked(){
-//
-//
-//     //MADELINE ADDED CODE//
-//
-//     //
-//   }
-// }
 
-//hover over the nextButton to access the second page
-function checkNextButtonClicked(){
-  let d = dist(mouseX, mouseY, nextButton.x, nextButton.y );
-  if (d <nextButton.size /2 - 20){
-    state = `page02`;
-  }
-}
+
+
 
 
 //keyboard input
@@ -419,6 +394,7 @@ function keyPressed(){
       titleMusic.loop();
     }
   }
+
   if (keyCode === 13){ //keycode for ENTER
     state = `page01`;
     if(titleMusic.isPlaying()){
@@ -455,11 +431,19 @@ function keyPressed(){
 
 }
 
+
+//function to click buttons to change states
 function mousePressed(){
   let d = dist(mouseX, mouseY, tutorialButton.x, tutorialButton.y );
   if (d <tutorialButton.size /2 - 60){
-    state = `tutorial`;
-}
+      state = `tutorial`;
+    }
+
+  let d2 = dist(mouseX, mouseY, nextButton.x, nextButton.y );
+  if (d2 <nextButton.size /2 - 20){
+      state = `page02`;
+    }
+
 }
 
 //MADELINE ADDED CODE//
