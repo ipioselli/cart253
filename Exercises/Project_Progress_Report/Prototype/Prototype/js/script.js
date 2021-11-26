@@ -53,6 +53,14 @@ let gymClass = {
   size:800,
 }
 
+//image for photography room
+let photographyRoomBg = {
+  x: 400,
+  y: 400,
+  size: 800,
+
+}
+
 
 //minigame variables
 let user;
@@ -66,33 +74,49 @@ let state = `title`; // the prototype starts with the title state
 
 let tutorialFont;
 
-let data = "It's your first day of art school and you are very excited to start!"
+let titleMusic;
+
+//MADELINE ADDED CODE//
+
+let typeWriterTime = 0;
+let typeWriterSpeed = 70;
+let typeWriterCursor = 0;
+let typeWriterText = "";
+
+let sentence0 = `You are a lovely fish who has just started their first day of college.`;
+
+let sentence03 = `This is the first time I see such a fine fish strolling around. \n Would you like me to take a picture of you ;) ? \nY. Yess \nN. uhh no kinda creepy`
+
+//
 
 
-/**
-Description of preload
-*/
+
 function preload() {
+
+  //load images
   titleScreen.image = loadImage("assets/images/titleScreen.png");
   tutorialButton.image = loadImage("assets/images/tutorialButton.png");
   nextButton.image = loadImage("assets/images/nextButton.png");
   page1Background.image = loadImage("assets/images/page01.png");
   page2Background.image = loadImage("assets/images/page02.png");
   gymClass.image = loadImage("assets/images/gymClass.png");
+  photographyRoomBg.image = loadImage("assets/images/photographyRoom.png");
+
+  //load fonts
   tutorialFont = loadFont(`assets/fonts/Blackberries.otf`);
-  titleMusic = loadSound(`assets/sounds/Brasil.mp3`);
-  //song1 = loadSound('assets/sounds/Brasil.mp3');
+
+  //load music
+  //titleMusic = loadSound(`assets/sounds/Brasil.mp3`);
+
 
 
 }
 
 
-/**
-Description of setup
-*/
+
 function setup() {
   createCanvas(800, 800);
-  song1.play();
+
 
   //creates each class
   user = new User(random(0, width), random(0, height)); // random x and y position
@@ -106,16 +130,13 @@ function setup() {
   //random speed for the ball
   ball.vx = random(-ball.speed, ball.speed);
   ball.vy = random(-ball.speed, ball.speed);
-
-
 }
-
 
 //Draws all the states for the game
 function draw() {
 
-  stateChange();
-
+stateChange();
+//musicChange();
 
 }
 
@@ -149,11 +170,22 @@ function stateChange(){
     sadEnding();
   }
 
+
+}
+
+function musicChange(){
+  if (state === `title`){
+      titleMusic.play();
+  }
+  else if(state !=`title`){
+    titleMusic.stop();
+  }
 }
 
 
 //title state : homepage
 function title(){
+
   imageMode(CENTER, CENTER);
   image(titleScreen.image, titleScreen.x, titleScreen.y, titleScreen.size, titleScreen.size);
   displayTutorialButton();
@@ -168,8 +200,6 @@ function title(){
 
   pop();
 
-
-
 }
 
 
@@ -183,6 +213,9 @@ function tutorial(){
   fill(255, 255, 255);
   text(`Long Leg Fish Love Story!`, width / 2, height / 2-300);
   textSize(35);
+
+
+
   text(`You are a lovely fish who has just started their first day of college.`, width / 2, height / 2-200);
   text(`You are asked to join clubs and meet new fish.`, width / 2, height / 2-150);
   text(`However, you encounter 2 love interests and must make a hard decision` ,width / 2, height / 2-100);
@@ -205,7 +238,7 @@ function page01(){
   image(page1Background.image, page1Background.x, page1Background.y, page1Background.size, page1Background.size);
   checkNextButtonClicked()
   displayNextButton()
-  typeWriter(data, 0, 20, 30, 100);
+
   push();
 
   //text box for page 1
@@ -213,7 +246,7 @@ function page01(){
   textAlign(CENTER, CENTER);
   textSize(30);
   fill(255, 255, 255);
-  //text(`It's your first day of art school and you are very excited to start!`, width/2, height/2 +210);
+  text(`It's your first day of art school and you are very excited to start!`, width/2, height/2 +210);
   text(`You really want to join a club but not sure which one.`, width/2, height/2 +250);
   text(`While you look around you see 2 tall mysterious fish `, width/2, height/2 +290);
   text(`approach you!`, width/2, height/2 +330);
@@ -244,14 +277,16 @@ function page02(){
 
 function photographyRoom(){
   imageMode(CENTER, CENTER);
-  image(photographyRoom.image, photographyRoom.x, photographyRoom.y, photographyRoom.size, photographyRoom.size);
+  image(photographyRoomBg.image, photographyRoomBg.x, photographyRoomBg.y, photographyRoomBg.size, photographyRoomBg.size);
+
 
   push();
+
   textFont(tutorialFont);
   textAlign(CENTER, CENTER);
   textSize(30);
   fill(255, 255, 255);
-  text(``)
+  drawTypeWriter(width / 2, height / 2 + 250);
   pop();
 }
 
@@ -339,6 +374,10 @@ function checkTutorialButtonClicked(){
   let d = dist(mouseX, mouseY, tutorialButton.x, tutorialButton.y );
   if (d <tutorialButton.size /2 - 60){
     state = `tutorial`;
+
+    //MADELINE ADDED CODE//
+
+    //
   }
 }
 
@@ -355,18 +394,60 @@ function checkNextButtonClicked(){
 function keyPressed(){
   if (keyCode === 13){ //keycode for ENTER
     state = `page01`;
-    //song1.stop();
   }
-  if (keyCode === 8){ // keycode for backspace
-    state = `title`;
+
+  if (state === `tutorial`) {
+    if (keyCode === 8) { // keycode for backspace
+        state = `title`;
   }
+}
+
   if(state === `page02`){
     if(keyCode === 65){ // keycode for letter A
       state = `minigame1`;
     }
     else if(keyCode === 66){ //keycode for letter B
-      state = `end`;
+      state = `photographyRoom`;
+      startTypeWriter(sentence03);
     }
+
+    if(state=== `photographyRoom`){
+      if(keyCode === 89){ //keycode for the letter Y
+        state = `pictureTime`;
+      }
+      else if(keyCode === 78){
+        state = `notPictureTime`;
+      }
+    }
+
   }
 
 }
+
+//MADELINE ADDED CODE//
+
+function startTypeWriter(sentence){
+    typeWriterTime = typeWriterSpeed;
+    typeWriterCursor = 0;
+    typeWriterText = sentence;
+}
+
+
+function drawTypeWriter(x,y) {
+
+    //MADELINE ADDED CODE//
+    typeWriterTime -= deltaTime;
+
+    if (typeWriterTime <= 0) {
+
+      if (typeWriterCursor < typeWriterText.length){
+        typeWriterCursor++;
+      }
+      typeWriterTime = typeWriterSpeed;
+    }
+    if (typeWriterCursor > 0){
+      text(typeWriterText.substring(0, typeWriterCursor), x, y);
+    }
+
+}
+//
