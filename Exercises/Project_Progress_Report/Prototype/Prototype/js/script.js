@@ -1,9 +1,9 @@
 /**
-Project 2 Prototype
+Project 2 Progress Report
 Long Leg Fishy Dating Simulator
 Ines Pioselli
 
-This is a prototype of my love simulator. The first few states show examples of how the style will look.
+This is a progress of my love simulator. The first few states show examples of how the style will look.
 The minigame is a very rough and small scale of what will happen. The user will have an array of balls bouncing around and they must doge them and
 get to their fish lover to win their heart back. For now I just used 3 ellipses to show what will happen.
 
@@ -66,6 +66,8 @@ let state = `title`; // the prototype starts with the title state
 
 let tutorialFont;
 
+let data = "It's your first day of art school and you are very excited to start!"
+
 
 /**
 Description of preload
@@ -78,8 +80,8 @@ function preload() {
   page2Background.image = loadImage("assets/images/page02.png");
   gymClass.image = loadImage("assets/images/gymClass.png");
   tutorialFont = loadFont(`assets/fonts/Blackberries.otf`);
-  //titleMusic = loadSound(`assets/sounds/Brasil.mp3`);
-  song1 = loadSound('assets/sounds/Brasil.mp3');
+  titleMusic = loadSound(`assets/sounds/Brasil.mp3`);
+  //song1 = loadSound('assets/sounds/Brasil.mp3');
 
 
 }
@@ -105,11 +107,20 @@ function setup() {
   ball.vx = random(-ball.speed, ball.speed);
   ball.vy = random(-ball.speed, ball.speed);
 
+
 }
 
 
 //Draws all the states for the game
 function draw() {
+
+  stateChange();
+
+
+}
+
+function stateChange(){
+
   if(state === `title`){
     title();
   }
@@ -122,6 +133,9 @@ function draw() {
   else if(state === `page02`){
     page02();
   }
+  else if (state === `photographyRoom`){
+  photographyRoom();
+}
   else if(state === `end`){
     end();
   }
@@ -191,6 +205,7 @@ function page01(){
   image(page1Background.image, page1Background.x, page1Background.y, page1Background.size, page1Background.size);
   checkNextButtonClicked()
   displayNextButton()
+  typeWriter(data, 0, 20, 30, 100);
   push();
 
   //text box for page 1
@@ -198,13 +213,16 @@ function page01(){
   textAlign(CENTER, CENTER);
   textSize(30);
   fill(255, 255, 255);
-  text(`It's your first day of art school and you are very excited to start!`, width/2, height/2 +210);
+  //text(`It's your first day of art school and you are very excited to start!`, width/2, height/2 +210);
   text(`You really want to join a club but not sure which one.`, width/2, height/2 +250);
   text(`While you look around you see 2 tall mysterious fish `, width/2, height/2 +290);
   text(`approach you!`, width/2, height/2 +330);
 
   pop();
 }
+
+
+
 
 //displays the second page with the 2 love interests
 function page02(){
@@ -224,6 +242,18 @@ function page02(){
   pop();
 }
 
+function photographyRoom(){
+  imageMode(CENTER, CENTER);
+  image(photographyRoom.image, photographyRoom.x, photographyRoom.y, photographyRoom.size, photographyRoom.size);
+
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+  text(``)
+  pop();
+}
 
 //if you select B. photography club you will end up on this state
 function end(){
@@ -325,7 +355,7 @@ function checkNextButtonClicked(){
 function keyPressed(){
   if (keyCode === 13){ //keycode for ENTER
     state = `page01`;
-    song1.stop();
+    //song1.stop();
   }
   if (keyCode === 8){ // keycode for backspace
     state = `title`;
