@@ -96,7 +96,7 @@ let door2;
 let door3;
 
 
-let state = `minigame2`; // the prototype starts with the start state
+let state = `start`; // the prototype starts with the start state
 
 let tutorialFont;
 
