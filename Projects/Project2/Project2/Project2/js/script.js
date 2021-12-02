@@ -1,11 +1,9 @@
 /**
-Project 2 Progress Report
+Project 2: Final
 Long Leg Fishy Dating Simulator
 Ines Pioselli
 
-This is a progress of my love simulator. The first few states show examples of how the style will look.
-The minigame is a very rough and small scale of what will happen. The user will have an array of balls bouncing around and they must doge them and
-get to their fish lover to win their heart back. For now I just used 3 ellipses to show what will happen.
+This is love simulator / visual novel about fish in love.
 
 
 */
@@ -463,7 +461,7 @@ function minigame2(){
   user2.bounce(maze11);
   user2.bounce(maze12);
   user2.bounce(maze13);
-  user2.bounce(maze14); // 
+  user2.bounce(maze14); //
 
   user2.checkOpenedDoor01(door1);
   user2.checkOpenedDoor02(door2);
