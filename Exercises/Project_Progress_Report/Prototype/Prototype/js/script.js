@@ -86,12 +86,17 @@ let ball;
 //minigame2 variables
 let user2;
 let maze1;
+let maze2;
+let maze3;
+let maze4;
+let maze5;
+let maze6;
 let door1;
 let door2;
 let door3;
 
 
-let state = `start`; // the prototype starts with the start state
+let state = `minigame2`; // the prototype starts with the start state
 
 let tutorialFont;
 
@@ -147,7 +152,10 @@ function setup() {
 
   //creates each class for minigame 2
   user2 = new User02(50, 50);
-  maze1 = new Maze(160, 580, 250, 20);
+  maze1 = new Maze(160, 580, 200, 20); //(x, y, w, h)
+  maze2 = new Maze(50, 410, 20, 560);
+  maze3 = new Maze(350, 690, 620, 20);
+  maze4 = new Maze(350, 100, 620, 20);
   door1 = new Door(400, 180, 70, 110);
   door2 = new Door(700, 500, 70, 110);
   door3 = new Door(110,500, 70, 110 );
@@ -395,6 +403,8 @@ function minigame1(){
   lover.move();
   lover.display();
 
+
+
   if(!user.foundLover){
     state = `happyEnding`;
   }
@@ -413,13 +423,28 @@ function minigame2(){
   user2.move();
   user2.handleInput()
   user2.bounce(maze1);
+  user2.bounce(maze2);
+  user2.bounce(maze3);
   user2.checkOpenedDoor01(door1);
   user2.checkOpenedDoor02(door2);
   user2.checkOpenedDoor03(door3);
   maze1.display();
+  maze2.display();
+  maze3.display();
+  maze4.display();
+  maze5.display();
   door1.display();
   door2.display();
   door3.display();
+
+  // for(let x = 0; x < width; x += 10){
+  //   for(let y = 0; y <height; y += 10){
+  //     let d = dist(x, y, mouseX, mouseY);
+  //     let c = map(d, 0, 100, 255, 0);
+  //     //fill(c);
+  //     //rect(x, y, 10, 10);
+  //   }
+  // }
 
 
   if(!user2.door01Opened){

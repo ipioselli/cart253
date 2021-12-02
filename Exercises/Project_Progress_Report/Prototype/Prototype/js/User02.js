@@ -5,7 +5,7 @@ class User02{
     this.x = x;
     this.y = y;
     //size
-    this.size = 50;
+    this.size = 30;
     //velocity
     this.vx = 0;
     this.vy = 0;
@@ -29,18 +29,30 @@ class User02{
 
   bounce(door){
 
-    if(this.x > door.x - door.width /2 &&
-    this.x < door.x + door.width /2 &&
-    this.y + this.size / 2 > door.y - door.height / 2 &&
-    this.y - this.size / 2 < door.y + door.height / 2){
+    if(this.x > door.x - door.width/2 -10  && this.x < door.x + door.width/2 &&
+    this.y + this.size/2  > door.y - door.height/2 &&
+    this.y - this.size/2 < door.y + door.height/2 ){
+
+      //let dx = this.x - door.x;
+      //let dy = this.y - door.y;
+      //this.vx = this.vx + map(dx, -door.width/2, door.width/2, -5, 5);
+      //this.vy = this.vy + map(dy, -door.width/2, door.width/2, -2, 2);
+
+      this.speed = this.speed *-1;
+    }
+    else{
+      this.speed = 5;
+    }
 
 
-      let dx = this.x - door.x;
-      this.vx = this.vx + map(dx, -door.width/2, door.width/2, -2, 2);
+
+
 
       //bounce off the wall
-      this.vy = -this.vy;
-    }
+      //this.vy = -this.vy;
+      //this.vx = -this.vx;
+
+
 
 
 
@@ -76,7 +88,7 @@ class User02{
   checkOpenedDoor01(door01){
 
     let d = dist(this.x, this.y, door01.x, door01.y);
-    if(d < this.size + door01.size){
+    if(d < this.size + door01.size -50){
       this.door01Opened = false;
     }
   }
@@ -85,7 +97,7 @@ class User02{
     checkOpenedDoor02(door02){
 
       let d = dist(this.x, this.y, door02.x, door02.y);
-      if(d < this.size + door02.size){
+      if(d < this.size + door02.size - 50){
         this.door02Opened = false;
       }
     }
@@ -93,7 +105,7 @@ class User02{
     checkOpenedDoor03(door03){
 
       let d = dist(this.x, this.y, door03.x, door03.y);
-      if(d < this.size + door03.size){
+      if(d < this.size + door03.size - 50){
         this.door03Opened = false;
       }
     }
