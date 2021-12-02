@@ -463,7 +463,7 @@ function minigame2(){
   user2.bounce(maze11);
   user2.bounce(maze12);
   user2.bounce(maze13);
-  user2.bounce(maze14);
+  user2.bounce(maze14); // 
 
   user2.checkOpenedDoor01(door1);
   user2.checkOpenedDoor02(door2);
