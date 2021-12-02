@@ -152,10 +152,16 @@ function setup() {
 
   //creates each class for minigame 2
   user2 = new User02(50, 50);
-  maze1 = new Maze(160, 580, 200, 20); //(x, y, w, h)
+
+  //creates the walls for the maze
+  maze1 = new Maze(160, 580, 200, 10); //(x, y, w, h)
   maze2 = new Maze(50, 410, 20, 560);
   maze3 = new Maze(350, 690, 620, 20);
-  maze4 = new Maze(350, 100, 620, 20);
+  maze4 = new Maze(450, 100, 620, 20);
+  maze5 = new Maze(250, 220, 10, 250);
+  maze6 = new Maze(450, 220, 10, 250);
+
+
   door1 = new Door(400, 180, 70, 110);
   door2 = new Door(700, 500, 70, 110);
   door3 = new Door(110,500, 70, 110 );
@@ -425,6 +431,8 @@ function minigame2(){
   user2.bounce(maze1);
   user2.bounce(maze2);
   user2.bounce(maze3);
+  user2.bounce(maze4);
+
   user2.checkOpenedDoor01(door1);
   user2.checkOpenedDoor02(door2);
   user2.checkOpenedDoor03(door3);
@@ -433,6 +441,7 @@ function minigame2(){
   maze3.display();
   maze4.display();
   maze5.display();
+  maze6.display();
   door1.display();
   door2.display();
   door3.display();
