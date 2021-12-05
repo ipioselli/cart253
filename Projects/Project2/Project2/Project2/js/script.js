@@ -81,31 +81,17 @@ let user;
 let lover;
 let ball;
 
+
+let mazeWalls = [];
 //minigame2 variables
 let user2;
-let maze1;
-let maze2;
-let maze3;
-let maze4;
-let maze5;
-let maze6;
-let maze7;
-let maze8;
-let maze9;
-let maze10;
-let maze11;
-let maze12;
-let maze13;
-let maze14;
-
-
 
 let door1;
 let door2;
 let door3;
 
 
-let state = `minigame2`; // the prototype starts with the start state
+let state = `start`; // the prototype starts with the start state
 
 let tutorialFont;
 
@@ -163,21 +149,20 @@ function setup() {
   user2 = new User02(50, 50);
 
   //creates the walls for the maze
-  maze1 = new Maze(160, 580, 200, 10); //(x, y, w, h)
-  maze2 = new Maze(50, 410, 20, 560);
-  maze3 = new Maze(350, 690, 620, 20);
-  maze4 = new Maze(450, 100, 620, 20);
-  maze5 = new Maze(250, 220, 10, 250);
-  maze6 = new Maze(470, 210, 10, 200);
-  maze7 = new Maze(250, 350, 220, 10);
-  maze8 = new Maze(355, 450, 10, 200);
-  maze9 = new Maze(630, 220, 140, 10);
-  maze10 = new Maze(545, 470, 150, 10);
-  maze11 = new Maze(680, 580, 170, 10);
-
-  maze12 = new Maze(615, 350, 10, 250);
-  maze13 = new Maze(550, 550, 10, 150);
-  maze14 = new Maze(760, 380, 20, 580);
+    mazeWalls.push(new Maze(160, 580, 200, 10)); //(x, y, w, h)
+    mazeWalls.push(new Maze(50, 410, 20, 560));
+    mazeWalls.push(new Maze(350, 690, 620, 20));
+    mazeWalls.push(new Maze(450, 100, 620, 20));
+    mazeWalls.push(new Maze(250, 220, 10, 250));
+    mazeWalls.push(new Maze(470, 210, 10, 200));
+    mazeWalls.push(new Maze(250, 350, 220, 10));
+    mazeWalls.push(new Maze(355, 450, 10, 200));
+    mazeWalls.push(new Maze(630, 220, 140, 10));
+    mazeWalls.push(new Maze(545, 470, 150, 10));
+    mazeWalls.push(new Maze(680, 580, 170, 10));
+    mazeWalls.push(new Maze(615, 350, 10, 250));
+    mazeWalls.push(new Maze(550, 550, 10, 150));
+    mazeWalls.push(new Maze(760, 380, 20, 580));
 
 
   //creates the doors for the ending states
@@ -199,8 +184,7 @@ function setup() {
 //Draws all the states for the game
 function draw() {
 
-stateChange();
-
+stateChange(); //contains all the states for the game
 
 }
 
@@ -445,41 +429,29 @@ function minigame2(){
   //image(maze.image, maze.x, maze.y, maze.size, maze.size);
   background(49, 69, 122);
 
-  user2.display();
-  user2.move();
-  user2.handleInput()
-  user2.bounce(maze1);
-  user2.bounce(maze2);
-  user2.bounce(maze3);
-  user2.bounce(maze4);
-  user2.bounce(maze5);
-  user2.bounce(maze6);
-  user2.bounce(maze7);
-  user2.bounce(maze8);
-  user2.bounce(maze9);
-  user2.bounce(maze10);
-  user2.bounce(maze11);
-  user2.bounce(maze12);
-  user2.bounce(maze13);
-  user2.bounce(maze14); //
+  //keyboard input
+  user2.handleInput();
 
+  //movement
+  user2.move();
+
+  for (let i = 0; i < mazeWalls.length; i++) {
+    let wall = mazeWalls[i];
+    user2.bounce(wall);
+  }
+
+  //check if the doors are opened
   user2.checkOpenedDoor01(door1);
   user2.checkOpenedDoor02(door2);
   user2.checkOpenedDoor03(door3);
-  maze1.display();
-  maze2.display();
-  maze3.display();
-  maze4.display();
-  maze5.display();
-  maze6.display();
-  maze7.display();
-  maze8.display();
-  maze9.display();
-  maze10.display();
-  maze11.display();
-  maze12.display();
-  maze13.display();
-  maze14.display();
+
+  //Display
+  user2.display();
+
+  for (let i = 0; i < mazeWalls.length; i++) {
+    let wall = mazeWalls[i];
+    wall.display();
+  }
 
 
   door1.display();
@@ -487,14 +459,6 @@ function minigame2(){
   door3.display();
 
 
-  // for(let x = 0; x < width; x += 10){
-  //   for(let y = 0; y <height; y += 10){
-  //     let d = dist(x, y, mouseX, mouseY);
-  //     let c = map(d, 0, 100, 255, 0);
-  //     //fill(c);
-  //     //rect(x, y, 10, 10);
-  //   }
-  // }
 
 
   if(!user2.door01Opened){
@@ -650,7 +614,7 @@ function mousePressed(){
 
 }
 
-//MADELINE ADDED CODE//
+
 
 function startTypeWriter(sentence){
     typeWriterTime = typeWriterSpeed;
@@ -661,7 +625,7 @@ function startTypeWriter(sentence){
 
 function drawTypeWriter(x,y) {
 
-    //MADELINE ADDED CODE//
+
     typeWriterTime -= deltaTime;
 
     if (typeWriterTime <= 0) {

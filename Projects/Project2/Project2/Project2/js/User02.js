@@ -27,36 +27,23 @@ class User02{
 
   }
 
-  bounce(door){
+  bounce(wall){
 
-    if(this.x > door.x - door.width/2 -10  && this.x < door.x + door.width/2 &&
-    this.y + this.size/2  > door.y - door.height/2 &&
-    this.y - this.size/2 < door.y + door.height/2 ){
+    if(this.x + this.size > wall.x - wall.width/2  &&
+      this.x - this.size < wall.x + wall.width/2 &&
+      this.y + this.size/2  > wall.y - wall.height/2 &&
+      this.y - this.size/2 < wall.y + wall.height/2 ){
 
-      //let dx = this.x - door.x;
-      //let dy = this.y - door.y;
-      //this.vx = this.vx + map(dx, -door.width/2, door.width/2, -5, 5);
-      //this.vy = this.vy + map(dy, -door.width/2, door.width/2, -2, 2);
 
-      this.speed = this.speed *-1;
+
+      this.x = this.x - this.vx;
+      this.y = this.y - this.vy;
+
+
+      this.vx = 0;
+      this.vy = 0;
+
     }
-    else{
-      this.speed = 5;
-    }
-
-
-
-
-
-      //bounce off the wall
-      //this.vy = -this.vy;
-      //this.vx = -this.vx;
-
-
-
-
-
-
   }
 
 //keyboard input
