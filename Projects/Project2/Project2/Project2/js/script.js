@@ -91,7 +91,7 @@ let door2;
 let door3;
 
 
-let state = `start`; // the prototype starts with the start state
+let state = `pictureTime`; // the prototype starts with the start state
 
 let tutorialFont;
 
@@ -103,6 +103,9 @@ let typeWriterTime = 0;
 let typeWriterSpeed = 65;
 let typeWriterCursor = 0;
 let typeWriterText = "";
+
+let letterTimer01 = 200;
+let letterTimerDone01 = false;
 
 
 let sentence03 = `This is the first time I see such a fine fish strolling around. \n Would you like me to take a picture of you ;) ? \nY. Yess \nN. uhh no kinda creepy`
@@ -141,7 +144,7 @@ function setup() {
 
 
   //creates each class
-  user = new User(random(0, width), random(0, height)); // random x and y position
+  user = new User01(random(0, width), random(0, height)); // random x and y position
   lover = new Lover(random(0, width), random(0, height)); // random x and y position
   ball = new Ball(random(0, width), random(0, height)); // random x and y position
 
@@ -184,7 +187,7 @@ function setup() {
 //Draws all the states for the game
 function draw() {
 
-stateChange(); //contains all the states for the game
+stateChange(); //
 
 }
 
@@ -240,6 +243,9 @@ function stateChange(){
   }
   else if(state === `notPictureTime`){
     notPictureTime();
+  }
+  else if(state === `letter01`){
+    letter01();
   }
 
 
@@ -380,6 +386,13 @@ function pictureTime(){
   text(`You just took a picture with Jake! \nPress ENTER to see what happens next`,  width/2, height/2 + 330);
   pop();
 
+  letterTimer01 -= 1;
+  if(letterTimer01 <= 0){
+    letterTimerDone01 = true;
+  }
+  if(letterTimerDone01){
+    state = `letter01`;
+  }
 
 }
 
@@ -437,7 +450,7 @@ function minigame2(){
 
   for (let i = 0; i < mazeWalls.length; i++) {
     let wall = mazeWalls[i];
-    user2.bounce(wall);
+    user2.hit(wall);
   }
 
   //check if the doors are opened
@@ -470,6 +483,8 @@ function minigame2(){
   if(!user2.door03Opened){
     state = `door03Outcome`;
   }
+
+
 
 }
 
@@ -532,6 +547,12 @@ function sadEnding(){
   textSize(30);
   fill(255, 255, 255);
   text(`You ended up sad and alone :( `, width/2, height/2);
+  pop();
+}
+
+function letter01(){
+  background(0);
+  push();
   pop();
 }
 

@@ -1,4 +1,4 @@
-class User{
+class User01{
 
   constructor(x, y){
     //position

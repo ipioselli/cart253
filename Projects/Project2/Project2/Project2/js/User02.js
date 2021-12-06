@@ -1,3 +1,7 @@
+// This is a class to create the second user for the minigame2
+//The user must navigate through the maze and choose 1 of the 3 doors to see if their soulmate
+//is behind one of those doors.
+
 class User02{
 
   constructor(x, y){
@@ -27,7 +31,9 @@ class User02{
 
   }
 
-  bounce(wall){
+//function to check if the user hit any of the maze walls
+//the velocity will be set to 0 if you hit the walls to prevent you from going into them
+  hit(wall){
 
     if(this.x + this.size > wall.x - wall.width/2  &&
       this.x - this.size < wall.x + wall.width/2 &&
@@ -39,9 +45,8 @@ class User02{
       this.x = this.x - this.vx;
       this.y = this.y - this.vy;
 
-
-      this.vx = 0;
-      this.vy = 0;
+      this.vx = 0; // sets x velocity to 0
+      this.vy = 0; // sets y velocity to 0
 
     }
   }
@@ -71,7 +76,7 @@ class User02{
     }
   }
 
-  //check if the user hit their lover
+  //check if the first door is opened
   checkOpenedDoor01(door01){
 
     let d = dist(this.x, this.y, door01.x, door01.y);
@@ -80,7 +85,8 @@ class User02{
     }
   }
 
-  //check if the user hit the ball
+
+  //check if the second door is opened
     checkOpenedDoor02(door02){
 
       let d = dist(this.x, this.y, door02.x, door02.y);
@@ -89,6 +95,7 @@ class User02{
       }
     }
 
+    //check if the third door is opened
     checkOpenedDoor03(door03){
 
       let d = dist(this.x, this.y, door03.x, door03.y);
