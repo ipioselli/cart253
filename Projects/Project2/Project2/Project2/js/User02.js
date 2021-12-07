@@ -51,6 +51,24 @@ class User02{
     }
   }
 
+  hit(seaweed){
+
+    if(this.x + this.size  > seaweed.x - seaweed.width/2  &&
+      this.x - this.size  < seaweed.x + seaweed.width/2 &&
+      this.y + this.size/2  > seaweed.y - seaweed.height/2 &&
+      this.y - this.size/2 < seaweed.y + seaweed.height/2 ){
+
+
+
+      this.x = this.x - this.vx;
+      this.y = this.y - this.vy;
+
+      this.vx = 0; // sets x velocity to 0
+      this.vy = 0; // sets y velocity to 0
+
+    }
+  }
+
 //keyboard input
   handleInput(){
 

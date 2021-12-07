@@ -75,6 +75,11 @@ let maze = {
   size:800,
 }
 
+let seaweeds = [];
+let newSeaweedTimer = 0;
+let newSeaweedDelay = 60 * 2;
+let seaweedImg = undefined;
+
 
 //minigame1 variables
 let user;
@@ -91,7 +96,7 @@ let door2;
 let door3;
 
 
-let state = `pictureTime`; // the prototype starts with the start state
+let state = `minigame2`; // the prototype starts with the start state
 
 let tutorialFont;
 
@@ -126,7 +131,7 @@ function preload() {
   photographyRoomBg.image = loadImage("assets/images/photographyRoom.png");
   pictureTimeBg.image = loadImage("assets/images/pictureTime.gif");
   maze.image = loadImage("assets/images/mazeTest.png");
-
+  seaweedImg = loadImage("assets/images/seaweed.png");
   //load fonts
   tutorialFont = loadFont(`assets/fonts/Blackberries.otf`);
 
@@ -167,11 +172,16 @@ function setup() {
     mazeWalls.push(new Maze(550, 550, 10, 150));
     mazeWalls.push(new Maze(760, 380, 20, 580));
 
+    seaweeds.push(new Seaweed(random(0, width), random(0, height),30, 30, seaweedImg));
+
+
 
   //creates the doors for the ending states
   door1 = new Door(400, 180, 70, 110);
   door2 = new Door(690, 500, 70, 110);
   door3 = new Door(140, 490, 70, 110 );
+
+
 
   //random speed for the fish lover
   lover.vx = random(-lover.speed, lover.speed);
@@ -453,6 +463,29 @@ function minigame2(){
     user2.hit(wall);
   }
 
+
+
+
+
+  newSeaweedTimer++;
+  if(newSeaweedTimer >= newSeaweedDelay){
+
+    //mazeWalls.push(new Maze(random(0, width), random(0, height), 30, 30));
+    //add a seaweed to block the path
+    seaweeds.push(new Seaweed(random(0, width), random(0, height),30, 30, seaweedImg));
+
+    newSeaweedTimer = 0;
+
+
+  }
+
+
+
+
+
+
+
+
   //check if the doors are opened
   user2.checkOpenedDoor01(door1);
   user2.checkOpenedDoor02(door2);
@@ -470,6 +503,18 @@ function minigame2(){
   door1.display();
   door2.display();
   door3.display();
+
+
+  for (let i = 0; i < seaweeds.length; i++) {
+    let seaweed = seaweeds[i];
+    user2.hit(seaweed);
+  }
+  for (let i = 0; i < seaweeds.length; i++) {
+    let seaweed = seaweeds[i];
+     seaweed.display();
+   }
+
+
 
 
 
@@ -632,6 +677,7 @@ function mousePressed(){
   if (d2 <nextButton.size /2 - 20){
       state = `page02`;
     }
+
 
 }
 
