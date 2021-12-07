@@ -68,6 +68,12 @@ let pictureTimeBg = {
   size: 800,
 }
 
+let notPictureTimeBg = {
+  x: 400,
+  y:400,
+  size: 800,
+}
+
 //maze placeholder image
 let maze = {
   x:400,
@@ -96,7 +102,7 @@ let door2;
 let door3;
 
 
-let state = `minigame2`; // the prototype starts with the start state
+let state = `start`; // the prototype starts with the start state
 
 let tutorialFont;
 
@@ -130,6 +136,7 @@ function preload() {
   gymClass.image = loadImage("assets/images/gymClass.png");
   photographyRoomBg.image = loadImage("assets/images/photographyRoom.png");
   pictureTimeBg.image = loadImage("assets/images/pictureTime.gif");
+  notPictureTimeBg.image = loadImage("assets/images/notPictureTime.png");
   maze.image = loadImage("assets/images/mazeTest.png");
   seaweedImg = loadImage("assets/images/seaweed.png");
   //load fonts
@@ -407,7 +414,10 @@ function pictureTime(){
 }
 
 function notPictureTime(){
-  background(0);
+
+  imageMode(CENTER, CENTER);
+  image(notPictureTimeBg.image, notPictureTimeBg.x, notPictureTimeBg.y, notPictureTimeBg.size, notPictureTimeBg.size );
+
   push();
   textFont(tutorialFont);
   textAlign(CENTER, CENTER);
