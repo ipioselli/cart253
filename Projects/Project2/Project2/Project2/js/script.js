@@ -81,6 +81,13 @@ let maze = {
   size:800,
 }
 
+//
+let phoneBg = {
+  x: 400,
+  y: 400,
+  size: 800,
+}
+
 let seaweeds = [];
 let newSeaweedTimer = 0;
 let newSeaweedDelay = 60 * 2;
@@ -102,7 +109,7 @@ let door2;
 let door3;
 
 
-let state = `start`; // the prototype starts with the start state
+let state = `pictureTime`; // the prototype starts with the start state
 
 let tutorialFont;
 
@@ -119,7 +126,11 @@ let letterTimer01 = 200;
 let letterTimerDone01 = false;
 
 
-let sentence03 = `This is the first time I see such a fine fish strolling around. \n Would you like me to take a picture of you ;) ? \nY. Yess \nN. uhh no kinda creepy`
+let sentence03 = `This is the first time I see such a fine fish strolling around. \n Would you like me to take a picture of you ;) ? \nY. Yess \nN. uhh no kinda creepy`;
+
+let sentence04 = `You realized everyone in this school is too weird and decided to leave`;
+
+
 
 //
 
@@ -139,6 +150,9 @@ function preload() {
   notPictureTimeBg.image = loadImage("assets/images/notPictureTime.png");
   maze.image = loadImage("assets/images/mazeTest.png");
   seaweedImg = loadImage("assets/images/seaweed.png");
+  phoneBg.image = loadImage("assets/images/phoneBg.png");
+
+
   //load fonts
   tutorialFont = loadFont(`assets/fonts/Blackberries.otf`);
 
@@ -204,7 +218,7 @@ function setup() {
 //Draws all the states for the game
 function draw() {
 
-stateChange(); //
+stateChange(); //function to switch from state to state
 
 }
 
@@ -271,7 +285,7 @@ function stateChange(){
 
 //page before the title page
 function start(){
-  background(0);
+  background(64, 175, 222);
   push();
   textFont(tutorialFont);
   textAlign(CENTER, CENTER);
@@ -419,11 +433,12 @@ function notPictureTime(){
   image(notPictureTimeBg.image, notPictureTimeBg.x, notPictureTimeBg.y, notPictureTimeBg.size, notPictureTimeBg.size );
 
   push();
+
   textFont(tutorialFont);
   textAlign(CENTER, CENTER);
-  textSize(40);
+  textSize(30);
   fill(255, 255, 255);
-  text(`:( \n place holder for now`,  width/2, height/2 );
+  drawTypeWriter(width / 2, height / 2 + 250);
   pop();
 }
 
@@ -474,9 +489,6 @@ function minigame2(){
   }
 
 
-
-
-
   newSeaweedTimer++;
   if(newSeaweedTimer >= newSeaweedDelay){
 
@@ -488,12 +500,6 @@ function minigame2(){
 
 
   }
-
-
-
-
-
-
 
 
   //check if the doors are opened
@@ -523,10 +529,6 @@ function minigame2(){
     let seaweed = seaweeds[i];
      seaweed.display();
    }
-
-
-
-
 
 
   if(!user2.door01Opened){
@@ -606,8 +608,11 @@ function sadEnding(){
 }
 
 function letter01(){
-  background(0);
+  imageMode(CENTER, CENTER);
+  image(phoneBg.image, phoneBg.x, phoneBg.y, phoneBg.size, phoneBg.size );
   push();
+
+
   pop();
 }
 
@@ -662,12 +667,7 @@ function keyPressed(){
       }
       else if(keyCode === 78){ //keycode for the letter N
         state = `notPictureTime`;
-      }
-    }
-
-    if(state === `pictureTime`){
-      if(keyCode === 13){ //keycode for Enter
-        state = `minigame2`;
+        startTypeWriter(sentence04);
       }
     }
 
