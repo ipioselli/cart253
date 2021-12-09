@@ -17,8 +17,7 @@ constructor(x, y, w, h, image){
 //displays the seaweed
 display(){
   push();
-      fill(255, 50, 50);
-      stroke(0);
+      noStroke();
       image(this.image, this.x, this.y, this.width, this.height);
       pop();
     }

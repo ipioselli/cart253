@@ -4,15 +4,20 @@
 
 class User02{
 
-  constructor(x, y){
+  constructor(x, y, image){
     //position
     this.x = x;
     this.y = y;
+
     //size
-    this.size = 35;
+    this.size = 60;
+
     //velocity
     this.vx = 0;
     this.vy = 0;
+
+    //image
+    this.image = image;
     //speed
     this.speed = 5;
     this.door01Opened = true; //check if you opened the first door
@@ -51,7 +56,7 @@ class User02{
     }
   }
 
-  
+
 
 //keyboard input
   handleInput(){
@@ -82,7 +87,7 @@ class User02{
   checkOpenedDoor01(door01){
 
     let d = dist(this.x, this.y, door01.x, door01.y);
-    if(d < this.size + door01.size -50){
+    if(d < this.size/2 + door01.size/2-40){
       this.door01Opened = false;
     }
   }
@@ -92,7 +97,7 @@ class User02{
     checkOpenedDoor02(door02){
 
       let d = dist(this.x, this.y, door02.x, door02.y);
-      if(d < this.size + door02.size - 50){
+      if(d < this.size/2 + door02.size/2 -40){
         this.door02Opened = false;
       }
     }
@@ -101,16 +106,15 @@ class User02{
     checkOpenedDoor03(door03){
 
       let d = dist(this.x, this.y, door03.x, door03.y);
-      if(d < this.size + door03.size - 50){
+      if(d < this.size/2 + door03.size/2-40){
         this.door03Opened = false;
       }
     }
 
-//displays the user
+//displays the user with an image
   display(){
     push();
-    fill(255, 255, 255);
-    ellipse(this.x, this.y, this.size);
+    image(this.image, this.x, this.y, this.size, this.size);
     pop();
   }
 }

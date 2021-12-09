@@ -1,15 +1,16 @@
 class Door{
 
-  constructor(x, y, w, h){
+  constructor(x, y, image){
 
-    //size
-this.width = w;
-this.height = h;
-this.size = 40;
+//size
+this.size = 150;
 
 //position
 this.x = x;
 this.y =  y;
+
+//image properties
+this.image = image;
   }
 
 
@@ -17,8 +18,7 @@ this.y =  y;
     push();
     fill(168, 50, 86);
     noStroke();
-    rectMode(CENTER);
-    rect(this.x, this.y, this.width, this.height, this.size);
+    image(this.image, this.x, this.y, this.size, this.size);
     pop();
   }
 }
