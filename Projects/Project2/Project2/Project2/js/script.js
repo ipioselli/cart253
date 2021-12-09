@@ -24,6 +24,22 @@ let nextButton = { // button to access the first page of the game
   size:100,
 }
 
+let mailIcon = { //mail icon to access the letter
+  x: 360,
+  y: 170,
+  size: 150,
+}
+
+let mailAlert = {
+  x: 380,
+  y: 155,
+  size: 20,
+}
+
+let diameter = 0;
+let growAmount =0.7;
+let grow = true;
+
 
 //image for the title state
 let titleScreen = {
@@ -100,16 +116,16 @@ let lover;
 let ball;
 
 
-let mazeWalls = [];
+
 //minigame2 variables
 let user2;
-
+let mazeWalls = [];
 let door1;
 let door2;
 let door3;
 
 
-let state = `pictureTime`; // the prototype starts with the start state
+let state = `phone01`; // the prototype starts with the start state
 
 let tutorialFont;
 
@@ -129,6 +145,8 @@ let letterTimerDone01 = false;
 let sentence03 = `This is the first time I see such a fine fish strolling around. \n Would you like me to take a picture of you ;) ? \nY. Yess \nN. uhh no kinda creepy`;
 
 let sentence04 = `You realized everyone in this school is too weird and decided to leave`;
+
+let sentence05 = `YOU GOT MAIL!!! \n Click the red dot to see who it's from!`;
 
 
 
@@ -151,6 +169,7 @@ function preload() {
   maze.image = loadImage("assets/images/mazeTest.png");
   seaweedImg = loadImage("assets/images/seaweed.png");
   phoneBg.image = loadImage("assets/images/phoneBg.png");
+  mailIcon.image = loadImage("assets/images/mailIcon.png");
 
 
   //load fonts
@@ -274,6 +293,10 @@ function stateChange(){
   }
   else if(state === `notPictureTime`){
     notPictureTime();
+  }
+
+  else if(state === `phone01`){
+    phone01();
   }
   else if(state === `letter01`){
     letter01();
@@ -422,7 +445,8 @@ function pictureTime(){
     letterTimerDone01 = true;
   }
   if(letterTimerDone01){
-    state = `letter01`;
+    state = `phone01`;
+    startTypeWriter(sentence05);
   }
 
 }
@@ -492,7 +516,7 @@ function minigame2(){
   newSeaweedTimer++;
   if(newSeaweedTimer >= newSeaweedDelay){
 
-    //mazeWalls.push(new Maze(random(0, width), random(0, height), 30, 30));
+
     //add a seaweed to block the path
     seaweeds.push(new Seaweed(random(0, width), random(0, height),30, 30, seaweedImg));
 
@@ -607,16 +631,45 @@ function sadEnding(){
   pop();
 }
 
-function letter01(){
+function phone01(){
   imageMode(CENTER, CENTER);
   image(phoneBg.image, phoneBg.x, phoneBg.y, phoneBg.size, phoneBg.size );
-  push();
 
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+  text(`YOU GOT MAIL!!! \n Click the red dot to see who it's from!`, width/2, height/2 + 250);
+  pop();
+
+  moveMailAlert();
+  displayMailIcon();
+  displayMailAlert();
+}
+
+function letter01(){
+  background(150, 116, 101);
+  push();
 
   pop();
 }
 
+function moveMailAlert(){
+if (diameter > 30){
+  grow = false;
+  }
+if(diameter <0){
+  grow = true;
+  }
 
+if (grow === true){
+  diameter += growAmount;
+  }
+else{
+  diameter -= growAmount
+  }
+}
 //displays the tutorial button
 function displayTutorialButton(){
   image(tutorialButton.image, tutorialButton.x, tutorialButton.y, tutorialButton.size, tutorialButton.size);
@@ -626,6 +679,19 @@ function displayTutorialButton(){
 function displayNextButton(){
   image(nextButton.image, nextButton.x, nextButton.y, nextButton.size, nextButton.size);
 }
+
+
+//displays mail icon for the phone
+function displayMailIcon(){
+  image(mailIcon.image, mailIcon.x, mailIcon.y, mailIcon.size, mailIcon.size);
+}
+
+function displayMailAlert(){
+  fill(158, 45, 25);
+  circle(mailAlert.x, mailAlert.y, diameter);
+}
+
+
 
 
 //keyboard input
@@ -688,11 +754,18 @@ function mousePressed(){
       state = `page02`;
     }
 
+    let d3 = dist(mouseX, mouseY, mailAlert.x, mailAlert.y);
+    if(d3 < diameter/2){
+      state = `letter01`;
+
+    }
+
 
 }
 
 
-
+//Madeline helped with this CODE
+//
 function startTypeWriter(sentence){
     typeWriterTime = typeWriterSpeed;
     typeWriterCursor = 0;
