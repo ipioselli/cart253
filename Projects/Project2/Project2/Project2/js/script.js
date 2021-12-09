@@ -89,6 +89,12 @@ let photographyRoomBg = {
 
 }
 
+let musicRoomBg = {
+  x: 400,
+  y:400,
+  size: 800,
+}
+
 //picture bg with Jake
 let pictureTimeBg = {
   x: 400,
@@ -168,7 +174,7 @@ let newBookDelay = 50;
 let bookImg = undefined;
 
 
-let state = `start`; // the project starts with the start state
+let state = `page02`; // the project starts with the start state
 
 let mainFont;
 
@@ -185,7 +191,8 @@ let letterTimer01 = 200;
 let letterTimerDone01 = false;
 
 
-let sentence03 = `This is the first time I see such a fine fish strolling around. \n Would you like me to take a picture of you ;) ? \nY. Yess \nN. uhh no kinda creepy`;
+let photographyRoomSentence = `This is the first time I see such a fine fish strolling around. \n Would you like me to take a picture of you ;) ? \nY. Yess \nN. uhh no kinda creepy`;
+let musicRoomSentence = `Hey there ;-) Thanks for joining my club. \nYou'll have a better time here than with Jake! \nDo you want to listen to my sick beats \nY. ye Defo \nN. uh no my taste in music is too sophisticated`;
 
 let sentence04 = `You realized everyone in this school is too weird and decided to leave`;
 
@@ -212,6 +219,7 @@ function preload() {
   page2Background.image = loadImage("assets/images/page02.png");
   minigame01Bg.image = loadImage("assets/images/gymClass.png");
   photographyRoomBg.image = loadImage("assets/images/photographyRoom.png");
+  musicRoomBg.image = loadImage("assets/images/musicRoomBg.png");
   pictureTimeBg.image = loadImage("assets/images/pictureTime.gif");
   notPictureTimeBg.image = loadImage("assets/images/notPictureTime.png");
   mailIcon.image = loadImage("assets/images/mailIcon.png");
@@ -325,6 +333,9 @@ function stateChange(){
   else if (state === `photographyRoom`){
     photographyRoom();
 }
+  else if(state === `musicRoom`){
+    musicRoom();
+}
   else if(state === `end`){
     end();
   }
@@ -354,6 +365,13 @@ function stateChange(){
   }
   else if(state === `notPictureTime`){
     notPictureTime();
+  }
+
+  else if(state === `musicTime`){
+    musicTime();
+  }
+  else if(state === `notMusicTime`){
+    notMusicTime();
   }
 
   else if(state === `phone01`){
@@ -482,6 +500,19 @@ function photographyRoom(){
   textSize(30);
   fill(255, 255, 255);
   drawTypeWriter(width / 2, height / 2 + 250);
+  pop();
+}
+
+function musicRoom(){
+  imageMode(CENTER, CENTER);
+  image(musicRoomBg.image, musicRoomBg.x, musicRoomBg.y, musicRoomBg.size, musicRoomBg.size);
+
+  push();
+  textFont(mainFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+  drawTypeWriter(width / 2, height / 2 + 270);
   pop();
 }
 
@@ -811,11 +842,12 @@ function keyPressed(){
 
   if(state === `page02`){
     if(keyCode === 65){ // keycode for letter A
-      state = `minigame01`;
+      state = `musicRoom`;
+      startTypeWriter(musicRoomSentence);
     }
     else if(keyCode === 66){ //keycode for letter B
       state = `photographyRoom`;
-      startTypeWriter(sentence03);
+      startTypeWriter(photographyRoomSentence);
     }
   }
 
@@ -826,6 +858,15 @@ function keyPressed(){
       else if(keyCode === 78){ //keycode for the letter N
         state = `notPictureTime`;
         startTypeWriter(sentence04);
+      }
+    }
+    if(state === `musicRoom`){
+      if(keyCode === 89){//keycode for the letter Y
+        state = `musicTime`;
+      }
+      else if(keyCode === 78){ //keycode for the letter N
+        state = `notMusicTime`;
+        //startTypeWriter(sentence04);
       }
     }
 
