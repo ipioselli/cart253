@@ -90,8 +90,7 @@ let notPictureTimeBg = {
   size: 800,
 }
 
-//maze placeholder image
-let maze = {
+let minigame02Bg = {
   x:400,
   y:400,
   size:800,
@@ -104,10 +103,17 @@ let phoneBg = {
   size: 800,
 }
 
-let seaweeds = [];
-let newSeaweedTimer = 0;
-let newSeaweedDelay = 60 * 2;
-let seaweedImg = undefined;
+let letter01Bg = {
+  x: 400,
+  y: 400,
+  size: 800,
+
+}
+
+let books = [];
+let newBookTimer = 0;
+let newBookDelay = 50;
+let bookImg = undefined;
 
 
 //minigame1 variables
@@ -125,7 +131,7 @@ let door2;
 let door3;
 
 
-let state = `phone01`; // the prototype starts with the start state
+let state = `minigame02`; // the prototype starts with the start state
 
 let tutorialFont;
 
@@ -146,7 +152,7 @@ let sentence03 = `This is the first time I see such a fine fish strolling around
 
 let sentence04 = `You realized everyone in this school is too weird and decided to leave`;
 
-let sentence05 = `YOU GOT MAIL!!! \n Click the red dot to see who it's from!`;
+
 
 
 
@@ -166,10 +172,12 @@ function preload() {
   photographyRoomBg.image = loadImage("assets/images/photographyRoom.png");
   pictureTimeBg.image = loadImage("assets/images/pictureTime.gif");
   notPictureTimeBg.image = loadImage("assets/images/notPictureTime.png");
-  maze.image = loadImage("assets/images/mazeTest.png");
-  seaweedImg = loadImage("assets/images/seaweed.png");
+  bookImg = loadImage("assets/images/book.png");
   phoneBg.image = loadImage("assets/images/phoneBg.png");
   mailIcon.image = loadImage("assets/images/mailIcon.png");
+  letter01Bg.image = loadImage("assets/images/letter01.png");
+  minigame02Bg.image = loadImage("assets/images/libraryFloor.png");
+
 
 
   //load fonts
@@ -196,7 +204,7 @@ function setup() {
   //creates each class for minigame 2
   user2 = new User02(50, 50);
 
-  //creates the walls for the maze
+  //creates the walls for the maze in minigame2
     mazeWalls.push(new Maze(160, 580, 200, 10)); //(x, y, w, h)
     mazeWalls.push(new Maze(50, 410, 20, 560));
     mazeWalls.push(new Maze(350, 690, 620, 20));
@@ -212,7 +220,7 @@ function setup() {
     mazeWalls.push(new Maze(550, 550, 10, 150));
     mazeWalls.push(new Maze(760, 380, 20, 580));
 
-    seaweeds.push(new Seaweed(random(0, width), random(0, height),30, 30, seaweedImg));
+    books.push(new Book(random(0, width), random(0, height),50, 50, bookImg));
 
 
 
@@ -267,11 +275,11 @@ function stateChange(){
   else if(state === `end`){
     end();
   }
-  else if(state === `minigame1`){
-    minigame1();
+  else if(state === `minigame01`){
+    minigame01();
   }
-  else if(state === `minigame2`){
-    minigame2();
+  else if(state === `minigame02`){
+    minigame02();
   }
   else if(state === `door01Outcome`){
     door01Outcome();
@@ -300,6 +308,10 @@ function stateChange(){
   }
   else if(state === `letter01`){
     letter01();
+  }
+
+  else if(state === `minigame02Failed`){
+    minigame02Failed();
   }
 
 
@@ -350,8 +362,6 @@ function tutorial(){
   text(`Long Leg Fish Love Story!`, width / 2, height / 2-300);
   textSize(35);
 
-
-
   text(`You are a lovely fish who has just started their first day of college.`, width / 2, height / 2-200);
   text(`You are asked to join clubs and meet new fish.`, width / 2, height / 2-150);
   text(`However, you encounter 2 love interests and must make a hard decision` ,width / 2, height / 2-100);
@@ -369,14 +379,12 @@ function tutorial(){
 //displays the first page with the main character
 function page01(){
 
-
   imageMode(CENTER, CENTER);
   image(page1Background.image, page1Background.x, page1Background.y, page1Background.size, page1Background.size);
   displayNextButton()
 
+//text box for page 1
   push();
-
-  //text box for page 1
   textFont(tutorialFont);
   textAlign(CENTER, CENTER);
   textSize(30);
@@ -385,11 +393,8 @@ function page01(){
   text(`You really want to join a club but not sure which one.`, width/2, height/2 +250);
   text(`While you look around you see 2 tall mysterious fish `, width/2, height/2 +290);
   text(`approach you!`, width/2, height/2 +330);
-
   pop();
 }
-
-
 
 
 //displays the second page with the 2 love interests
@@ -416,9 +421,7 @@ function photographyRoom(){
   imageMode(CENTER, CENTER);
   image(photographyRoomBg.image, photographyRoomBg.x, photographyRoomBg.y, photographyRoomBg.size, photographyRoomBg.size);
 
-
   push();
-
   textFont(tutorialFont);
   textAlign(CENTER, CENTER);
   textSize(30);
@@ -440,24 +443,23 @@ function pictureTime(){
   text(`You just took a picture with Jake! \nPress ENTER to see what happens next`,  width/2, height/2 + 330);
   pop();
 
+
+//timer for phone01 state to pop up
   letterTimer01 -= 1;
   if(letterTimer01 <= 0){
     letterTimerDone01 = true;
   }
   if(letterTimerDone01){
     state = `phone01`;
-    startTypeWriter(sentence05);
-  }
-
+    }
 }
 
-function notPictureTime(){
 
+function notPictureTime(){
   imageMode(CENTER, CENTER);
   image(notPictureTimeBg.image, notPictureTimeBg.x, notPictureTimeBg.y, notPictureTimeBg.size, notPictureTimeBg.size );
 
   push();
-
   textFont(tutorialFont);
   textAlign(CENTER, CENTER);
   textSize(30);
@@ -467,11 +469,8 @@ function notPictureTime(){
 }
 
 
-
-
-
 //if you select A. The music club you will end up on this state
-function minigame1(){
+function minigame01(){
   imageMode(CENTER, CENTER);
   image(gymClass.image, gymClass.x, gymClass.y, gymClass.size, gymClass.size);
   user.move();
@@ -496,10 +495,36 @@ function minigame1(){
 
 }
 
-function minigame2(){
-  //imageMode(CENTER, CENTER);
-  //image(maze.image, maze.x, maze.y, maze.size, maze.size);
-  background(49, 69, 122);
+//happy ending for the minigame1
+function happyEnding(){
+  background(191, 66, 245);
+
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+  text(`You fell in love with Edward and rode off into the sunset!`, width/2, height/2);
+  pop();
+}
+
+
+//sad ending for the minigame1
+function sadEnding(){
+  background(150, 116, 101);
+  push();
+  textFont(tutorialFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+  text(`You ended up sad and alone :( `, width/2, height/2);
+  pop();
+}
+
+
+function minigame02(){
+  imageMode(CENTER, CENTER);
+  image(minigame02Bg.image, minigame02Bg.x, minigame02Bg.y, minigame02Bg.size, minigame02Bg.size);
 
   //keyboard input
   user2.handleInput();
@@ -513,18 +538,14 @@ function minigame2(){
   }
 
 
-  newSeaweedTimer++;
-  if(newSeaweedTimer >= newSeaweedDelay){
-
-
-    //add a seaweed to block the path
-    seaweeds.push(new Seaweed(random(0, width), random(0, height),30, 30, seaweedImg));
-
-    newSeaweedTimer = 0;
+  newBookTimer++; //increments the book timer
+  if(newBookTimer >= newBookDelay){
+    //add a book to block the path
+    books.push(new Book(random(0, width), random(0, height),50, 50, bookImg));
+    newBookTimer = 0;
 
 
   }
-
 
   //check if the doors are opened
   user2.checkOpenedDoor01(door1);
@@ -545,16 +566,21 @@ function minigame2(){
   door3.display();
 
 
-  for (let i = 0; i < seaweeds.length; i++) {
-    let seaweed = seaweeds[i];
-    user2.hit(seaweed);
+  for (let i = 0; i < books.length; i++) {
+    let book = books[i];
+    user2.hit(book);
   }
-  for (let i = 0; i < seaweeds.length; i++) {
-    let seaweed = seaweeds[i];
-     seaweed.display();
+  for (let i = 0; i < books.length; i++) {
+    let book = books[i];
+     book.display();
    }
 
+//stops the minigame if there are too many books blocking the path
+   if(books.length >= 60){
+     state = `start`;
+   }
 
+//checks if any of the doors are open and then brings you to the state for each door
   if(!user2.door01Opened){
     state = `door01Outcome`;
   }
@@ -564,9 +590,6 @@ function minigame2(){
   if(!user2.door03Opened){
     state = `door03Outcome`;
   }
-
-
-
 }
 
 
@@ -605,31 +628,7 @@ function door03Outcome(){
 }
 
 
-//happy ending for the minigame1
-function happyEnding(){
-  background(191, 66, 245);
 
-  push();
-  textFont(tutorialFont);
-  textAlign(CENTER, CENTER);
-  textSize(30);
-  fill(255, 255, 255);
-  text(`You fell in love with Edward and rode off into the sunset!`, width/2, height/2);
-  pop();
-}
-
-
-//sad ending for the minigame1
-function sadEnding(){
-  background(150, 116, 101);
-  push();
-  textFont(tutorialFont);
-  textAlign(CENTER, CENTER);
-  textSize(30);
-  fill(255, 255, 255);
-  text(`You ended up sad and alone :( `, width/2, height/2);
-  pop();
-}
 
 function phone01(){
   imageMode(CENTER, CENTER);
@@ -648,11 +647,20 @@ function phone01(){
   displayMailAlert();
 }
 
+function phone02(){
+
+}
+
 function letter01(){
-  background(150, 116, 101);
+  imageMode(CENTER, CENTER);
+  image(letter01Bg.image, letter01Bg.x, letter01Bg.y, letter01Bg.size, letter01Bg.size );
   push();
 
   pop();
+}
+
+function letter02(){
+background(0);
 }
 
 function moveMailAlert(){
@@ -670,6 +678,8 @@ else{
   diameter -= growAmount
   }
 }
+
+
 //displays the tutorial button
 function displayTutorialButton(){
   image(tutorialButton.image, tutorialButton.x, tutorialButton.y, tutorialButton.size, tutorialButton.size);
@@ -680,7 +690,6 @@ function displayNextButton(){
   image(nextButton.image, nextButton.x, nextButton.y, nextButton.size, nextButton.size);
 }
 
-
 //displays mail icon for the phone
 function displayMailIcon(){
   image(mailIcon.image, mailIcon.x, mailIcon.y, mailIcon.size, mailIcon.size);
@@ -690,8 +699,6 @@ function displayMailAlert(){
   fill(158, 45, 25);
   circle(mailAlert.x, mailAlert.y, diameter);
 }
-
-
 
 
 //keyboard input
@@ -719,7 +726,7 @@ function keyPressed(){
 
   if(state === `page02`){
     if(keyCode === 65){ // keycode for letter A
-      state = `minigame1`;
+      state = `minigame01`;
     }
     else if(keyCode === 66){ //keycode for letter B
       state = `photographyRoom`;
@@ -734,6 +741,15 @@ function keyPressed(){
       else if(keyCode === 78){ //keycode for the letter N
         state = `notPictureTime`;
         startTypeWriter(sentence04);
+      }
+    }
+
+    if(state === `letter01`){
+      if(keyCode === 65){
+        state = `minigame01`;
+      }
+      else if(keyCode === 66){
+        state = `minigame02`;
       }
     }
 

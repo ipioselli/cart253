@@ -35,8 +35,8 @@ class User02{
 //the velocity will be set to 0 if you hit the walls to prevent you from going into them
   hit(wall){
 
-    if(this.x + this.size > wall.x - wall.width/2  &&
-      this.x - this.size < wall.x + wall.width/2 &&
+    if(this.x + this.size/2 > wall.x - wall.width/2  &&
+      this.x - this.size/2 < wall.x + wall.width/2 &&
       this.y + this.size/2  > wall.y - wall.height/2 &&
       this.y - this.size/2 < wall.y + wall.height/2 ){
 
@@ -51,23 +51,7 @@ class User02{
     }
   }
 
-  hit(seaweed){
-
-    if(this.x + this.size  > seaweed.x - seaweed.width/2  &&
-      this.x - this.size  < seaweed.x + seaweed.width/2 &&
-      this.y + this.size/2  > seaweed.y - seaweed.height/2 &&
-      this.y - this.size/2 < seaweed.y + seaweed.height/2 ){
-
-
-
-      this.x = this.x - this.vx;
-      this.y = this.y - this.vy;
-
-      this.vx = 0; // sets x velocity to 0
-      this.vy = 0; // sets y velocity to 0
-
-    }
-  }
+  
 
 //keyboard input
   handleInput(){
