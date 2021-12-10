@@ -166,6 +166,13 @@ let minigame01GoodEndingBg = {
 }
 
 
+let minigame01TimeoutBg = {
+  x: 400,
+  y: 400,
+  size: 800,
+}
+
+
 
 //minigame2 variables
 let user2;
@@ -201,7 +208,7 @@ let newBookDelay = 50;
 let bookImg = undefined;
 
 
-let state = `minigame01GoodEnding`; // the project starts with the start state
+let state = `minigame01Timeout`; // the project starts with the start state
 
 let mainFont;
 
@@ -268,6 +275,7 @@ function preload() {
   user01Img = loadImage("assets/images/user01.png");
   loverImg = loadImage("assets/images/lover.png");
   minigame01GoodEndingBg.image = loadImage("assets/images/loveEnding.png");
+  minigame01TimeoutBg.image = loadImage("assets/images/timerDone.png");
 
   //Minigame02 images
   minigame02TutorialBg.image = loadImage("assets/images/minigame02Tutorial.png");
@@ -366,8 +374,8 @@ function stateChange() {
     minigame01();
   } else if (state === `minigame01Tutorial`) {
     minigame01Tutorial();
-  } else if (state === `minigame01Failed`) {
-    minigame01Failed();
+  } else if (state === `minigame01Timeout`) {
+    minigame01Timeout();
   } else if (state === `minigame02`) {
     minigame02();
   } else if (state === `door01Outcome`) {
@@ -378,8 +386,8 @@ function stateChange() {
     door03Outcome();
   } else if (state === `minigame01GoodEnding`) {
     minigame01GoodEnding();
-  } else if (state === `sadEnding`) {
-    sadEnding();
+  } else if (state === `minigame01SadEnding`) {
+    minigame01SadEnding();
   } else if (state === `phone01`) {
     phone01();
   } else if (state === `loveLetter01`) {
@@ -637,10 +645,10 @@ function minigame01(){
   }
 
   if(!user1.notFoundLover){
-    state = `minigame01GoodEnding`;
+    state = `minigame01GoodEnding`; // if the user reaches the lover, you get the good ending
   }
   if(!user1.ballNotHit){
-   state = `sadEnding`;
+   state = `minigame01SadEnding`; // if the user hits a ball, you get the bad ending
    }
 
    minigame01Timer -=1;
@@ -648,7 +656,7 @@ function minigame01(){
      minigame01TimerDone = true;
    }
    if(minigame01TimerDone){
-     state =`minigame01Failed`
+     state =`minigame01Timeout`
    }
 
   //diplay functions
@@ -665,19 +673,20 @@ function minigame01(){
 
 }
 
-
-
 //brings you to this state when the timer is done
-function minigame01Failed(){
-  background(0);
+function minigame01Timeout(){
+  imageMode(CENTER, CENTER);
+  image(minigame01TimeoutBg.image, minigame01TimeoutBg.x, minigame01TimeoutBg.y, minigame01TimeoutBg.size, minigame01TimeoutBg.size);
+
   push();
   textFont(mainFont);
   textAlign(CENTER, CENTER);
-  textSize(30);
+  textSize(40);
   fill(255, 255, 255);
-  text(`You ran out of time :/`, width/2, height/2);
+  text(`You ran out of time :/ \nand ended up alone`, width/2, height/2 + 300);
   pop();
 }
+
 //happy ending for the minigame1
 function minigame01GoodEnding(){
   imageMode(CENTER, CENTER);
@@ -694,7 +703,7 @@ function minigame01GoodEnding(){
 
 
 //sad ending for the minigame1
-function sadEnding(){
+function minigame01SadEnding(){
   background(150, 116, 101);
   push();
   textFont(mainFont);
