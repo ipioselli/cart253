@@ -152,9 +152,13 @@ let letter02Bg = {
 }
 
 //minigame1 variables
-let user;
+let user1;
+let user01Img = undefined;
 let lover;
-let ball;
+let basketballs = [];
+let volleyballs = [];
+let basketballImg = undefined;
+let volleyballImg = undefined;
 
 
 
@@ -192,7 +196,7 @@ let newBookDelay = 50;
 let bookImg = undefined;
 
 
-let state = `phone02`; // the project starts with the start state
+let state = `minigame01`; // the project starts with the start state
 
 let mainFont;
 
@@ -255,6 +259,9 @@ function preload() {
 //Minigame01 images
   minigame01TutorialBg.image = loadImage("assets/images/minigame01Tutorial.png");
   minigame01Bg.image = loadImage("assets/images/gymClass.png");
+  basketballImg = loadImage("assets/images/basketball.png");
+  volleyballImg = loadImage("assets/images/volleyball.png");
+  user01Img = loadImage("assets/images/mainCharacter.png");
 
 //Minigame02 images
   minigame02TutorialBg.image = loadImage("assets/images/minigame02Tutorial.png");
@@ -284,9 +291,12 @@ function setup() {
 
 
   //creates each class
-  user = new User01(random(0, width), random(0, height)); // random x and y position
+  user1 = new User01(10, 10, user01Img); // random x and y position
   lover = new Lover(random(0, width), random(0, height)); // random x and y position
-  ball = new Ball(random(0, width), random(0, height)); // random x and y position
+  basketballs.push(new Basketball(10, 150, basketballImg));
+  basketballs.push(new Basketball(10, 400, basketballImg));
+  basketballs.push(new Basketball(10, 650, basketballImg));
+
 
   //creates each class for minigame 2
   user2 = new User02(50, 50, user02Img);
@@ -323,8 +333,8 @@ function setup() {
   lover.vy = random(-lover.speed, lover.speed);
 
   //random speed for the ball
-  ball.vx = random(-ball.speed, ball.speed);
-  ball.vy = random(-ball.speed, ball.speed);
+  //ball.vx = random(-ball.speed, ball.speed);
+  //ball.vy = random(-ball.speed, ball.speed);
 
 
 }
@@ -640,22 +650,39 @@ function minigame01Tutorial(){
 function minigame01(){
   imageMode(CENTER, CENTER);
   image(minigame01Bg.image, minigame01Bg.x, minigame01Bg.y, minigame01Bg.size, minigame01Bg.size);
-  user.move();
-  user.display();
-  user.handleInput();
-  user.checkHit(lover);
-  user.checkHitBall(ball);
-  ball.move();
-  ball.display();
-  lover.move();
+
+  user1.handleInput();
+
+  user1.move();
+
+
+  for (let i = 0; i < basketballs.length; i++) {
+    let basketball = basketballs[i];
+    basketball.move();
+  }
+
+  user1.display();
+
+  user1.checkHit(lover);
+
+  for (let i = 0; i < basketballs.length; i++) {
+    let basketball = basketballs[i];
+    user1.checkHitBall(basketball);
+  }
+
   lover.display();
 
+  for (let i = 0; i < basketballs.length; i++) {
+    let basketball = basketballs[i];
+    basketball.display();
+  }
 
 
-  if(!user.foundLover){
+
+  if(!user1.foundLover){
     state = `happyEnding`;
   }
-  if(!user.ballHit){
+  if(!user1.ballHit){
    state = `sadEnding`;
    }
 
@@ -760,7 +787,7 @@ function minigame02(){
 }
 
 function minigame02Failed(){
-  background
+  background(0);
 }
 
 

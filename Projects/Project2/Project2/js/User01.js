@@ -1,6 +1,6 @@
 class User01{
 
-  constructor(x, y){
+  constructor(x, y, image){
     //position
     this.x = x;
     this.y = y;
@@ -13,6 +13,8 @@ class User01{
     this.speed = 5;
     this.foundLover = true; //check if you found your lover
     this.ballHit = true; //check if the ball hit you
+
+    this.image = image;
   }
 
 //function to move the user
@@ -55,7 +57,7 @@ class User01{
   checkHit(lover){
 
     let d = dist(this.x, this.y, lover.x, lover.y);
-    if(d < this.size + lover.size){
+    if(d < this.size/2 + lover.size/2){
       this.foundLover = false;
     }
   }
@@ -64,18 +66,17 @@ class User01{
     checkHitBall(ball){
 
       let d = dist(this.x, this.y, ball.x, ball.y);
-      if(d < this.size + ball.size){
+      if(d < this.size/2 + ball.size/2){
         this.ballHit = false;
       }
 
 
   }
 
-//displays the user
+//displays the user with an image
   display(){
     push();
-    fill(255, 255, 255);
-    ellipse(this.x, this.y, this.size);
+    image(this.image, this.x, this.y, this.size, this.size);
     pop();
   }
 }

@@ -1,16 +1,16 @@
-class Ball{
-  constructor(x, y){
+class Basketball{
+  constructor(x, y, image){
 
     //position
     this.x = x;
     this.y = y;
     //size
-    this.size = 50;
+    this.size = 70;
     //velocity
-    this.vx = 0;
-    this.vy = 0;
-    //speed
-    this.speed = 10;
+    this.vx = 8;
+
+    //image
+    this.image = image;
 
   }
 
@@ -18,7 +18,7 @@ class Ball{
   move(){
 
     this.x = this.x + this.vx;
-    this.y = this.y + this.vy;
+
 
     //constrains the ball to the canvas
     this.x = constrain(this.x, 0, width);
@@ -28,9 +28,7 @@ class Ball{
     if(this.x >= width || this.x <=0){
       this.vx = -this.vx;
     }
-    if(this.y >= height || this.y <=0){
-      this.vy = -this.vy;
-    }
+
 
   }
 
@@ -38,9 +36,8 @@ class Ball{
   //displays the ball
   display(){
     push();
-    fill(181, 67, 18);
     noStroke();
-    ellipse(this.x, this.y, this.size);
+    image(this.image, this.x, this.y, this.size, this.size);
     pop();
   }
 
