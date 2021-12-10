@@ -139,13 +139,13 @@ let phoneBg = {
   size: 800,
 }
 
-let letter01Bg = {
+let loveLetter01Bg = {
   x: 400,
   y: 400,
   size: 800,
 }
 
-let letter02Bg = {
+let loveLetter02Bg = {
   x: 400,
   y: 400,
   size: 800,
@@ -225,11 +225,11 @@ let photographyRoomSentence = `This is the first time I see such a fine fish str
 let musicRoomSentence = `Hey there ;-) Thanks for joining my club. \nYou'll have a better time here than with Jake! \nDo you want to listen to my sick beats \nY. ye Defo \nN. uh no my taste in music is too sophisticated`;
 let notMusicTimeSentence = `You decided to make your own music and \nbecame a star all on your own.`;
 let musicTimeSentence = `Edward made you listen to his music \nand it was great!`;
-let sentence04 = `You realized everyone in this school is too weird and decided to leave`;
+let notPictureTimeSentence = `You realized everyone in this school is too weird and decided to leave`;
 let minigame02TutorialSentence = `You must prove your love to Jake by finding him in the maze. \nNavigate through maze and choose one of the doors to find your soulamte. \n Be careful books are dropping from the sky and blocking the path. \n Ps. If you choose the wrong door you might end up alone.`;
 let minigame01TutorialSentence = `You must prove your love to Edward in gym class. \nMake your way towards him but make sure avoid all the balls. \nIf you touch any of the balls you will end up alone :(.`;
 let letter02Sentence = `You just received a love letter from Edward!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Jake.`;
-let letter01Sentence = `You just received a love letter from Jake!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Edward.`;
+let loveLetter01Sentence = `You just received a love letter from Jake!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Edward.`;
 
 
 //loads all the assets for project2
@@ -249,15 +249,15 @@ function preload() {
   notMusicTimeBg.image = loadImage("assets/images/notMusicTimeBg.png");
 
   mailIcon.image = loadImage("assets/images/mailIcon.png");
-  letter01Bg.image = loadImage("assets/images/letter01.png");
-  letter02Bg.image = loadImage("assets/images/letter02.png");
+  loveLetter01Bg.image = loadImage("assets/images/letter01.png");
+  loveLetter02Bg.image = loadImage("assets/images/letter02.png");
 
-//buttons
+  //buttons
   tutorialButton.image = loadImage("assets/images/tutorialButton.png");
   nextButton.image = loadImage("assets/images/nextButton.png");
   okButton.image = loadImage("assets/images/okButton.png");
 
-//Minigame01 images
+  //Minigame01 images
   minigame01TutorialBg.image = loadImage("assets/images/minigame01Tutorial.png");
   minigame01Bg.image = loadImage("assets/images/gymClass.png");
   basketballImg = loadImage("assets/images/basketball.png");
@@ -265,7 +265,7 @@ function preload() {
   user01Img = loadImage("assets/images/user01.png");
   loverImg = loadImage("assets/images/lover.png");
 
-//Minigame02 images
+  //Minigame02 images
   minigame02TutorialBg.image = loadImage("assets/images/minigame02Tutorial.png");
   bookImg = loadImage("assets/images/book.png");
   phoneBg.image = loadImage("assets/images/phoneBg.png");
@@ -338,89 +338,59 @@ stateChange(); //function to switch from state to state
 }
 
 //creates all the states for the game
-function stateChange(){
+function stateChange() {
 
-  if (state === `start`){
+  if (state === `start`) {
     start();
-  }
-
-  else if(state === `title`){
+  } else if (state === `title`) {
     title();
-
-  }
-  else if(state === `tutorial`){
+  } else if (state === `tutorial`) {
     tutorial();
-  }
-  else if(state === `page01`){
+  } else if (state === `page01`) {
     page01();
-  }
-  else if(state === `page02`){
+  } else if (state === `page02`) {
     page02();
-  }
-  else if (state === `photographyRoom`){
+  } else if (state === `photographyRoom`) {
     photographyRoom();
-}
-  else if(state === `musicRoom`){
-    musicRoom();
-}
-  else if(state === `end`){
-    end();
-  }
-  else if(state === `minigame01`){
-    minigame01();
-  }
-  else if(state === `minigame01Tutorial`){
-    minigame01Tutorial();
-  }
-  else if(state === `minigame01Failed`){
-    minigame01Failed();
-  }
-  else if(state === `minigame02`){
-    minigame02();
-  }
-  else if(state === `door01Outcome`){
-    door01Outcome();
-  }
-  else if(state === `door02Outcome`){
-    door02Outcome();
-  }
-  else if(state === `door03Outcome`){
-    door03Outcome();
-  }
-  else if(state === `happyEnding`){
-    happyEnding();
-  }
-  else if(state === `sadEnding`){
-    sadEnding();
-  }
-  else if(state === `pictureTime`){
+  } else if (state === `pictureTime`) {
     pictureTime();
-  }
-  else if(state === `notPictureTime`){
+  } else if (state === `notPictureTime`) {
     notPictureTime();
-  }
-  else if(state === `musicTime`){
+  } else if (state === `musicRoom`) {
+    musicRoom();
+  } else if (state === `musicTime`) {
     musicTime();
-  }
-  else if(state === `notMusicTime`){
+  } else if (state === `notMusicTime`) {
     notMusicTime();
-  }
-  else if(state === `phone01`){
+  } else if (state === `minigame01`) {
+    minigame01();
+  } else if (state === `minigame01Tutorial`) {
+    minigame01Tutorial();
+  } else if (state === `minigame01Failed`) {
+    minigame01Failed();
+  } else if (state === `minigame02`) {
+    minigame02();
+  } else if (state === `door01Outcome`) {
+    door01Outcome();
+  } else if (state === `door02Outcome`) {
+    door02Outcome();
+  } else if (state === `door03Outcome`) {
+    door03Outcome();
+  } else if (state === `happyEnding`) {
+    happyEnding();
+  } else if (state === `sadEnding`) {
+    sadEnding();
+  } else if (state === `phone01`) {
     phone01();
-  }
-  else if(state === `letter01`){
-    letter01();
-  }
-  else if(state === `phone02`){
+  } else if (state === `loveLetter01`) {
+    loveLetter01();
+  } else if (state === `phone02`) {
     phone02();
-  }
-  else if(state === `letter02`){
-    letter02();
-  }
-  else if(state === `minigame02Failed`){
+  } else if (state === `loveLetter02`) {
+    loveLetter02();
+  } else if (state === `minigame02Failed`) {
     minigame02Failed();
-  }
-  else if(state === `minigame02Tutorial`){
+  } else if (state === `minigame02Tutorial`) {
     minigame02Tutorial();
   }
 
@@ -631,8 +601,10 @@ function minigame01Tutorial(){
   text(minigame01TutorialSentence, width / 2, height / 2);
   pop();
   displayOkButton();
-
 }
+
+
+
 //if you select A. The music club you will end up on this state
 function minigame01(){
   imageMode(CENTER, CENTER);
@@ -654,8 +626,6 @@ function minigame01(){
   }
 
   user1.checkHit(lover);
-
-
 
   for (let i = 0; i < basketballs.length; i++) {
     let basketball = basketballs[i];
@@ -684,18 +654,18 @@ function minigame01(){
   //diplay functions
   user1.display();
   lover.display();
-
   for (let i = 0; i < basketballs.length; i++) {
     let basketball = basketballs[i];
     basketball.display();
   }
-
   for (let i = 0; i < volleyballs.length; i++) {
     let volleyball = volleyballs[i];
     volleyball.display();
   }
 
 }
+
+
 
 //brings you to this state when the timer is done
 function minigame01Failed(){
@@ -884,28 +854,28 @@ function phone02(){
   displayMailAlert();
 }
 
-function letter01(){
+function loveLetter01(){
   imageMode(CENTER, CENTER);
-  image(letter01Bg.image, letter01Bg.x, letter01Bg.y, letter01Bg.size, letter01Bg.size );
+  image(loveLetter01Bg.image, loveLetter01Bg.x, loveLetter01Bg.y, loveLetter01Bg.size, loveLetter01Bg.size );
   push();
   textFont(mainFont);
   textAlign(CENTER, CENTER);
   textSize(30);
   fill(255, 255, 255);
-  text(letter01Sentence, width / 2, height / 2+250);
+  text(loveLetter01Sentence, width / 2, height / 2+250);
   pop();
 }
 
 
-function letter02(){
+function loveLetter02(){
   imageMode(CENTER, CENTER);
-  image(letter02Bg.image, letter02Bg.x, letter02Bg.y, letter02Bg.size, letter02Bg.size );
+  image(loveLetter02Bg.image, loveLetter02Bg.x, loveLetter02Bg.y, loveLetter02Bg.size, loveLetter02Bg.size );
   push();
   textFont(mainFont);
   textAlign(CENTER, CENTER);
   textSize(30);
   fill(255, 255, 255);
-  text(letter02Sentence, width / 2, height / 2+250);
+  text(loveLetter02Sentence, width / 2, height / 2+250);
   pop();
 }
 
@@ -1006,7 +976,7 @@ function keyPressed(){
       }
       else if(keyCode === 78){ //keycode for the letter N
         state = `notPictureTime`;
-        startTypeWriter(sentence04);
+        startTypeWriter(notPictureTimeSentence);
       }
     }
     if(state === `musicRoom`){
@@ -1021,7 +991,7 @@ function keyPressed(){
       }
     }
 
-    if(state === `letter01`){
+    if(state === `loveLetter01`){
       if(keyCode === 65){ //keycode for the letter A
         state = `minigame02Tutorial`;
       }
@@ -1030,7 +1000,7 @@ function keyPressed(){
       }
     }
 
-    if(state === `letter02`){
+    if(state === `loveLetter02`){
       if(keyCode === 65){ //keycode for the letterA
         state = `minigame01Tutorial`;
       }
@@ -1064,13 +1034,13 @@ if(state === `page01`){
   let d3 = dist(mouseX, mouseY, mailAlert.x, mailAlert.y);
     if(state === `phone01`){
       if(d3 < diameter/2){
-        state = `letter02`;
+        state = `loveLetter02`;
 
     }
   }
   else if(state === `phone02`){
     if(d3 < diameter/2){
-      state = `letter01`;
+      state = `loveLetter01`;
     }
   }
 
