@@ -164,8 +164,11 @@ let minigame01GoodEndingBg = {
   y: 400,
   size: 800,
 }
-
-
+let minigame01SadEndingBg = {
+  x: 400,
+  y: 400,
+  size: 800,
+}
 let minigame01TimeoutBg = {
   x: 400,
   y: 400,
@@ -208,7 +211,7 @@ let newBookDelay = 50;
 let bookImg = undefined;
 
 
-let state = `minigame01Timeout`; // the project starts with the start state
+let state = `minigame01SadEnding`; // the project starts with the start state
 
 let mainFont;
 
@@ -232,6 +235,7 @@ let minigame01Timer = 1000;
 let minigame01TimerDone = false;
 
 //SENTENCES
+//added all the text here for the typewriter and if the sentence was too long
 let photographyRoomSentence = `This is the first time I see such a fine fish strolling around. \n Would you like me to take a picture of you ;) ? \nY. Yess \nN. uhh no kinda creepy`;
 let musicRoomSentence = `Hey there ;-) Thanks for joining my club. \nYou'll have a better time here than with Jake! \nDo you want to listen to my sick beats \nY. ye Defo \nN. uh no my taste in music is too sophisticated`;
 let notMusicTimeSentence = `You decided to make your own music and \nbecame a star all on your own.`;
@@ -241,6 +245,7 @@ let minigame02TutorialSentence = `You must prove your love to Jake by finding hi
 let minigame01TutorialSentence = `You must prove your love to Edward in gym class. \nMake your way towards him but make sure avoid all the balls. \nIf you touch any of the balls you will end up alone :(.`;
 let letter02Sentence = `You just received a love letter from Edward!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Jake.`;
 let loveLetter01Sentence = `You just received a love letter from Jake!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Edward.`;
+let minigame01SadEndingSentence = `You ended up sad and alone :( \nYou also failed gym class because you are so bad at dodging balls.`;
 
 
 //loads all the assets for project2
@@ -275,6 +280,7 @@ function preload() {
   user01Img = loadImage("assets/images/user01.png");
   loverImg = loadImage("assets/images/lover.png");
   minigame01GoodEndingBg.image = loadImage("assets/images/loveEnding.png");
+  minigame01SadEndingBg.image = loadImage("assets/images/badEnding.png");
   minigame01TimeoutBg.image = loadImage("assets/images/timerDone.png");
 
   //Minigame02 images
@@ -707,13 +713,15 @@ function minigame01GoodEnding(){
 
 //sad ending for the minigame1
 function minigame01SadEnding(){
-  background(150, 116, 101);
+  imageMode(CENTER, CENTER);
+  image(minigame01SadEndingBg.image, minigame01SadEndingBg.x, minigame01SadEndingBg.y, minigame01SadEndingBg.size, minigame01SadEndingBg.size);
+
   push();
   textFont(mainFont);
   textAlign(CENTER, CENTER);
   textSize(30);
   fill(255, 255, 255);
-  text(`You ended up sad and alone :( `, width/2, height/2);
+  text(minigame01SadEndingSentence, width/2, height/2 + 250);
   pop();
 }
 
