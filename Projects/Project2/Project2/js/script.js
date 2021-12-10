@@ -217,7 +217,7 @@ let newBookDelay = 50;
 let bookImg = undefined;
 
 
-let state = `minigame01SadEnding`; // the project starts with the start state
+let state = `start`; // the project starts with the start state
 
 let mainFont;
 
@@ -248,7 +248,7 @@ let notMusicTimeSentence = `You decided to make your own music and \nbecame a st
 let musicTimeSentence = `Edward made you listen to his music \nand it was great!`;
 let notPictureTimeSentence = `You realized everyone in this school is too weird and decided to leave`;
 let minigame02TutorialSentence = `You must prove your love to Jake by finding him in the maze. \nNavigate through maze and choose one of the doors to find your soulamte. \n Be careful books are dropping from the sky and blocking the path. \n Ps. If you choose the wrong door you might end up alone.`;
-let minigame01TutorialSentence = `You must prove your love to Edward in gym class. \nMake your way towards him but make sure avoid all the balls. \nIf you touch any of the balls you will end up alone :(.`;
+let minigame01TutorialSentence = `You must prove your love to Edward in gym class. \nMake your way towards him but make sure avoid all the balls. \nIf you touch any of the balls you will end up alone :(. \nWatch out for the timer too!`;
 let letter02Sentence = `You just received a love letter from Edward!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Jake.`;
 let loveLetter01Sentence = `You just received a love letter from Jake!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Edward.`;
 let minigame01SadEndingSentence = `You ended up sad and alone :( \nYou also failed gym class because you are so bad at dodging balls.`;
@@ -310,7 +310,7 @@ function preload() {
 
 }
 
-
+//setups the minigames by calling all the classes
 function setup() {
   createCanvas(800, 800);
 
@@ -343,10 +343,11 @@ function setup() {
   mazeWalls.push(new Mazewalls(550, 550, 10, 150));
   mazeWalls.push(new Mazewalls(760, 380, 20, 580));
 
-  books.push(new Book(random(0, width), random(0, height), 50, 50, bookImg));
+  //creates the books that appear with the timer
+  books.push(new Book(random(0, width), random(0, height), 50, 50, bookImg)); // (x, y, w, h, img)
 
   //creates the doors for the ending states
-  door01 = new Door(400, 180, doorsImg);
+  door01 = new Door(400, 180, doorsImg); // (x, y, img)
   door02 = new Door(690, 500, doorsImg);
   door03 = new Door(120, 500, doorsImg);
 
@@ -416,7 +417,7 @@ function stateChange() {
 
 }
 
-//page before the homepage
+//page before the homepage (made this so the music would start after a key was pressed)
 function start(){
   background(64, 175, 222);
   push();
