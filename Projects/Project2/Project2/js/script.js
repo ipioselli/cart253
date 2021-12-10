@@ -214,13 +214,14 @@ let newBookDelay = 80; //speed of book timer
 let bookImg = undefined;
 
 
-let state = `musicTime`; // the project starts with the start state
+let state = `start`; // the project starts with the start state
 
 let mainFont; //font used throughout the game
 
 let titleMusic; //music on the homepage
 let musicTimeMusic; //music for when Edward shows you his music
 let suspenseMusic; //suspenseful music for when you get a mysterious message from one of the fish
+let beginningMusic;
 
 /***
 ---------------------------------------------
@@ -229,7 +230,7 @@ TIMERS
 */
 //Typewriter timer
 let typeWriterTime = 0;
-let typeWriterSpeed = 90;
+let typeWriterSpeed = 70;
 let typeWriterCursor = 0;
 let typeWriterText = "";
 
@@ -258,7 +259,7 @@ let musicTimeSentence = `Edward made you listen to his music \nand it was great!
 let notPictureTimeSentence = `You realized everyone in this school is too weird and decided to leave`;
 let minigame02TutorialSentence = `You must prove your love to Jake by finding him in the maze. \nNavigate through the maze and choose one of the doors to find your soulamte. \n Be careful books are dropping from the sky and blocking the path. \n Ps. If you choose the wrong door you might end up alone.`;
 let minigame01TutorialSentence = `You must prove your love to Edward in gym class. \nMake your way towards him but make sure avoid all the balls. \nIf you touch any of the balls you will end up alone :(. \nWatch out for the timer too!`;
-let letter02Sentence = `You just received a love letter from Edward!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Jake.`;
+let loveLetter02Sentence = `You just received a love letter from Edward!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Jake.`;
 let loveLetter01Sentence = `You just received a love letter from Jake!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Edward.`;
 let minigame01SadEndingSentence = `You ended up sad and alone :( \nYou also failed gym class because you are so bad at dodging balls.`;
 
@@ -315,6 +316,7 @@ function preload() {
   titleMusic = loadSound(`assets/sounds/Brasil.mp3`);
   musicTimeMusic = loadSound(`assets/sounds/musicTimeSong.mp3`);
   suspenseMusic = loadSound(`assets/sounds/suspense.mp3`);
+  beginningMusic = loadSound(`assets/sounds/cuteSong.mp3`);
 
 
 
@@ -566,6 +568,7 @@ function pictureTime(){
   }
   if(letterTimerDone01){
     state = `phone01`;
+    beginningMusic.stop();
     suspenseMusic.loop();
     }
 }
@@ -612,7 +615,7 @@ function notMusicTime(){
   push();
   textFont(mainFont);
   textAlign(CENTER, CENTER);
-  textSize(30);
+  textSize(50);
   fill(255, 255, 255);
   drawTypeWriter(width / 2, height / 2 + 250);
   pop();
@@ -999,8 +1002,10 @@ function keyPressed(){
   if(state === `title`){
     if (keyCode === 13){ //keycode for ENTER
       state = `page01`;
+
       if(titleMusic.isPlaying()){
         titleMusic.stop();
+        beginningMusic.loop();
       }
     }
   }
@@ -1028,6 +1033,7 @@ function keyPressed(){
       else if(keyCode === 78){ //keycode for the letter N
         state = `notPictureTime`;
         startTypeWriter(notPictureTimeSentence); //starts the typewriter after N is clicked
+
       }
     }
     if(state === `musicRoom`){
@@ -1035,6 +1041,9 @@ function keyPressed(){
         state = `musicTime`;
         startTypeWriter(musicTimeSentence);
         musicTimeMusic.loop();
+        if(beginningMusic.isPlaying()){
+          beginningMusic.stop();
+        }
       }
       else if(keyCode === 78){ //keycode for the letter N
         state = `notMusicTime`;
