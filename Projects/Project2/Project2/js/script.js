@@ -261,7 +261,7 @@ function preload() {
   minigame01Bg.image = loadImage("assets/images/gymClass.png");
   basketballImg = loadImage("assets/images/basketball.png");
   volleyballImg = loadImage("assets/images/volleyball.png");
-  user01Img = loadImage("assets/images/mainCharacter.png");
+  user01Img = loadImage("assets/images/user01.png");
 
 //Minigame02 images
   minigame02TutorialBg.image = loadImage("assets/images/minigame02Tutorial.png");
@@ -291,11 +291,14 @@ function setup() {
 
 
   //creates each class
-  user1 = new User01(10, 10, user01Img); // random x and y position
-  lover = new Lover(random(0, width), random(0, height)); // random x and y position
+  user1 = new User01(20, 20, user01Img); // random x and y position
+  lover = new Lover(750, 760); // random x and y position
   basketballs.push(new Basketball(10, 150, basketballImg));
-  basketballs.push(new Basketball(10, 400, basketballImg));
-  basketballs.push(new Basketball(10, 650, basketballImg));
+  basketballs.push(new Basketball(10, 350, basketballImg));
+  basketballs.push(new Basketball(10, 550, basketballImg));
+  volleyballs.push(new Volleyball(780, 250, volleyballImg));
+  volleyballs.push(new Volleyball(780, 450, volleyballImg));
+  volleyballs.push(new Volleyball(780, 650, volleyballImg));
 
 
   //creates each class for minigame 2
@@ -325,16 +328,6 @@ function setup() {
   door01 = new Door(400, 180, doorsImg);
   door02 = new Door(690, 500, doorsImg);
   door03 = new Door(120, 500, doorsImg );
-
-
-
-  //random speed for the fish lover
-  lover.vx = random(-lover.speed, lover.speed);
-  lover.vy = random(-lover.speed, lover.speed);
-
-  //random speed for the ball
-  //ball.vx = random(-ball.speed, ball.speed);
-  //ball.vy = random(-ball.speed, ball.speed);
 
 
 }
@@ -661,6 +654,11 @@ function minigame01(){
     basketball.move();
   }
 
+  for (let i = 0; i < volleyballs.length; i++) {
+    let volleyball = volleyballs[i];
+    volleyball.move();
+  }
+
   user1.display();
 
   user1.checkHit(lover);
@@ -669,6 +667,11 @@ function minigame01(){
     let basketball = basketballs[i];
     user1.checkHitBall(basketball);
   }
+  for (let i = 0; i < volleyballs.length; i++) {
+    let volleyball = volleyballs[i];
+    user1.checkHitBall(volleyball);
+  }
+
 
   lover.display();
 
@@ -677,6 +680,10 @@ function minigame01(){
     basketball.display();
   }
 
+  for (let i = 0; i < volleyballs.length; i++) {
+    let volleyball = volleyballs[i];
+    volleyball.display();
+  }
 
 
   if(!user1.foundLover){

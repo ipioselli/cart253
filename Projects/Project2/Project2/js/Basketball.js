@@ -7,7 +7,7 @@ class Basketball{
     //size
     this.size = 70;
     //velocity
-    this.vx = 8;
+    this.vx = 12;
 
     //image
     this.image = image;
@@ -18,7 +18,6 @@ class Basketball{
   move(){
 
     this.x = this.x + this.vx;
-
 
     //constrains the ball to the canvas
     this.x = constrain(this.x, 0, width);

@@ -66,7 +66,7 @@ class User01{
     checkHitBall(ball){
 
       let d = dist(this.x, this.y, ball.x, ball.y);
-      if(d < this.size/2 + ball.size/2){
+      if(d < this.size/2-40 + ball.size/2){
         this.ballHit = false;
       }
 

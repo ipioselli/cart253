@@ -1,5 +1,5 @@
 class Volleyball{
-  constructor(x, y){
+  constructor(x, y, image){
 
     //position
     this.x = x;
@@ -7,10 +7,10 @@ class Volleyball{
     //size
     this.size = 50;
     //velocity
-    this.vx = 0;
-    this.vy = 0;
-    //speed
-    this.speed = 10;
+    this.vx = 12;
+
+    //image
+    this.image = image;
 
   }
 
@@ -18,7 +18,6 @@ class Volleyball{
   move(){
 
     this.x = this.x + this.vx;
-    this.y = this.y + this.vy;
 
     //constrains the ball to the canvas
     this.x = constrain(this.x, 0, width);
@@ -28,19 +27,14 @@ class Volleyball{
     if(this.x >= width || this.x <=0){
       this.vx = -this.vx;
     }
-    if(this.y >= height || this.y <=0){
-      this.vy = -this.vy;
-    }
-
   }
 
 
-  //displays the ball
+  //displays the volleyball with an image
   display(){
     push();
-    fill(181, 67, 18);
     noStroke();
-    ellipse(this.x, this.y, this.size);
+    image(this.image, this.x, this.y, this.size, this.size);
     pop();
   }
 
