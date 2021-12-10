@@ -4,6 +4,14 @@ Long Leg Fishy Dating Simulator
 Ines Pioselli
 
 This is love simulator / visual novel about fish in love.
+You start your first day at school and get to choose a club.
+Depending on which club you choose you can end up with the fish
+in that club. There is Jake in the photography club or Edward inspect in
+the music club. There is always the possibility to change
+your love interest. Each fish writes you a love letter to stop
+you from getting with the other fish. You can either reject or accept
+the letter. BUT you must successfully finish 1/2 minigames to prove
+your love for 1 of the fish.
 
 
 */
@@ -28,13 +36,13 @@ let okButton = { // button to access the minigames from the minigame tutorial pa
   size:200,
 }
 
-let mailIcon = { //mail icon to access the love letter
+let mailIcon = { //mail icon on the phone state
   x: 360,
   y: 170,
   size: 150,
 }
 
-let mailAlert = {
+let mailAlert = { // red mail alert on the mail icon on the phone state
   x: 380,
   y: 155,
   size: 20,
@@ -44,9 +52,7 @@ let diameter = 0;
 let growAmount =0.7;
 let grow = true;
 
-
-//image for the title state
-let titleScreen = {
+let titleScreen = { //image for the title state
   x:400,
   y:400,
   size:800,
@@ -744,11 +750,9 @@ function minigame02(){
 
   newBookTimer++; //increments the book timer
   if(newBookTimer >= newBookDelay){
-    //add a book to block the path
+    //adds a book to block the path
     books.push(new Book(random(0, width), random(0, height),50, 50, bookImg));
     newBookTimer = 0;
-
-
   }
 
   //check if the doors are opened
@@ -756,24 +760,26 @@ function minigame02(){
   user2.checkOpenedDoor02(door02);
   user2.checkOpenedDoor03(door03);
 
-  //Display
-  user2.display();
+    //checks the user hit any of the books
+    for (let i = 0; i < books.length; i++) {
+      let book = books[i];
+      user2.hit(book);
+    }
 
+  //Display functions
+  user2.display(); //displays the user
+
+  //displays the maze walls in the array for minigame01
   for (let i = 0; i < mazeWalls.length; i++) {
     let wall = mazeWalls[i];
     wall.display();
   }
-
-
+  //displays each door in the maze
   door01.display();
   door02.display();
   door03.display();
 
-
-  for (let i = 0; i < books.length; i++) {
-    let book = books[i];
-    user2.hit(book);
-  }
+  //displays all the books in the array
   for (let i = 0; i < books.length; i++) {
     let book = books[i];
      book.display();
@@ -796,12 +802,13 @@ function minigame02(){
   }
 }
 
+//brings you to this ending if the # of books added is >= 40
 function minigame02Failed(){
   background(0);
 }
 
 
-
+//this door gives you a bad ending and you end up alone
 function door01Outcome(){
   imageMode(CENTER, CENTER);
   image(door01Bg.image, door01Bg.x, door01Bg.y, door01Bg.size, door01Bg.size);
@@ -814,6 +821,8 @@ function door01Outcome(){
   pop();
 }
 
+//DOORS
+//this door gives you the good ending
 function door02Outcome(){
   imageMode(CENTER, CENTER);
   image(door02Bg.image, door02Bg.x, door02Bg.y, door02Bg.size, door02Bg.size);
@@ -826,6 +835,7 @@ function door02Outcome(){
   pop();
 }
 
+//this door gives you another bad ending
 function door03Outcome(){
   imageMode(CENTER, CENTER);
   image(door03Bg.image, door03Bg.x, door03Bg.y, door03Bg.size, door03Bg.size);
@@ -837,9 +847,6 @@ function door03Outcome(){
   text(`You ended up alone but that's okay because you are \n a boss woman.`, width/2, height/2 - 250);
   pop();
 }
-
-
-
 
 function phone01(){
   imageMode(CENTER, CENTER);
@@ -986,11 +993,11 @@ function keyPressed(){
   if(state === `page02`){
     if(keyCode === 65){ // keycode for letter A
       state = `musicRoom`;
-      startTypeWriter(musicRoomSentence);
+      startTypeWriter(musicRoomSentence); //starts the typewriter after A is clicked
     }
     else if(keyCode === 66){ //keycode for letter B
       state = `photographyRoom`;
-      startTypeWriter(photographyRoomSentence);
+      startTypeWriter(photographyRoomSentence); //starts the typewriter after B is clicked
     }
   }
 
@@ -1000,7 +1007,7 @@ function keyPressed(){
       }
       else if(keyCode === 78){ //keycode for the letter N
         state = `notPictureTime`;
-        startTypeWriter(notPictureTimeSentence);
+        startTypeWriter(notPictureTimeSentence); //starts the typewriter after N is clicked
       }
     }
     if(state === `musicRoom`){
@@ -1042,7 +1049,7 @@ function mousePressed() {
 
   let d = dist(mouseX, mouseY, tutorialButton.x, tutorialButton.y);
   if(state === `title`){
-    if (d < tutorialButton.size / 2 - 60) {
+    if (d < tutorialButton.size / 2 - 60) { // -60 is added so the mouse only clicks on the button and not dead space around it
       state = `tutorial`;
     }
   }
@@ -1066,7 +1073,6 @@ function mousePressed() {
     }
   }
 
-
   let d4 = dist(mouseX, mouseY, okButton.x, okButton.y);
   if (state === `minigame01Tutorial`) {
     if (d4 < okButton.size / 2 - 20) {
@@ -1082,7 +1088,7 @@ function mousePressed() {
 
 
 //Madeline helped with this CODE
-//
+//functions to add a typewriter effect to the text like in most visual novels
 function startTypeWriter(sentence){
     typeWriterTime = typeWriterSpeed;
     typeWriterCursor = 0;
