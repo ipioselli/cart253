@@ -16,8 +16,6 @@ let tutorialButton = { // button to access the tutorial state
   size:200,
 }
 
-
-
 let nextButton = { // button to access the first page of the game
   x:600,
   y:750,
@@ -161,6 +159,12 @@ let volleyballs = [];
 let basketballImg = undefined;
 let volleyballImg = undefined;
 
+let minigame01GoodEndingBg = {
+  x: 400,
+  y: 400,
+  size: 800,
+}
+
 
 
 //minigame2 variables
@@ -197,7 +201,7 @@ let newBookDelay = 50;
 let bookImg = undefined;
 
 
-let state = `start`; // the project starts with the start state
+let state = `minigame01GoodEnding`; // the project starts with the start state
 
 let mainFont;
 
@@ -237,10 +241,8 @@ function preload() {
 
   //load images
   titleScreen.image = loadImage("assets/images/titleScreen.png");
-
   page1Background.image = loadImage("assets/images/page01.png");
   page2Background.image = loadImage("assets/images/page02.png");
-
   photographyRoomBg.image = loadImage("assets/images/photographyRoom.png");
   musicRoomBg.image = loadImage("assets/images/musicRoomBg.png");
   pictureTimeBg.image = loadImage("assets/images/pictureTime.gif");
@@ -249,6 +251,7 @@ function preload() {
   notMusicTimeBg.image = loadImage("assets/images/notMusicTimeBg.png");
 
   mailIcon.image = loadImage("assets/images/mailIcon.png");
+  phoneBg.image = loadImage("assets/images/phoneBg.png");
   loveLetter01Bg.image = loadImage("assets/images/letter01.png");
   loveLetter02Bg.image = loadImage("assets/images/letter02.png");
 
@@ -264,11 +267,11 @@ function preload() {
   volleyballImg = loadImage("assets/images/volleyball.png");
   user01Img = loadImage("assets/images/user01.png");
   loverImg = loadImage("assets/images/lover.png");
+  minigame01GoodEndingBg.image = loadImage("assets/images/loveEnding.png");
 
   //Minigame02 images
   minigame02TutorialBg.image = loadImage("assets/images/minigame02Tutorial.png");
   bookImg = loadImage("assets/images/book.png");
-  phoneBg.image = loadImage("assets/images/phoneBg.png");
   minigame02Bg.image = loadImage("assets/images/libraryFloor.png");
   doorsImg = loadImage("assets/images/door.png");
   user02Img = loadImage("assets/images/mainCharacter.png");
@@ -327,14 +330,11 @@ function setup() {
   door02 = new Door(690, 500, doorsImg);
   door03 = new Door(120, 500, doorsImg);
 
-
 }
 
 //Draws all the states for the game
 function draw() {
-
 stateChange(); //function to switch from state to state
-
 }
 
 //creates all the states for the game
@@ -376,8 +376,8 @@ function stateChange() {
     door02Outcome();
   } else if (state === `door03Outcome`) {
     door03Outcome();
-  } else if (state === `happyEnding`) {
-    happyEnding();
+  } else if (state === `minigame01GoodEnding`) {
+    minigame01GoodEnding();
   } else if (state === `sadEnding`) {
     sadEnding();
   } else if (state === `phone01`) {
@@ -637,7 +637,7 @@ function minigame01(){
   }
 
   if(!user1.notFoundLover){
-    state = `happyEnding`;
+    state = `minigame01GoodEnding`;
   }
   if(!user1.ballNotHit){
    state = `sadEnding`;
@@ -679,15 +679,16 @@ function minigame01Failed(){
   pop();
 }
 //happy ending for the minigame1
-function happyEnding(){
-  background(191, 66, 245);
+function minigame01GoodEnding(){
+  imageMode(CENTER, CENTER);
+  image(minigame01GoodEndingBg.image, minigame01GoodEndingBg.x, minigame01GoodEndingBg.y, minigame01GoodEndingBg.size, minigame01GoodEndingBg.size);
 
   push();
   textFont(mainFont);
   textAlign(CENTER, CENTER);
-  textSize(30);
+  textSize(40);
   fill(255, 255, 255);
-  text(`You fell in love with Edward and rode off into the sunset!`, width/2, height/2);
+  text(`You fell in love with Edward and rode off into the sunset!`, width/2, height/2 + 350);
   pop();
 }
 
@@ -866,7 +867,7 @@ function loveLetter01(){
   pop();
 }
 
-
+//you get an incoming love letter from Edward
 function loveLetter02(){
   imageMode(CENTER, CENTER);
   image(loveLetter02Bg.image, loveLetter02Bg.x, loveLetter02Bg.y, loveLetter02Bg.size, loveLetter02Bg.size );
@@ -879,22 +880,23 @@ function loveLetter02(){
   pop();
 }
 
-function moveMailAlert(){
-if (diameter > 30){
-  grow = false;
+//function to make the red dot shrink and grow on the phone state
+function moveMailAlert() {
+  if (diameter > 30) {
+    grow = false;
   }
-if(diameter <0){
-  grow = true;
+  if (diameter < 0) {
+    grow = true;
   }
 
-if (grow === true){
-  diameter += growAmount;
-  }
-else{
-  diameter -= growAmount
+  if (grow === true) {
+    diameter += growAmount;
+  } else {
+    diameter -= growAmount
   }
 }
 
+//tutorial for the 2nd minigame
 function minigame02Tutorial(){
   imageMode(CENTER, CENTER);
   image(minigame02TutorialBg.image, minigame02TutorialBg.x, minigame02TutorialBg.y, minigame02TutorialBg.size, minigame02TutorialBg.size );
@@ -911,7 +913,7 @@ function minigame02Tutorial(){
 }
 
 
-//displays the tutorial button
+//displays the tutorial button on the title page
 function displayTutorialButton(){
   image(tutorialButton.image, tutorialButton.x, tutorialButton.y, tutorialButton.size, tutorialButton.size);
 }
@@ -921,6 +923,7 @@ function displayNextButton(){
   image(nextButton.image, nextButton.x, nextButton.y, nextButton.size, nextButton.size);
 }
 
+//displays the ok button on the minigame tutorial states
 function displayOkButton(){
   image(okButton.image, okButton.x, okButton.y, okButton.size, okButton.size);
 }
@@ -930,6 +933,7 @@ function displayMailIcon(){
   image(mailIcon.image, mailIcon.x, mailIcon.y, mailIcon.size, mailIcon.size);
 }
 
+//displays the mail red alert
 function displayMailAlert(){
   fill(158, 45, 25);
   circle(mailAlert.x, mailAlert.y, diameter);
@@ -1001,7 +1005,7 @@ function keyPressed(){
     }
 
     if(state === `loveLetter02`){
-      if(keyCode === 65){ //keycode for the letterA
+      if(keyCode === 65){ //keycode for the letter A
         state = `minigame01Tutorial`;
       }
       else if(keyCode === 66){ // keycode for the letter B
@@ -1013,54 +1017,47 @@ function keyPressed(){
 
 
 
-
 //function to click buttons to change states
-function mousePressed(){
+function mousePressed() {
 
-  let d = dist(mouseX, mouseY, tutorialButton.x, tutorialButton.y );
-  if (d <tutorialButton.size /2 - 60){
+  let d = dist(mouseX, mouseY, tutorialButton.x, tutorialButton.y);
+  if(state === `title`){
+    if (d < tutorialButton.size / 2 - 60) {
       state = `tutorial`;
     }
+  }
 
-let d2 = dist(mouseX, mouseY, nextButton.x, nextButton.y );
-if(state === `page01`){
-  if (d2 <nextButton.size /2 - 20){
+  let d2 = dist(mouseX, mouseY, nextButton.x, nextButton.y);
+  if (state === `page01`) {
+    if (d2 < nextButton.size / 2 - 20) {
       state = `page02`;
     }
-}
-
-
+  }
 
   let d3 = dist(mouseX, mouseY, mailAlert.x, mailAlert.y);
-    if(state === `phone01`){
-      if(d3 < diameter/2){
-        state = `loveLetter02`;
-
+  if (state === `phone01`) {
+    if (d3 < diameter / 2) {
+      state = `loveLetter02`;
     }
   }
-  else if(state === `phone02`){
-    if(d3 < diameter/2){
+  else if (state === `phone02`) {
+    if (d3 < diameter / 2) {
       state = `loveLetter01`;
     }
   }
 
 
   let d4 = dist(mouseX, mouseY, okButton.x, okButton.y);
-
-  if(state === `minigame01Tutorial`){
-    if (d4 <okButton.size /2 - 20){
-        state = `minigame01`;
-      }
+  if (state === `minigame01Tutorial`) {
+    if (d4 < okButton.size / 2 - 20) {
+      state = `minigame01`;
+    }
   }
-  else if(state === `minigame02Tutorial`){
-    if (d4 <okButton.size /2 - 20){
-        state = `minigame02`;
-      }
+  else if (state === `minigame02Tutorial`) {
+    if (d4 < okButton.size / 2 - 20) {
+      state = `minigame02`;
+    }
   }
-
-
-
-
 }
 
 
@@ -1075,7 +1072,6 @@ function startTypeWriter(sentence){
 
 function drawTypeWriter(x,y) {
 
-
     typeWriterTime -= deltaTime;
 
     if (typeWriterTime <= 0) {
@@ -1088,6 +1084,4 @@ function drawTypeWriter(x,y) {
     if (typeWriterCursor > 0){
       text(typeWriterText.substring(0, typeWriterCursor), x, y);
     }
-
 }
-//
