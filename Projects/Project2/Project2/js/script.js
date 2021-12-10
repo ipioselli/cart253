@@ -19,21 +19,21 @@ your love for 1 of the fish.
 "use strict";
 
 let tutorialButton = { // button to access the tutorial state
-  x:150,
-  y:750,
-  size:200,
+  x: 150,
+  y: 750,
+  size: 200,
 }
 
 let nextButton = { // button to access the first page of the game
-  x:600,
-  y:750,
-  size:100,
+  x: 600,
+  y: 750,
+  size: 100,
 }
 
 let okButton = { // button to access the minigames from the minigame tutorial pages
-  x:400,
-  y:600,
-  size:200,
+  x: 400,
+  y: 600,
+  size: 200,
 }
 
 let mailIcon = { //mail icon on the phone state
@@ -51,36 +51,36 @@ let mailAlert = { // red mail alert on the mail icon on the phone state
 }
 
 let titleScreen = { //image for the title state
-  x:400,
-  y:400,
-  size:800,
+  x: 400,
+  y: 400,
+  size: 800,
 }
 
 //image for the first page
 let page1Background = {
-  x:400,
-  y:400,
-  size:800,
+  x: 400,
+  y: 400,
+  size: 800,
 }
 
 
 //image for the 2nd page
 let page2Background = {
-  x:400,
-  y:400,
-  size:800,
+  x: 400,
+  y: 400,
+  size: 800,
 }
 
 let minigame01Bg = {
-  x:400,
-  y:400,
-  size:800,
+  x: 400,
+  y: 400,
+  size: 800,
 }
 
 let minigame01TutorialBg = {
-  x:400,
-  y:400,
-  size:800,
+  x: 400,
+  y: 400,
+  size: 800,
 }
 
 //image for photography room
@@ -93,32 +93,32 @@ let photographyRoomBg = {
 
 let musicRoomBg = {
   x: 400,
-  y:400,
+  y: 400,
   size: 800,
 }
 
 //picture bg with Jake
 let pictureTimeBg = {
   x: 400,
-  y:400,
+  y: 400,
   size: 800,
 }
 
 let notPictureTimeBg = {
   x: 400,
-  y:400,
+  y: 400,
   size: 800,
 }
 
 let notMusicTimeBg = {
   x: 400,
-  y:400,
+  y: 400,
   size: 800,
 }
 
 let musicTimeBg = {
   x: 400,
-  y:400,
+  y: 400,
   size: 800,
 }
 
@@ -141,7 +141,7 @@ let loveLetter02Bg = {
   size: 800,
 }
 
-//minigame1 variables
+//minigame01 variables
 let user1;
 let lover;
 let user01Img = undefined;
@@ -166,8 +166,6 @@ let minigame01TimeoutBg = {
   y: 400,
   size: 800,
 }
-
-
 
 //minigame2 variables
 let user2;
@@ -194,19 +192,19 @@ let door03Bg = {
   size: 800,
 }
 let minigame02Bg = {
-  x:400,
-  y:400,
-  size:800,
+  x: 400,
+  y: 400,
+  size: 800,
 }
 let minigame02TutorialBg = {
-  x:400,
-  y:400,
-  size:800,
+  x: 400,
+  y: 400,
+  size: 800,
 }
 let minigame02FailedBg = {
-  x:400,
-  y:400,
-  size:800,
+  x: 400,
+  y: 400,
+  size: 800,
 }
 
 //timer properties to add a book in the minigame02
@@ -216,30 +214,42 @@ let newBookDelay = 80; //speed of book timer
 let bookImg = undefined;
 
 
-let state = `start`; // the project starts with the start state
+let state = `musicTime`; // the project starts with the start state
 
-let mainFont;
+let mainFont; //font used throughout the game
 
-let titleMusic;
-let musicTimeMusic;
-let suspenseMusic;
+let titleMusic; //music on the homepage
+let musicTimeMusic; //music for when Edward shows you his music
+let suspenseMusic; //suspenseful music for when you get a mysterious message from one of the fish
 
-//TIMERS
+/***
+---------------------------------------------
+TIMERS
+--------------------------------------------
+*/
+//Typewriter timer
 let typeWriterTime = 0;
 let typeWriterSpeed = 90;
 let typeWriterCursor = 0;
 let typeWriterText = "";
 
+//timer for the loveletter01 to appear
 let letterTimer01 = 200;
 let letterTimerDone01 = false;
 
+//timer for the loveletter02 to appear
 let letterTimer02 = 600;
 let letterTimerDone02 = false;
 
+//timer for the minigame01
 let minigame01Timer = 1000;
 let minigame01TimerDone = false;
 
-//SENTENCES
+/***
+---------------------------------------------
+SENTENCES
+--------------------------------------------
+*/
 //added all the text here for the typewriter and if the sentence was too long
 let photographyRoomSentence = `This is the first time I see such a fine fish strolling around. \n Would you like me to take a picture of you ;) ? \nY. Yess \nN. uhh no kinda creepy`;
 let musicRoomSentence = `Hey there ;-) Thanks for joining my club. \nYou'll have a better time here than with Jake! \nDo you want to listen to my sick beats \nY. ye Defo \nN. uh no my taste in music is too sophisticated`;
@@ -253,7 +263,7 @@ let loveLetter01Sentence = `You just received a love letter from Jake!?!. \nA. D
 let minigame01SadEndingSentence = `You ended up sad and alone :( \nYou also failed gym class because you are so bad at dodging balls.`;
 
 
-//loads all the assets for project2
+//loads all the assets for project2 (images, sounds and fonts)
 function preload() {
 
   //load images
@@ -266,7 +276,6 @@ function preload() {
   notPictureTimeBg.image = loadImage("assets/images/notPictureTime.png");
   musicTimeBg.image = loadImage("assets/images/musicTimeBg.gif");
   notMusicTimeBg.image = loadImage("assets/images/notMusicTimeBg.png");
-
   mailIcon.image = loadImage("assets/images/mailIcon.png");
   phoneBg.image = loadImage("assets/images/phoneBg.png");
   loveLetter01Bg.image = loadImage("assets/images/letter01.png");
@@ -305,6 +314,7 @@ function preload() {
   //load music
   titleMusic = loadSound(`assets/sounds/Brasil.mp3`);
   musicTimeMusic = loadSound(`assets/sounds/musicTimeSong.mp3`);
+  suspenseMusic = loadSound(`assets/sounds/suspense.mp3`);
 
 
 
@@ -315,11 +325,14 @@ function setup() {
   createCanvas(800, 800);
 
   //creates each class for minigame01
-  user1 = new User01(50, 30, user01Img);
-  lover = new Lover(750, 760, loverImg);
-  basketballs.push(new Basketball(10, 150, basketballImg));
+
+  user1 = new User01(50, 30, user01Img); //creates user 1
+  lover = new Lover(750, 760, loverImg); //creates the love interest
+  //creates all the basketballs
+  basketballs.push(new Basketball(10, 150, basketballImg)); // (x, y, img)
   basketballs.push(new Basketball(10, 350, basketballImg));
   basketballs.push(new Basketball(10, 550, basketballImg));
+  //creates all the volleyballs
   volleyballs.push(new Volleyball(780, 250, volleyballImg));
   volleyballs.push(new Volleyball(780, 450, volleyballImg));
   volleyballs.push(new Volleyball(780, 650, volleyballImg));
@@ -456,14 +469,12 @@ function tutorial(){
   fill(255, 255, 255);
   text(`Long Leg Fish Love Story!`, width / 2, height / 2-300);
   textSize(35);
-
   text(`You are a lovely fish who has just started their first day of college.`, width / 2, height / 2-200);
   text(`You are asked to join clubs and meet new fish.`, width / 2, height / 2-150);
   text(`However, you encounter 2 love interests and must make a hard decision` ,width / 2, height / 2-100);
   text(`and choose one of them do date!` ,width / 2, height / 2-50);
   text(`Be careful though, you can end up with none of them`, width / 2, height / 2-0);
   text(`if you don't play your cards right!`, width / 2, height / 2 + 50);
-
   textSize(50);
   fill(24, 79, 102);
   text(`Press "Back" to go back to the homepage!` ,width / 2, height / 2 + 150);
@@ -472,63 +483,59 @@ function tutorial(){
 
 
 //displays the first page with the main character
-function page01(){
-
+function page01() {
   imageMode(CENTER, CENTER);
   image(page1Background.image, page1Background.x, page1Background.y, page1Background.size, page1Background.size);
   displayNextButton()
-
-//text box for page 1
+  //text box for page 1
   push();
   textFont(mainFont);
   textAlign(CENTER, CENTER);
   textSize(30);
   fill(255, 255, 255);
-  text(`It's your first day of art school and you are very excited to start!`, width/2, height/2 +210);
-  text(`You really want to join a club but not sure which one.`, width/2, height/2 +250);
-  text(`While you look around you see 2 tall mysterious fish `, width/2, height/2 +290);
-  text(`approach you!`, width/2, height/2 +330);
+  text(`It's your first day of art school and you are very excited to start!`, width / 2, height / 2 + 210);
+  text(`You really want to join a club but not sure which one.`, width / 2, height / 2 + 250);
+  text(`While you look around you see 2 tall mysterious fish `, width / 2, height / 2 + 290);
+  text(`approach you!`, width / 2, height / 2 + 330);
   pop();
 }
-
 
 //displays the second page with the 2 love interests
-function page02(){
+function page02() {
   imageMode(CENTER, CENTER);
   image(page2Background.image, page2Background.x, page2Background.y, page2Background.size, page2Background.size);
-
+  //text box for page 2
   push();
   textFont(mainFont);
   textAlign(CENTER, CENTER);
   textSize(30);
   fill(255, 255, 255);
-  text(`Orange fish: Hi there! My name is Jake! want to join the `, width/2, height/2 +210);
-  text(`photography club? `, width/2, height/2 +250);
-  text(`White fish: Don't listen to him. My name is Edward and you`, width/2, height/2 + 290);
-  text(`should join the music club!`, width/2, height/2 + 330);
-  text(`A. Join the music club     B.Join the photography club`, width/2, height/2 +355);
+  text(`Orange fish: Hi there! My name is Jake! Want to join the \nphotography club? `, width / 2, height / 2 + 210);
+  text(`White fish: Don't listen to him. My name is Edward and you \nshould join the music club!`, width / 2, height / 2 + 290);
+  text(`A. Join the music club     B.Join the photography club`, width / 2, height / 2 + 350);
   pop();
 }
 
 
-//if you select B. photography club you will end up on this state
+//if you select B. from page02 you will end up in the photography club with Jake
 function photographyRoom(){
   imageMode(CENTER, CENTER);
   image(photographyRoomBg.image, photographyRoomBg.x, photographyRoomBg.y, photographyRoomBg.size, photographyRoomBg.size);
-
+  //textbox
   push();
   textFont(mainFont);
   textAlign(CENTER, CENTER);
   textSize(30);
   fill(255, 255, 255);
-  drawTypeWriter(width / 2, height / 2 + 250);
+  drawTypeWriter(width / 2, height / 2 + 250); //typewriter effect for the text
   pop();
 }
 
+//if you select A. from page02 you will end up in the music club with Edward
 function musicRoom(){
   imageMode(CENTER, CENTER);
   image(musicRoomBg.image, musicRoomBg.x, musicRoomBg.y, musicRoomBg.size, musicRoomBg.size);
-
+  //text
   push();
   textFont(mainFont);
   textAlign(CENTER, CENTER);
@@ -542,7 +549,7 @@ function musicRoom(){
 function pictureTime(){
   imageMode(CENTER, CENTER);
   image(pictureTimeBg.image, pictureTimeBg.x, pictureTimeBg.y, pictureTimeBg.size, pictureTimeBg.size );
-
+  //text
   push();
   textFont(mainFont);
   textAlign(CENTER, CENTER);
@@ -559,6 +566,7 @@ function pictureTime(){
   }
   if(letterTimerDone01){
     state = `phone01`;
+    suspenseMusic.loop();
     }
 }
 
@@ -594,6 +602,7 @@ function musicTime(){
   if(letterTimerDone02){
     state = `phone02`;
     musicTimeMusic.stop();
+    suspenseMusic.loop();
     }
 }
 
@@ -1036,18 +1045,30 @@ function keyPressed(){
     if(state === `loveLetter01`){
       if(keyCode === 65){ //keycode for the letter A
         state = `minigame02Tutorial`;
+        if(suspenseMusic.isPlaying()){
+          suspenseMusic.stop();
+        }
       }
       else if(keyCode === 66){ // keycode for the letter B
         state = `minigame01Tutorial`;
+        if(suspenseMusic.isPlaying()){
+          suspenseMusic.stop();
+        }
       }
     }
 
     if(state === `loveLetter02`){
       if(keyCode === 65){ //keycode for the letter A
         state = `minigame01Tutorial`;
+        if(suspenseMusic.isPlaying()){
+          suspenseMusic.stop();
+        }
       }
       else if(keyCode === 66){ // keycode for the letter B
         state = `minigame02Tutorial`;
+        if(suspenseMusic.isPlaying()){
+          suspenseMusic.stop();
+        }
       }
     }
 
@@ -1069,6 +1090,7 @@ function mousePressed() {
   if (state === `page01`) {
     if (d2 < nextButton.size / 2 - 20) {
       state = `page02`;
+
     }
   }
 
@@ -1076,6 +1098,8 @@ function mousePressed() {
   if (state === `phone01`) {
     if (d3 < mailAlert.size / 2) {
       state = `loveLetter02`;
+
+
     }
   }
   else if (state === `phone02`) {
