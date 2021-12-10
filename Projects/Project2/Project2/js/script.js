@@ -660,12 +660,15 @@ function minigame01(){
    }
 
   //diplay functions
-  user1.display();
-  lover.display();
+  user1.display(); // displays the user
+  lover.display(); // displays the lover
+
+  //displays all the basketballs in the array
   for (let i = 0; i < basketballs.length; i++) {
     let basketball = basketballs[i];
     basketball.display();
   }
+  //displays all the volleyballs in the array
   for (let i = 0; i < volleyballs.length; i++) {
     let volleyball = volleyballs[i];
     volleyball.display();
