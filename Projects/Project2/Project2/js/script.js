@@ -24,13 +24,13 @@ let nextButton = { // button to access the first page of the game
   size:100,
 }
 
-let okButton = {
+let okButton = { // button to access the minigames from the minigame tutorial pages
   x:400,
   y:600,
   size:200,
 }
 
-let mailIcon = { //mail icon to access the letter
+let mailIcon = { //mail icon to access the love letter
   x: 360,
   y: 170,
   size: 150,
@@ -153,8 +153,9 @@ let letter02Bg = {
 
 //minigame1 variables
 let user1;
-let user01Img = undefined;
 let lover;
+let user01Img = undefined;
+let loverImg = undefined;
 let basketballs = [];
 let volleyballs = [];
 let basketballImg = undefined;
@@ -202,6 +203,7 @@ let mainFont;
 
 let titleMusic;
 
+//TIMERS
 let typeWriterTime = 0;
 let typeWriterSpeed = 75;
 let typeWriterCursor = 0;
@@ -213,29 +215,26 @@ let letterTimerDone01 = false;
 let letterTimer02 = 350;
 let letterTimerDone02 = false;
 
+let minigame01Timer = 1000;
+let minigame01TimerDone = false;
 
+//SENTENCES
 let photographyRoomSentence = `This is the first time I see such a fine fish strolling around. \n Would you like me to take a picture of you ;) ? \nY. Yess \nN. uhh no kinda creepy`;
 let musicRoomSentence = `Hey there ;-) Thanks for joining my club. \nYou'll have a better time here than with Jake! \nDo you want to listen to my sick beats \nY. ye Defo \nN. uh no my taste in music is too sophisticated`;
 let notMusicTimeSentence = `You decided to make your own music and \nbecame a star all on your own.`;
 let musicTimeSentence = `Edward made you listen to his music \nand it was great!`;
-
 let sentence04 = `You realized everyone in this school is too weird and decided to leave`;
-
-
 let minigame02TutorialSentence = `You must prove your love to Jake by finding him in the maze. \nNavigate through maze and choose one of the doors to find your soulamte. \n Be careful books are dropping from the sky and blocking the path. \n Ps. If you choose the wrong door you might end up alone.`;
 let minigame01TutorialSentence = `You must prove your love to Edward in gym class. \nMake your way towards him but make sure avoid all the balls. \nIf you touch any of the balls you will end up alone :(.`;
 let letter02Sentence = `You just received a love letter from Edward!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Jake.`;
 let letter01Sentence = `You just received a love letter from Jake!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Edward.`;
 
 
-
-
-
+//loads all the assets for project2
 function preload() {
 
   //load images
   titleScreen.image = loadImage("assets/images/titleScreen.png");
-
 
   page1Background.image = loadImage("assets/images/page01.png");
   page2Background.image = loadImage("assets/images/page02.png");
@@ -262,6 +261,7 @@ function preload() {
   basketballImg = loadImage("assets/images/basketball.png");
   volleyballImg = loadImage("assets/images/volleyball.png");
   user01Img = loadImage("assets/images/user01.png");
+  loverImg = loadImage("assets/images/lover.png");
 
 //Minigame02 images
   minigame02TutorialBg.image = loadImage("assets/images/minigame02Tutorial.png");
@@ -285,14 +285,12 @@ function preload() {
 }
 
 
-
 function setup() {
   createCanvas(800, 800);
 
-
-  //creates each class
-  user1 = new User01(20, 20, user01Img); // random x and y position
-  lover = new Lover(750, 760); // random x and y position
+  //creates each class for minigame01
+  user1 = new User01(50, 30, user01Img);
+  lover = new Lover(750, 760, loverImg);
   basketballs.push(new Basketball(10, 150, basketballImg));
   basketballs.push(new Basketball(10, 350, basketballImg));
   basketballs.push(new Basketball(10, 550, basketballImg));
@@ -300,34 +298,31 @@ function setup() {
   volleyballs.push(new Volleyball(780, 450, volleyballImg));
   volleyballs.push(new Volleyball(780, 650, volleyballImg));
 
-
   //creates each class for minigame 2
   user2 = new User02(50, 50, user02Img);
 
   //creates the walls for the maze in minigame2
-    mazeWalls.push(new Maze(160, 580, 200, 10)); //(x, y, w, h)
-    mazeWalls.push(new Maze(50, 410, 20, 560));
-    mazeWalls.push(new Maze(350, 690, 620, 20));
-    mazeWalls.push(new Maze(450, 100, 620, 20));
-    mazeWalls.push(new Maze(250, 220, 10, 250));
-    mazeWalls.push(new Maze(470, 210, 10, 200));
-    mazeWalls.push(new Maze(250, 350, 220, 10));
-    mazeWalls.push(new Maze(355, 450, 10, 200));
-    mazeWalls.push(new Maze(630, 220, 140, 10));
-    mazeWalls.push(new Maze(545, 470, 150, 10));
-    mazeWalls.push(new Maze(680, 580, 170, 10));
-    mazeWalls.push(new Maze(615, 350, 10, 250));
-    mazeWalls.push(new Maze(550, 550, 10, 150));
-    mazeWalls.push(new Maze(760, 380, 20, 580));
+  mazeWalls.push(new Maze(160, 580, 200, 10)); //(x, y, w, h)
+  mazeWalls.push(new Maze(50, 410, 20, 560));
+  mazeWalls.push(new Maze(350, 690, 620, 20));
+  mazeWalls.push(new Maze(450, 100, 620, 20));
+  mazeWalls.push(new Maze(250, 220, 10, 250));
+  mazeWalls.push(new Maze(470, 210, 10, 200));
+  mazeWalls.push(new Maze(250, 350, 220, 10));
+  mazeWalls.push(new Maze(355, 450, 10, 200));
+  mazeWalls.push(new Maze(630, 220, 140, 10));
+  mazeWalls.push(new Maze(545, 470, 150, 10));
+  mazeWalls.push(new Maze(680, 580, 170, 10));
+  mazeWalls.push(new Maze(615, 350, 10, 250));
+  mazeWalls.push(new Maze(550, 550, 10, 150));
+  mazeWalls.push(new Maze(760, 380, 20, 580));
 
-    books.push(new Book(random(0, width), random(0, height),50, 50, bookImg));
-
-
+  books.push(new Book(random(0, width), random(0, height), 50, 50, bookImg));
 
   //creates the doors for the ending states
   door01 = new Door(400, 180, doorsImg);
   door02 = new Door(690, 500, doorsImg);
-  door03 = new Door(120, 500, doorsImg );
+  door03 = new Door(120, 500, doorsImg);
 
 
 }
@@ -374,6 +369,9 @@ function stateChange(){
   else if(state === `minigame01Tutorial`){
     minigame01Tutorial();
   }
+  else if(state === `minigame01Failed`){
+    minigame01Failed();
+  }
   else if(state === `minigame02`){
     minigame02();
   }
@@ -398,14 +396,12 @@ function stateChange(){
   else if(state === `notPictureTime`){
     notPictureTime();
   }
-
   else if(state === `musicTime`){
     musicTime();
   }
   else if(state === `notMusicTime`){
     notMusicTime();
   }
-
   else if(state === `phone01`){
     phone01();
   }
@@ -418,19 +414,14 @@ function stateChange(){
   else if(state === `letter02`){
     letter02();
   }
-
   else if(state === `minigame02Failed`){
     minigame02Failed();
   }
-
   else if(state === `minigame02Tutorial`){
     minigame02Tutorial();
   }
 
-
-
 }
-
 
 //page before the homepage
 function start(){
@@ -447,7 +438,6 @@ function start(){
 
 //title state : homepage
 function title(){
-
   imageMode(CENTER, CENTER);
   image(titleScreen.image, titleScreen.x, titleScreen.y, titleScreen.size, titleScreen.size);
   displayTutorialButton();
@@ -646,8 +636,8 @@ function minigame01(){
 
   user1.handleInput();
 
+//move functions
   user1.move();
-
 
   for (let i = 0; i < basketballs.length; i++) {
     let basketball = basketballs[i];
@@ -659,9 +649,9 @@ function minigame01(){
     volleyball.move();
   }
 
-  user1.display();
-
   user1.checkHit(lover);
+
+
 
   for (let i = 0; i < basketballs.length; i++) {
     let basketball = basketballs[i];
@@ -672,7 +662,23 @@ function minigame01(){
     user1.checkHitBall(volleyball);
   }
 
+  if(!user1.notFoundLover){
+    state = `happyEnding`;
+  }
+  if(!user1.ballNotHit){
+   state = `sadEnding`;
+   }
 
+   minigame01Timer -=1;
+   if(minigame01Timer <=0){
+     minigame01TimerDone = true;
+   }
+   if(minigame01TimerDone){
+     state =`minigame01Failed`
+   }
+
+  //diplay functions
+  user1.display();
   lover.display();
 
   for (let i = 0; i < basketballs.length; i++) {
@@ -685,17 +691,19 @@ function minigame01(){
     volleyball.display();
   }
 
-
-  if(!user1.foundLover){
-    state = `happyEnding`;
-  }
-  if(!user1.ballHit){
-   state = `sadEnding`;
-   }
-
-
 }
 
+//brings you to this state when the timer is done
+function minigame01Failed(){
+  background(0);
+  push();
+  textFont(mainFont);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(255, 255, 255);
+  text(`You ran out of time :/`, width/2, height/2);
+  pop();
+}
 //happy ending for the minigame1
 function happyEnding(){
   background(191, 66, 245);

@@ -1,44 +1,23 @@
 class Lover{
 
-  constructor(x, y,){
+  constructor(x, y, image){
 
     //position
     this.x = x;
     this.y = y;
     //size
-    this.size = 80;
-    //velocity
-    this.vx = 0;
-    this.vy = 0;
-    //speed
-    this.speed = 10;
-  }
+    this.size = 100;
 
-//moves the lover
-  move(){
-
-    this.x = this.x + this.vx;
-    this.y = this.y + this.vy;
-
-    //constrain to the canvas
-    this.x = constrain(this.x, 0, width);
-    this.y = constrain(this.y, 0, height);
-
-    //allows the user to bounce off the walls
-    if(this.x >= width || this.x <=0){
-      this.vx = -this.vx;
-    }
-    if(this.y >= height || this.y <=0){
-      this.vy = -this.vy;
-    }
+    this.image = image;
 
   }
+
+
 
 //draws the lover
-  display(){
-    push();
-    fill(67, 78, 20);
-    ellipse(this.x, this.y, this.size);
-    pop();
-  }
+display(){
+  push();
+  image(this.image, this.x, this.y, this.size, this.size);
+  pop();
+}
 }

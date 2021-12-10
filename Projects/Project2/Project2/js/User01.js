@@ -1,6 +1,13 @@
-class User01{
+/**
+User 01 class
+This is a class to create the user for the minigame01
+This class allows the user to move, get displayed, handle keyboard input and
+check if it touches any of the balls or the lover
+*/
 
-  constructor(x, y, image){
+class User01 {
+
+  constructor(x, y, image) {
     //position
     this.x = x;
     this.y = y;
@@ -11,14 +18,15 @@ class User01{
     this.vy = 0;
     //speed
     this.speed = 5;
-    this.foundLover = true; //check if you found your lover
-    this.ballHit = true; //check if the ball hit you
+    this.notFoundLover = true; //check if you found your lover
+    this.ballNotHit = true; //check if the ball hit you
 
+    //image
     this.image = image;
   }
 
-//function to move the user
-  move(){
+  //function to move the user
+  move() {
 
     this.x = this.x + this.vx;
     this.y = this.y + this.vy;
@@ -28,53 +36,46 @@ class User01{
 
   }
 
-//keyboard input
-  handleInput(){
+  //keyboard input with arrow keys
+  handleInput() {
 
-    if(keyIsDown(LEFT_ARROW)){
-      this.vx = - this.speed;
-    }
-    else if(keyIsDown(RIGHT_ARROW)){
+    if (keyIsDown(LEFT_ARROW)) {
+      this.vx = -this.speed;
+    } else if (keyIsDown(RIGHT_ARROW)) {
       this.vx = this.speed;
-    }
-    else{
+    } else {
       this.vx = 0;
     }
 
-    if(keyIsDown(UP_ARROW)){
+    if (keyIsDown(UP_ARROW)) {
       this.vy = -this.speed;
-    }
-    else if(keyIsDown(DOWN_ARROW)){
+    } else if (keyIsDown(DOWN_ARROW)) {
       this.vy = this.speed;
-    }
-
-    else{
+    } else {
       this.vy = 0;
     }
   }
 
   //check if the user hit their lover
-  checkHit(lover){
+  checkHit(lover) {
 
     let d = dist(this.x, this.y, lover.x, lover.y);
-    if(d < this.size/2 + lover.size/2){
-      this.foundLover = false;
+    if (d < this.size / 2 + lover.size / 2) {
+      this.notFoundLover = false;
     }
   }
 
-  //check if the user hit the ball
-    checkHitBall(ball){
+  //check if the user hit the balls
+  checkHitBall(ball) {
 
-      let d = dist(this.x, this.y, ball.x, ball.y);
-      if(d < this.size/2-40 + ball.size/2){
-        this.ballHit = false;
-      }
-
-
+    let d = dist(this.x, this.y, ball.x, ball.y);
+    if (d < this.size / 2 - 40 + ball.size / 2) {
+      this.ballNotHit = false;
+    }
   }
 
-//displays the user with an image
-  display(){
+  //displays the user with an image
+  display() {
     push();
     image(this.image, this.x, this.y, this.size, this.size);
     pop();
