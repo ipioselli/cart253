@@ -31,8 +31,8 @@ class User01 {
     this.x = this.x + this.vx;
     this.y = this.y + this.vy;
 
-    this.x = constrain(this.x, 0, width);
-    this.y = constrain(this.y, 0, height);
+    this.x = constrain(this.x, 0, width); //constrains the user to width of the canvas
+    this.y = constrain(this.y, 0, height); //constrains the user to height of the canvas
 
   }
 

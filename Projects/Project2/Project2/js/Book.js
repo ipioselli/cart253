@@ -1,24 +1,29 @@
-class Book{
+/**
+Book class
+This is a class to create the books for minigame02
+This class allows the ball to be displayed with an image
+*/
 
-constructor(x, y, w, h, image){
+class Book {
 
-  this.x = x;
-  this.y = y;
+  constructor(x, y, w, h, image) {
 
-  this.width = w;
-  this.height = h;
+    //position
+    this.x = x;
+    this.y = y;
+    //size
+    this.width = w;
+    this.height = h;
+    //image
+    this.image = image;
 
-  this.image = image;
-  //this.size = 100;
+  }
 
-}
-
-
-//displays the seaweed
-display(){
-  push();
-      noStroke();
-      image(this.image, this.x, this.y, this.width, this.height);
-      pop();
-    }
+  //displays the book with an image
+  display() {
+    push();
+    noStroke();
+    image(this.image, this.x, this.y, this.width, this.height);
+    pop();
+  }
 }

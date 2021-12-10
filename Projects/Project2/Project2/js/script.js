@@ -197,22 +197,24 @@ let newBookDelay = 50;
 let bookImg = undefined;
 
 
-let state = `minigame01`; // the project starts with the start state
+let state = `start`; // the project starts with the start state
 
 let mainFont;
 
 let titleMusic;
+let musicTimeMusic;
+let suspenseMusic;
 
 //TIMERS
 let typeWriterTime = 0;
-let typeWriterSpeed = 75;
+let typeWriterSpeed = 90;
 let typeWriterCursor = 0;
 let typeWriterText = "";
 
 let letterTimer01 = 200;
 let letterTimerDone01 = false;
 
-let letterTimer02 = 350;
+let letterTimer02 = 600;
 let letterTimerDone02 = false;
 
 let minigame01Timer = 1000;
@@ -279,6 +281,7 @@ function preload() {
 
   //load music
   titleMusic = loadSound(`assets/sounds/Brasil.mp3`);
+  musicTimeMusic = loadSound(`assets/sounds/musicTimeSong.mp3`);
 
 
 
@@ -302,20 +305,20 @@ function setup() {
   user2 = new User02(50, 50, user02Img);
 
   //creates the walls for the maze in minigame2
-  mazeWalls.push(new Maze(160, 580, 200, 10)); //(x, y, w, h)
-  mazeWalls.push(new Maze(50, 410, 20, 560));
-  mazeWalls.push(new Maze(350, 690, 620, 20));
-  mazeWalls.push(new Maze(450, 100, 620, 20));
-  mazeWalls.push(new Maze(250, 220, 10, 250));
-  mazeWalls.push(new Maze(470, 210, 10, 200));
-  mazeWalls.push(new Maze(250, 350, 220, 10));
-  mazeWalls.push(new Maze(355, 450, 10, 200));
-  mazeWalls.push(new Maze(630, 220, 140, 10));
-  mazeWalls.push(new Maze(545, 470, 150, 10));
-  mazeWalls.push(new Maze(680, 580, 170, 10));
-  mazeWalls.push(new Maze(615, 350, 10, 250));
-  mazeWalls.push(new Maze(550, 550, 10, 150));
-  mazeWalls.push(new Maze(760, 380, 20, 580));
+  mazeWalls.push(new Mazewalls(160, 580, 200, 10)); //(x, y, w, h)
+  mazeWalls.push(new Mazewalls(50, 410, 20, 560));
+  mazeWalls.push(new Mazewalls(350, 690, 620, 20));
+  mazeWalls.push(new Mazewalls(450, 100, 620, 20));
+  mazeWalls.push(new Mazewalls(250, 220, 10, 250));
+  mazeWalls.push(new Mazewalls(470, 210, 10, 200));
+  mazeWalls.push(new Mazewalls(250, 350, 220, 10));
+  mazeWalls.push(new Mazewalls(355, 450, 10, 200));
+  mazeWalls.push(new Mazewalls(630, 220, 140, 10));
+  mazeWalls.push(new Mazewalls(545, 470, 150, 10));
+  mazeWalls.push(new Mazewalls(680, 580, 170, 10));
+  mazeWalls.push(new Mazewalls(615, 350, 10, 250));
+  mazeWalls.push(new Mazewalls(550, 550, 10, 150));
+  mazeWalls.push(new Mazewalls(760, 380, 20, 580));
 
   books.push(new Book(random(0, width), random(0, height), 50, 50, bookImg));
 
@@ -599,6 +602,7 @@ function musicTime(){
   }
   if(letterTimerDone02){
     state = `phone02`;
+    musicTimeMusic.stop();
     }
 }
 
@@ -1009,6 +1013,7 @@ function keyPressed(){
       if(keyCode === 89){//keycode for the letter Y
         state = `musicTime`;
         startTypeWriter(musicTimeSentence);
+        musicTimeMusic.loop();
       }
       else if(keyCode === 78){ //keycode for the letter N
         state = `notMusicTime`;
@@ -1041,20 +1046,26 @@ function keyPressed(){
 
 //function to click buttons to change states
 function mousePressed(){
+
   let d = dist(mouseX, mouseY, tutorialButton.x, tutorialButton.y );
   if (d <tutorialButton.size /2 - 60){
       state = `tutorial`;
     }
 
-  let d2 = dist(mouseX, mouseY, nextButton.x, nextButton.y );
+let d2 = dist(mouseX, mouseY, nextButton.x, nextButton.y );
+if(state === `page01`){
   if (d2 <nextButton.size /2 - 20){
       state = `page02`;
     }
+}
+
+
 
   let d3 = dist(mouseX, mouseY, mailAlert.x, mailAlert.y);
     if(state === `phone01`){
       if(d3 < diameter/2){
         state = `letter02`;
+
     }
   }
   else if(state === `phone02`){
