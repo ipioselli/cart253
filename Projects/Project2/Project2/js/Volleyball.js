@@ -14,7 +14,7 @@ class Volleyball {
     //size
     this.size = 50;
     //velocity
-    this.vx = 12;
+    this.vx = 20;
     //image
     this.image = image;
   }

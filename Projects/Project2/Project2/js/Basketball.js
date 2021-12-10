@@ -14,7 +14,7 @@ class Basketball {
     //size
     this.size = 70;
     //velocity
-    this.vx = 12;
+    this.vx = 20;
     //image
     this.image = image;
   }
