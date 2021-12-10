@@ -45,12 +45,10 @@ let mailIcon = { //mail icon on the phone state
 let mailAlert = { // red mail alert on the mail icon on the phone state
   x: 380,
   y: 155,
-  size: 20,
+  size: 0,
+  growAmount: 0.7,
+  grow: true,
 }
-
-let diameter = 0;
-let growAmount =0.7;
-let grow = true;
 
 let titleScreen = { //image for the title state
   x:400,
@@ -124,18 +122,6 @@ let musicTimeBg = {
   size: 800,
 }
 
-let minigame02Bg = {
-  x:400,
-  y:400,
-  size:800,
-}
-
-let minigame02TutorialBg = {
-  x:400,
-  y:400,
-  size:800,
-}
-
 //
 let phoneBg = {
   x: 400,
@@ -197,23 +183,36 @@ let door01Bg = {
   y: 400,
   size: 800,
 }
-
 let door02Bg = {
   x: 400,
   y: 400,
   size: 800,
 }
-
 let door03Bg = {
   x: 400,
   y: 400,
   size: 800,
 }
+let minigame02Bg = {
+  x:400,
+  y:400,
+  size:800,
+}
+let minigame02TutorialBg = {
+  x:400,
+  y:400,
+  size:800,
+}
+let minigame02FailedBg = {
+  x:400,
+  y:400,
+  size:800,
+}
 
-
+//timer properties to add a book in the minigame02
 let books = [];
-let newBookTimer = 0;
-let newBookDelay = 50;
+let newBookTimer = 0; //book timer starts at 0
+let newBookDelay = 80; //speed of book timer
 let bookImg = undefined;
 
 
@@ -247,7 +246,7 @@ let musicRoomSentence = `Hey there ;-) Thanks for joining my club. \nYou'll have
 let notMusicTimeSentence = `You decided to make your own music and \nbecame a star all on your own.`;
 let musicTimeSentence = `Edward made you listen to his music \nand it was great!`;
 let notPictureTimeSentence = `You realized everyone in this school is too weird and decided to leave`;
-let minigame02TutorialSentence = `You must prove your love to Jake by finding him in the maze. \nNavigate through maze and choose one of the doors to find your soulamte. \n Be careful books are dropping from the sky and blocking the path. \n Ps. If you choose the wrong door you might end up alone.`;
+let minigame02TutorialSentence = `You must prove your love to Jake by finding him in the maze. \nNavigate through the maze and choose one of the doors to find your soulamte. \n Be careful books are dropping from the sky and blocking the path. \n Ps. If you choose the wrong door you might end up alone.`;
 let minigame01TutorialSentence = `You must prove your love to Edward in gym class. \nMake your way towards him but make sure avoid all the balls. \nIf you touch any of the balls you will end up alone :(. \nWatch out for the timer too!`;
 let letter02Sentence = `You just received a love letter from Edward!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Jake.`;
 let loveLetter01Sentence = `You just received a love letter from Jake!?!. \nA. Do you accept it? \n B. Reject it and proclaim your love for Edward.`;
@@ -298,6 +297,7 @@ function preload() {
   door01Bg.image = loadImage("assets/images/door01Bg.png");
   door02Bg.image = loadImage("assets/images/door02Bg.png");
   door03Bg.image = loadImage("assets/images/door03Bg.png");
+  minigame02FailedBg.image = loadImage("assets/images/booksFalling.png");
 
   //load fonts
   mainFont = loadFont(`assets/fonts/Blackberries.otf`);
@@ -336,7 +336,7 @@ function setup() {
   mazeWalls.push(new Mazewalls(470, 210, 10, 200));
   mazeWalls.push(new Mazewalls(250, 350, 220, 10));
   mazeWalls.push(new Mazewalls(355, 450, 10, 200));
-  mazeWalls.push(new Mazewalls(630, 220, 140, 10));
+  mazeWalls.push(new Mazewalls(600, 220, 100, 10));
   mazeWalls.push(new Mazewalls(545, 470, 150, 10));
   mazeWalls.push(new Mazewalls(680, 580, 170, 10));
   mazeWalls.push(new Mazewalls(615, 350, 10, 250));
@@ -805,7 +805,15 @@ function minigame02(){
 
 //brings you to this ending if the # of books added is >= 40
 function minigame02Failed(){
-  background(0);
+  imageMode(CENTER, CENTER);
+  image(minigame02FailedBg.image, minigame02FailedBg.x, minigame02FailedBg.y, minigame02FailedBg.size, minigame02FailedBg.size);
+  push();
+  textFont(mainFont);
+  textAlign(CENTER, CENTER);
+  textSize(40);
+  fill(255, 255, 255);
+  text(`Sorry there were too many books you ended up alone :(`, width/2, height/2 +250);
+  pop();
 }
 
 
@@ -910,17 +918,17 @@ function loveLetter02(){
 
 //function to make the red dot shrink and grow on the phone state
 function moveMailAlert() {
-  if (diameter > 30) {
-    grow = false;
+  if (mailAlert.size > 30) {
+    mailAlert.grow = false;
   }
-  if (diameter < 0) {
-    grow = true;
+  if (mailAlert.size < 0) {
+    mailAlert.grow = true;
   }
 
-  if (grow === true) {
-    diameter += growAmount;
+  if (mailAlert.grow === true) {
+    mailAlert.size += mailAlert.growAmount;
   } else {
-    diameter -= growAmount
+    mailAlert.size -= mailAlert.growAmount
   }
 }
 
@@ -931,9 +939,11 @@ function minigame02Tutorial(){
   push();
   textFont(mainFont);
   textAlign(CENTER, CENTER);
-  textSize(70);
+  textSize(80);
   fill(255, 255, 255);
   text(`Minigame Tutorial`,  width / 2, height / 2 -250);
+  textSize(55);
+  text(`Aquarium Library Maze`,  width / 2, height / 2 - 150);
   textSize(30);
   text(minigame02TutorialSentence, width / 2, height / 2);
   pop();
@@ -964,7 +974,7 @@ function displayMailIcon(){
 //displays the mail red alert
 function displayMailAlert(){
   fill(158, 45, 25);
-  circle(mailAlert.x, mailAlert.y, diameter);
+  circle(mailAlert.x, mailAlert.y, mailAlert.size);
 }
 
 
@@ -1064,12 +1074,12 @@ function mousePressed() {
 
   let d3 = dist(mouseX, mouseY, mailAlert.x, mailAlert.y);
   if (state === `phone01`) {
-    if (d3 < diameter / 2) {
+    if (d3 < mailAlert.size / 2) {
       state = `loveLetter02`;
     }
   }
   else if (state === `phone02`) {
-    if (d3 < diameter / 2) {
+    if (d3 < mailAlert.size / 2) {
       state = `loveLetter01`;
     }
   }
